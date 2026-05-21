@@ -600,6 +600,324 @@
     }
 
     
+    /* ── Scroll cue ── */
+    .hero__scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+      animation: fadeUp 1s ease forwards 1.2s;
+      opacity: 0;
+    }
+    .scroll-cue__track {
+      width: 2px;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .scroll-cue__shimmer {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(237,144,7,0.3) 30%,
+        var(--orange) 50%,
+        rgba(237,144,7,0.3) 70%,
+        transparent 100%
+      );
+      animation: shimmerDown 1.8s ease-in-out infinite;
+      border-radius: 2px;
+    }
+    @keyframes shimmerDown {
+      0%   { top: -100%; }
+      100% { top: 100%;  }
+    }
+    .scroll-cue__chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--orange);
+      opacity: 0.7;
+      animation: chevronPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes chevronPulse {
+      0%, 100% { opacity: 0.4; transform: translateY(0); }
+      50%       { opacity: 1;   transform: translateY(4px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-cue__shimmer { animation: none; top: 0; height: 100%; opacity: 0.5; }
+      .scroll-cue__chevron { animation: none; }
+    }
+
+    /* ── Dual Path Section ── */
+    .dual-path {
+      background: var(--off-white);
+      padding: 100px 32px;
+    }
+    .dual-path__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    /* Path card */
+    .path-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow: hidden;
+    }
+    .path-card--service {
+      background: var(--teget);
+      color: var(--white);
+    }
+    .path-card--project {
+      background: #FFFFFF;
+      color: var(--teget);
+      border: 1.5px solid rgba(15,26,36,0.08);
+      box-shadow: 0 4px 32px rgba(15,26,36,0.06);
+    }
+
+    /* Glow */
+    .path-card__glow {
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(237,144,7,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .path-card__glow--subtle {
+      background: radial-gradient(circle, rgba(237,144,7,0.07) 0%, transparent 70%);
+    }
+
+    /* Icon */
+    .path-card__icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .path-card__icon-wrap svg {
+      width: 26px; height: 26px;
+      stroke: #fff;
+    }
+    .path-card__icon-wrap--glass {
+      background: var(--teget);
+    }
+    .path-card__icon-wrap--glass svg {
+      stroke: var(--orange);
+    }
+
+    /* Tag */
+    .path-card__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .path-card__tag--glass {
+      color: var(--teget);
+      opacity: 0.55;
+    }
+
+    /* Title */
+    .path-card__title {
+      font-family: var(--font-head);
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .path-card--service .path-card__title { color: var(--white); }
+    .path-card--project .path-card__title { color: var(--teget); }
+    .path-card__title em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    /* Desc */
+    .path-card__desc {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .path-card--service .path-card__desc { color: rgba(255,255,255,0.62); }
+    .path-card--project .path-card__desc { color: rgba(15,26,36,0.6); }
+
+    /* List */
+    .path-card__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .path-card--service .path-card__list { color: rgba(255,255,255,0.85); }
+    .path-card--project .path-card__list { color: rgba(15,26,36,0.75); }
+    .path-card__list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .path-card__check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(237,144,7,0.15);
+      border: 1.5px solid rgba(237,144,7,0.4);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .path-card__check::after {
+      content: '';
+      position: absolute;
+      top: 4px; left: 3px;
+      width: 9px; height: 5px;
+      border-left: 1.5px solid var(--orange);
+      border-bottom: 1.5px solid var(--orange);
+      transform: rotate(-45deg);
+    }
+
+    /* CTAs */
+    .path-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      text-decoration: none;
+      border: none;
+    }
+    .path-card__cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .path-card__cta--primary {
+      background: var(--orange);
+      color: #fff;
+    }
+    .path-card__cta--primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(237,144,7,0.3);
+    }
+    .path-card__cta--ghost {
+      background: rgba(255,255,255,0.06);
+      color: var(--teget);
+      border: 1.5px solid rgba(15,26,36,0.12);
+    }
+    .path-card__cta--ghost:hover {
+      background: rgba(15,26,36,0.06);
+      transform: translateY(-2px);
+    }
+    .path-card__cta--outline {
+      background: var(--teget);
+      color: var(--white);
+    }
+    .path-card__cta--outline:hover {
+      background: var(--teget-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15,26,36,0.2);
+    }
+
+    /* Phone link */
+    .path-card__phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+      margin-top: -8px;
+    }
+    .path-card__phone svg { width: 14px; height: 14px; }
+    .path-card__phone:hover { color: var(--orange); }
+
+    /* Divider */
+    .dual-path__divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 32px;
+      gap: 12px;
+    }
+    .divider__line {
+      width: 1px;
+      flex: 1;
+      background: rgba(15,26,36,0.1);
+    }
+    .divider__badge {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--off-white);
+      border: 1.5px solid rgba(15,26,36,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(15,26,36,0.4);
+      flex-shrink: 0;
+    }
+
+    /* Scroll-triggered fade-up */
+    [data-aos] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    [data-aos].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .path-card--project[data-aos] { transition-delay: 0.15s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .dual-path__inner {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+      }
+      .dual-path__divider {
+        flex-direction: row;
+        padding: 0;
+        gap: 16px;
+      }
+      .divider__line { flex: 1; height: 1px; width: auto; }
+      .path-card { padding: 36px 28px; }
+    }
+    @media (max-width: 480px) {
+      .dual-path { padding: 64px 20px; }
+      .path-card { padding: 28px 20px; }
+    }
+
     /* ── Right — Project cards 2×2 grid ── */
     .hero__projects {
       display: flex;
@@ -1184,11 +1502,79 @@
 
   </div>
 
-  <div class="hero__scroll" aria-hidden="true">
-    <span class="hero__scroll-text">Skrolujte</span>
-    <div class="hero__scroll-line"></div>
+  <!-- Scroll cue — electric orange shimmer -->
+  <div class="hero__scroll-cue" aria-hidden="true">
+    <div class="scroll-cue__track">
+      <div class="scroll-cue__shimmer"></div>
+    </div>
+    <svg class="scroll-cue__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     DUAL PATH SECTION
+════════════════════════════════════════════════════════════ -->
+<section class="dual-path" id="putanje" aria-label="Izaberite svoju putanju">
+  <div class="dual-path__inner">
+
+    <!-- Left path — Quick service -->
+    <article class="path-card path-card--service" data-aos>
+      <div class="path-card__glow" aria-hidden="true"></div>
+      <div class="path-card__icon-wrap" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="path-card__tag">Brza servisna putanja</div>
+      <h2 class="path-card__title">Treba vam usluga<br><em>sada ili uskoro?</em></h2>
+      <p class="path-card__desc">Zamena instalacija, ugradnja alarma, video nadzor, pametna rasveta — izlazimo na teren, dajemo predračun i radimo bez iznenađenja.</p>
+      <ul class="path-card__list" role="list">
+        <li><span class="path-card__check" aria-hidden="true"></span>Obilazak i predračun bez obaveze</li>
+        <li><span class="path-card__check" aria-hidden="true"></span>Odgovor u roku od 2 sata</li>
+        <li><span class="path-card__check" aria-hidden="true"></span>Radimo u Novom Sadu i okolini</li>
+      </ul>
+      <a href="#kontakt" class="path-card__cta path-card__cta--primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Zakažite obilazak
+      </a>
+      <a href="tel:0601234567" class="path-card__phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        060 123 4567
+      </a>
+    </article>
+
+    <!-- Divider -->
+    <div class="dual-path__divider" aria-hidden="true">
+      <div class="divider__line"></div>
+      <div class="divider__badge">ili</div>
+      <div class="divider__line"></div>
+    </div>
+
+    <!-- Right path — Project consultation -->
+    <article class="path-card path-card--project" data-aos>
+      <div class="path-card__glow path-card__glow--subtle" aria-hidden="true"></div>
+      <div class="path-card__icon-wrap path-card__icon-wrap--glass" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      </div>
+      <div class="path-card__tag path-card__tag--glass">Projektna putanja</div>
+      <h2 class="path-card__title">Planirate projekat<br><em>i tražite partnera?</em></h2>
+      <p class="path-card__desc">Novogradnja, renoviranje, pametna kuća ili investicioni objekat — radimo od projektovanja do primopredaje, sa punom dokumentacijom.</p>
+      <ul class="path-card__list" role="list">
+        <li><span class="path-card__check" aria-hidden="true"></span>Konsultacija i plan sistema</li>
+        <li><span class="path-card__check" aria-hidden="true"></span>Kompletan izvođački tim</li>
+        <li><span class="path-card__check" aria-hidden="true"></span>Dokumentacija i garancija na radove</li>
+      </ul>
+      <a href="#projekti" class="path-card__cta path-card__cta--ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Pogledajte projekte
+      </a>
+      <a href="#kontakt" class="path-card__cta path-card__cta--outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Pošaljite opis projekta
+      </a>
+    </article>
+
+  </div>
 </section>
 
 
@@ -1389,6 +1775,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderCards();
   startAutoplay();
+
+  // ─── Scroll-triggered animations (Intersection Observer) ────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
 });
 </script>
