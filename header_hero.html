@@ -3134,6 +3134,293 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 </script>
 
+<!-- ===== BRANDS / TECHNOLOGY SECTION ===== -->
+<section class="brands" aria-label="Tehnologije koje koristimo">
+  <div class="brands__inner">
+    <div class="brands__header">
+      <span class="brands__eyebrow">Oprema i tehnologije</span>
+      <h2 class="brands__title">Sistemi sa kojima radimo</h2>
+      <p class="brands__sub">Koristimo isključivo proverene brendove i sertifikovane sisteme — bez kompromisa na kvalitetu.</p>
+    </div>
+
+    <div class="brands__grid">
+
+      <!-- Hikvision -->
+      <div class="brand-card">
+        <div class="brand-card__logo-wrap">
+          <img src="https://www.hikvision.com/content/dam/hikvision/en/marketing/image/logo/Hikvision-logo.png"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+               alt="Hikvision" class="brand-card__img">
+          <div class="brand-card__fallback" style="display:none">HIKVISION</div>
+        </div>
+        <div class="brand-card__info">
+          <span class="brand-card__category">Video nadzor</span>
+          <p class="brand-card__desc">Vodeći svetski proizvođač IP kamera, DVR/NVR sistema i pametnih sigurnosnih rešenja.</p>
+        </div>
+      </div>
+
+      <!-- Teknim -->
+      <div class="brand-card">
+        <div class="brand-card__logo-wrap">
+          <img src="teknim_logo.png"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+               alt="Teknim" class="brand-card__img">
+          <div class="brand-card__fallback" style="display:none">TEKNIM</div>
+        </div>
+        <div class="brand-card__info">
+          <span class="brand-card__category">Alarmni sistemi</span>
+          <p class="brand-card__desc">Turski proizvođač profesionalnih alarmnih i protivpožarnih sistema sa 30+ godina iskustva.</p>
+        </div>
+      </div>
+
+      <!-- Jablotron -->
+      <div class="brand-card">
+        <div class="brand-card__logo-wrap">
+          <img src="jablotron_logo.svg"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+               alt="Jablotron" class="brand-card__img">
+          <div class="brand-card__fallback" style="display:none">JABLOTRON</div>
+        </div>
+        <div class="brand-card__info">
+          <span class="brand-card__category">Alarmni sistemi</span>
+          <p class="brand-card__desc">Češki lider u sigurnosnim sistemima — pouzdan, intuitivan i jednostavan za upravljanje.</p>
+        </div>
+      </div>
+
+      <!-- WISE Smart Home -->
+      <div class="brand-card">
+        <div class="brand-card__logo-wrap">
+          <img src="wise_logo.png"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+               alt="WISE Smart Home" class="brand-card__img">
+          <div class="brand-card__fallback" style="display:none">WISE</div>
+        </div>
+        <div class="brand-card__info">
+          <span class="brand-card__category">Pametna kuća</span>
+          <p class="brand-card__desc">WiFi pametni prekidači, utičnice, senzori i automatizacija — dostupno i pouzdano rešenje za svaki dom.</p>
+        </div>
+      </div>
+
+      <!-- KNX -->
+      <div class="brand-card brand-card--featured">
+        <div class="brand-card__logo-wrap">
+          <img src="knx_logo.png"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+               alt="KNX Standard" class="brand-card__img">
+          <div class="brand-card__fallback" style="display:none">KNX</div>
+        </div>
+        <div class="brand-card__info">
+          <span class="brand-card__category">Međunarodni standard</span>
+          <p class="brand-card__desc">Jedini globalni otvoreni standard za kućnu i poslovnu automatizaciju — kompatibilan sa 500+ proizvođača.</p>
+          <span class="brand-card__badge">ISO 14543-3 sertifikovan</span>
+        </div>
+      </div>
+
+    </div><!-- /.brands__grid -->
+
+    <p class="brands__note">Svi sistemi su instalirani od strane sertifikovanih tehničara prema važećim standardima.</p>
+  </div>
+</section>
+
+<style>
+/* ===== BRANDS SECTION ===== */
+.brands {
+  background: var(--off-white);
+  padding: 96px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.brands::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(237,144,7,0.3), transparent);
+}
+.brands__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.brands__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.brands__eyebrow {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.brands__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--teget);
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+.brands__sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: rgba(15,26,36,0.62);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid */
+.brands__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Brand Card */
+.brand-card {
+  background: #ffffff;
+  border: 1px solid rgba(15,26,36,0.08);
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: default;
+}
+.brand-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(237,144,7,0.12);
+  border-color: rgba(237,144,7,0.35);
+}
+.brand-card--featured {
+  border-color: rgba(237,144,7,0.3);
+  background: linear-gradient(135deg, #fff 0%, rgba(237,144,7,0.04) 100%);
+  position: relative;
+}
+.brand-card--featured::after {
+  content: '★ Standard';
+  position: absolute;
+  top: -1px; right: 16px;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Logo area */
+.brand-card__logo-wrap {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.brand-card__img {
+  max-height: 40px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.brand-card:hover .brand-card__img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+.brand-card__fallback {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--teget);
+  letter-spacing: 0.05em;
+  align-items: center;
+}
+
+/* Info */
+.brand-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.brand-card__category {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.brand-card__desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(15,26,36,0.65);
+  line-height: 1.55;
+  margin: 0;
+}
+.brand-card__badge {
+  display: inline-block;
+  background: rgba(237,144,7,0.1);
+  color: var(--orange);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(237,144,7,0.25);
+  width: fit-content;
+}
+
+/* Note */
+.brands__note {
+  text-align: center;
+  margin-top: 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(15,26,36,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.brands__note::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: rgba(15,26,36,0.2);
+}
+.brands__note::after {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: rgba(15,26,36,0.2);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .brands__grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+  .brands__grid { grid-template-columns: repeat(2, 1fr); }
+  .brands { padding: 64px 0 56px; }
+}
+@media (max-width: 420px) {
+  .brands__grid { grid-template-columns: 1fr; }
+}
+</style>
+
 
 </body>
 </html>
