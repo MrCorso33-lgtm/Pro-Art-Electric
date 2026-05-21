@@ -599,39 +599,7 @@
       transform: translateY(-2px);
     }
 
-    /* Trust strip */
-    .hero__trust {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.7s ease forwards 0.8s;
-    }
-    .trust-item { display: flex; align-items: center; gap: 10px; }
-    .trust-item__icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .trust-item__icon svg {
-      width: 16px; height: 16px;
-      stroke: var(--orange);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .trust-item__label { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.2; }
-    .trust-item__sub   { font-size: 11px; color: var(--text-muted); line-height: 1.2; }
-    .trust-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
-
+    
     /* ── Right — Project cards 2×2 grid ── */
     .hero__projects {
       display: flex;
@@ -1200,22 +1168,7 @@
         </a>
       </div>
 
-      <div class="hero__trust" role="list" aria-label="Ključne prednosti">
-        <div class="trust-item" role="listitem">
-          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><div class="trust-item__label">Licencirani izvođač</div><div class="trust-item__sub">Registrovano privredno društvo</div></div>
-        </div>
-        <div class="trust-sep" aria-hidden="true"></div>
-        <div class="trust-item" role="listitem">
-          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div><div class="trust-item__label">Odgovor u 2h</div><div class="trust-item__sub">Radnim danima 08–20h</div></div>
-        </div>
-        <div class="trust-sep" aria-hidden="true"></div>
-        <div class="trust-item" role="listitem">
-          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div><div class="trust-item__label">Garancija na radove</div><div class="trust-item__sub">Pisana garancija uz svaki projekat</div></div>
-        </div>
-      </div>
+
 
     </div>
 
