@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Art Electric</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --teget:         #0F1A24;
+      --teget-mid:     #1A2530;
+      --teget-light:   #243040;
+      --orange:        #ED9007;
+      --orange-dark:   #C97A06;
+      --orange-glow:   rgba(237, 144, 7, 0.15);
+      --orange-dim:    rgba(237, 144, 7, 0.08);
+      --white:         #FFFFFF;
+      --off-white:     #F5F5FA;
+      --text-body:     rgba(255, 255, 255, 0.62);
+      --text-muted:    rgba(255, 255, 255, 0.38);
+      --glass-bg:      rgba(255, 255, 255, 0.045);
+      --glass-hover:   rgba(255, 255, 255, 0.08);
+      --glass-border:  rgba(255, 255, 255, 0.09);
+      --sep:           rgba(255, 255, 255, 0.06);
+      --font-head:     'Space Grotesk', sans-serif;
+      --font-body:     'Inter', sans-serif;
+      --header-height: 80px;
+      --header-compact:64px;
+      --radius-sm:     6px;
+      --radius-md:     10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--teget);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul, li { list-style: none; }
+
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER — STICKY + GLASSMORPHISM
+    ═══════════════════════════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      transition: height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      height: var(--header-compact);
+      background: rgba(15, 26, 36, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 38px; height: 38px;
+      background: var(--orange);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .logo-mark:hover { transform: scale(1.05); }
+    .logo-mark svg { width: 20px; height: 20px; fill: var(--teget); }
+    .logo-text {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+    .logo-text span { color: var(--orange); }
+
+    /* ── Desktop Nav ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-item { position: relative; }
+    .nav-link {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-body);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--white);
+      background: var(--glass-bg);
+    }
+    .nav-link .chevron {
+      width: 10px; height: 10px;
+      opacity: 0.5;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-item:hover .chevron { transform: rotate(180deg); opacity: 0.8; }
+
+    /* ── Mega Menu ── */
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      min-width: 560px;
+      background: rgba(15, 26, 36, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .nav-item:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+    .mega-menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .mega-menu-section { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu-category {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      padding: 0 14px 8px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--sep);
+    }
+    .mega-menu-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+    .mega-menu-item:hover { background: var(--glass-hover); }
+    .mega-menu-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--orange-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mega-menu-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mega-menu-content { display: flex; flex-direction: column; gap: 2px; }
+    .mega-menu-title {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+    }
+    .mega-menu-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Header Right ── */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .header-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-body);
+      transition: color 0.15s ease;
+    }
+    .header-phone:hover { color: var(--white); }
+    .header-phone svg {
+      width: 16px; height: 16px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .header-cta {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--teget);
+      background: var(--orange);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .header-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .header-cta:active { transform: translateY(0); }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px; height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1100;
+    }
+    .hamburger-line {
+      width: 22px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger-line:nth-child(1) { margin-bottom: 5px; }
+    .hamburger-line:nth-child(3) { margin-top: 5px; }
+    .hamburger.active .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
+    .hamburger.active .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile Menu Overlay ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1050;
+      background: rgba(15, 26, 36, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 100px 32px 40px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-nav-item { border-bottom: 1px solid var(--sep); }
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--white);
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+    .mobile-nav-link:hover { color: var(--orange); }
+    .mobile-nav-link .mobile-chevron {
+      width: 14px; height: 14px;
+      stroke: var(--text-muted);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s ease, stroke 0.3s ease;
+    }
+    .mobile-nav-item.expanded .mobile-chevron { transform: rotate(180deg); stroke: var(--orange); }
+    .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-nav-item.expanded .mobile-submenu { max-height: 600px; }
+    .mobile-submenu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+    }
+    .mobile-submenu-item:hover { background: var(--glass-hover); }
+    .mobile-submenu-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--orange-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mobile-submenu-icon svg {
+      width: 16px; height: 16px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mobile-submenu-text {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+    .mobile-menu-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--sep);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-phone {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--white);
+    }
+    .mobile-phone svg {
+      width: 18px; height: 18px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mobile-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--teget);
+      background: var(--orange);
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .mobile-cta:hover { background: var(--orange-dark); }
+
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Background */
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero_bg.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+      will-change: transform;
+    }
+    .hero__bg.loaded { transform: scale(1); }
+
+    /* Overlays */
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg,
+          rgba(10, 18, 28, 0.90) 0%,
+          rgba(10, 18, 28, 0.72) 45%,
+          rgba(10, 18, 28, 0.38) 100%),
+        radial-gradient(ellipse at 0% 100%,
+          rgba(237, 144, 7, 0.12) 0%,
+          transparent 60%);
+    }
+    .hero__noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+    }
+
+    /* Container */
+    .hero__container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 140px 80px 100px;
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* ── Left content ── */
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+    .hero__eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 8px rgba(237,144,7,0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(237,144,7,0.6); }
+      50%       { box-shadow: 0 0 16px rgba(237,144,7,0.9); }
+    }
+    .hero__eyebrow-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .hero__eyebrow-sep {
+      width: 1px; height: 14px;
+      background: rgba(237,144,7,0.3);
+    }
+    .hero__eyebrow-location {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero__heading {
+      font-family: var(--font-head);
+      font-size: clamp(38px, 4.5vw, 64px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+    .hero__heading em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+    .hero__heading em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      opacity: 0.5;
+    }
+
+    .hero__sub {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--text-body);
+      max-width: 520px;
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    /* CTA group */
+    .hero__cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--orange);
+      color: var(--teget);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(237,144,7,0.35);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 28px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.18);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* Trust strip */
+    .hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s ease forwards 0.8s;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+    .trust-item__icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-item__icon svg {
+      width: 16px; height: 16px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .trust-item__label { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.2; }
+    .trust-item__sub   { font-size: 11px; color: var(--text-muted); line-height: 1.2; }
+    .trust-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
+
+    /* ── Right — Project cards 2×2 grid ── */
+    .hero__projects {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: 0;
+      transform: translateX(24px);
+      animation: fadeRight 0.8s ease forwards 0.7s;
+    }
+    .projects__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .projects__title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .projects__counter { font-size: 11px; font-weight: 500; color: var(--text-muted); }
+    .projects__counter span { color: var(--orange); font-weight: 600; }
+
+    /* 2×2 grid wrapper */
+    #projectCards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: rgba(237,144,7,0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    .project-card.active {
+      border-color: rgba(237,144,7,0.5);
+      box-shadow: 0 0 0 1px rgba(237,144,7,0.2), 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .project-card.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), rgba(237,144,7,0.3));
+      border-radius: 12px 12px 0 0;
+    }
+    .project-card__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px;
+      flex: 1;
+    }
+    .project-card__thumb {
+      width: 100%;
+      height: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--teget-light);
+    }
+    .project-card__thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-card__thumb-placeholder svg { width: 28px; height: 28px; opacity: 0.5; }
+    .project-card__info { display: flex; flex-direction: column; gap: 6px; }
+    .project-card__category {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .project-card__name {
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .project-card__meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .project-card__tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .project-card__tag svg { width: 10px; height: 10px; opacity: 0.5; }
+    .project-card__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-top: auto;
+      align-self: flex-start;
+    }
+    .project-card__status.done {
+      background: rgba(34, 197, 94, 0.12);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .project-card__status.done::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+    .project-card__progress {
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+      margin-top: auto;
+    }
+    .project-card__progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), rgba(237,144,7,0.4));
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    .projects__dots {
+      display: none;
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 1.4s;
+    }
+    .hero__scroll-text {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero__scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(237,144,7,0.6), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeRight{ to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeIn   { to { opacity: 1; } }
+
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1200px) {
+      .hero__container { grid-template-columns: 1fr 380px; gap: 40px; padding: 140px 48px 100px; }
+    }
+    @media (max-width: 1024px) {
+      .nav { display: none; }
+      .header-phone span { display: none; }
+      .header-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .header { padding: 0 20px; }
+      .header-right { gap: 12px; }
+      .hero__container { grid-template-columns: 1fr; max-width: 720px; padding: 140px 40px 100px; }
+      .hero__projects { display: none; }
+      .hero__heading { font-size: clamp(32px, 5vw, 52px); }
+    }
+    @media (max-width: 640px) {
+      :root { --header-height: 68px; --header-compact: 60px; }
+      .header { padding: 0 16px; }
+      .logo-text { font-size: 16px; }
+      .logo-mark { width: 34px; height: 34px; }
+      .logo-mark svg { width: 18px; height: 18px; }
+      .mobile-menu { padding: 88px 20px 32px; }
+      .mobile-nav-link { font-size: 16px; padding: 16px 0; }
+      .hero__container { padding: 110px 24px 80px; }
+      .hero__heading { font-size: 32px; }
+      .hero__sub { font-size: 15px; }
+      .hero__cta-group { flex-direction: column; align-items: flex-start; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .trust-sep { display: none; }
+      .hero__trust { gap: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header class="header" role="banner">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="#" class="logo" aria-label="Pro Art Electric — početna">
+      <div class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <span class="logo-text">Pro Art <span>Electric</span></span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav" role="navigation" aria-label="Glavna navigacija">
+
+      <!-- Elektroinstalacije -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Elektroinstalacije
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Instalacije</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kompletne instalacije</span><span class="mega-menu-desc">Stambeni i poslovni objekti</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Razvodni ormari</span><span class="mega-menu-desc">Projektovanje i montaža</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Jaka struja</span><span class="mega-menu-desc">Napajanje i razvod</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Slaba struja</span><span class="mega-menu-desc">Mreža, signal, komunikacije</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Solarni sistemi</span><span class="mega-menu-desc">Fotonaponske instalacije</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Adaptacije</span><span class="mega-menu-desc">Rekonstrukcija postojećih sistema</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pametna kuća -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Pametna kuća
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Automatizacija</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Scene i automatizacije</span><span class="mega-menu-desc">Scenariji po prostorijama</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Centralno upravljanje</span><span class="mega-menu-desc">Jedan interfejs za sve sisteme</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Pametna rasveta</span><span class="mega-menu-desc">Dimeri, RGB, senzori pokreta</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Kontrola</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kontrola uređaja</span><span class="mega-menu-desc">Grejanje, klima, roletne</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Integracije</span><span class="mega-menu-desc">KNX, Tuya, Zigbee, Google, Alexa</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Daljinsko upravljanje</span><span class="mega-menu-desc">Kontrola sa telefona, bilo gde</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sigurnost -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Sigurnost
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Video nadzor</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">IP &amp; Wi-Fi kamere</span><span class="mega-menu-desc">Daljinski pristup, noćno snimanje</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Snimači (DVR/NVR)</span><span class="mega-menu-desc">Podešavanje i servis sistema</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Alarmi &amp; Pristup</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Alarmni sistemi</span><span class="mega-menu-desc">Protivprovalni, GSM, bežični</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kontrola pristupa</span><span class="mega-menu-desc">Interfoni, RFID, elektronske brave</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rasveta -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Rasveta
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" style="min-width: 480px;" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Tipovi rasvete</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Unutrašnja rasveta</span><span class="mega-menu-desc">Ambijentalna, dekorativna, LED</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Spoljna rasveta</span><span class="mega-menu-desc">Dvorišna, fasadna, staze</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Usluge</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Projektovanje</span><span class="mega-menu-desc">Plan rasvete, proračun osvetljenja</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Montaža i adaptacija</span><span class="mega-menu-desc">Lusteri, LED sistemi, postojeća rasveta</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Održavanje -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Održavanje
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" style="min-width: 420px;" role="menu">
+          <div class="mega-menu-grid" style="grid-template-columns: 1fr;">
+            <div class="mega-menu-section">
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Redovno održavanje</span><span class="mega-menu-desc">Periodični pregledi i preventiva</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Hitne intervencije</span><span class="mega-menu-desc">Brza reakcija na kvarove</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Ugovorno održavanje</span><span class="mega-menu-desc">Dijagnostika i planirani servis</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direktni linkovi -->
+      <div class="nav-item"><a href="#projekti" class="nav-link">Projekti</a></div>
+      <div class="nav-item"><a href="#o-nama" class="nav-link">O nama</a></div>
+
+    </nav>
+
+    <!-- Right: Phone + CTA + Hamburger -->
+    <div class="header-right">
+      <a href="tel:+381601234567" class="header-phone" aria-label="Pozovite nas: 060 123 4567">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <span>060 123 4567</span>
+      </a>
+      <button class="header-cta" onclick="document.getElementById('kontakt')?.scrollIntoView({behavior:'smooth'})">Zakažite obilazak</button>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════════════════════════ -->
+<div class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobilni meni">
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Elektroinstalacije<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div><span class="mobile-submenu-text">Kompletne instalacije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><span class="mobile-submenu-text">Razvodni ormari</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><span class="mobile-submenu-text">Jaka struja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div><span class="mobile-submenu-text">Slaba struja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg></div><span class="mobile-submenu-text">Solarni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Adaptacije</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Pametna kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><span class="mobile-submenu-text">Scene i automatizacije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div><span class="mobile-submenu-text">Pametna rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div><span class="mobile-submenu-text">Kontrola uređaja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div><span class="mobile-submenu-text">Integracije sistema</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><span class="mobile-submenu-text">Daljinsko upravljanje</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Sigurnost<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">IP &amp; Wi-Fi kamere</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><span class="mobile-submenu-text">Snimači (DVR/NVR)</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Kontrola pristupa</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Rasveta<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><span class="mobile-submenu-text">Unutrašnja rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><span class="mobile-submenu-text">Spoljna rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><span class="mobile-submenu-text">Projektovanje rasvete</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Montaža i adaptacija</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Održavanje<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span class="mobile-submenu-text">Redovno održavanje</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><span class="mobile-submenu-text">Hitne intervencije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><span class="mobile-submenu-text">Ugovorno održavanje</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item"><a href="#projekti" class="mobile-nav-link" style="justify-content:flex-start;">Projekti</a></div>
+  <div class="mobile-nav-item"><a href="#o-nama" class="mobile-nav-link" style="justify-content:flex-start;">O nama</a></div>
+
+  <div class="mobile-menu-footer">
+    <a href="tel:+381601234567" class="mobile-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      060 123 4567
+    </a>
+    <a href="#kontakt" class="mobile-cta">Zakažite obilazak</a>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════════════════════════ -->
+<section class="hero" aria-label="Naslovna sekcija">
+
+  <div class="hero__bg" id="heroBg" style="background-image: url('hero_bg.jpg');" aria-hidden="true"></div>
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__noise" aria-hidden="true"></div>
+
+  <div class="hero__container">
+
+    <!-- Left content -->
+    <div class="hero__content">
+
+      <div class="hero__eyebrow" aria-label="Kategorija i lokacija">
+        <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+        <span class="hero__eyebrow-text">Elektro &amp; Smart Home</span>
+        <span class="hero__eyebrow-sep" aria-hidden="true"></span>
+        <span class="hero__eyebrow-location">Novi Sad &amp; Srbija</span>
+      </div>
+
+      <h1 class="hero__heading">
+        Vaš dom.<br>
+        <em>Pametan.</em><br>
+        Siguran. Savršen.
+      </h1>
+
+      <p class="hero__sub">
+        Kompletne elektroinstalacije, pametna kuća, video nadzor i alarmni sistemi.
+        Od projekta do primopredaje — bez iznenađenja.
+      </p>
+
+      <div class="hero__cta-group">
+        <a href="#kontakt" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Zakažite obilazak
+        </a>
+        <a href="#projekti" class="btn-ghost">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Pogledajte projekte
+        </a>
+      </div>
+
+      <div class="hero__trust" role="list" aria-label="Ključne prednosti">
+        <div class="trust-item" role="listitem">
+          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="trust-item__label">Licencirani izvođač</div><div class="trust-item__sub">Registrovano privredno društvo</div></div>
+        </div>
+        <div class="trust-sep" aria-hidden="true"></div>
+        <div class="trust-item" role="listitem">
+          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="trust-item__label">Odgovor u 2h</div><div class="trust-item__sub">Radnim danima 08–20h</div></div>
+        </div>
+        <div class="trust-sep" aria-hidden="true"></div>
+        <div class="trust-item" role="listitem">
+          <div class="trust-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div class="trust-item__label">Garancija na radove</div><div class="trust-item__sub">Pisana garancija uz svaki projekat</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right — Project cards -->
+    <aside class="hero__projects" aria-label="Realizovani projekti">
+      <div class="projects__header">
+        <span class="projects__title">Realizovani projekti</span>
+        <span class="projects__counter" aria-live="polite"><span id="currentCard">1</span> / <span id="totalCards">4</span></span>
+      </div>
+      <div id="projectCards" role="list"></div>
+      <div class="projects__dots" id="projectDots" role="tablist" aria-label="Navigacija projekata"></div>
+    </aside>
+
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-text">Skrolujte</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ─── Sticky header ────────────────────────────────────────
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // ─── Mobile menu toggle ───────────────────────────────────
+  const hamburger   = document.querySelector('.hamburger');
+  const mobileMenu  = document.querySelector('.mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // ─── Mobile accordion ────────────────────────────────────
+  document.querySelectorAll('.mobile-nav-item').forEach(item => {
+    const link    = item.querySelector('.mobile-nav-link');
+    const submenu = item.querySelector('.mobile-submenu');
+    if (!submenu) return;
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-nav-item.expanded').forEach(other => {
+        if (other !== item) other.classList.remove('expanded');
+      });
+      item.classList.toggle('expanded');
+    });
+  });
+
+  // Close mobile menu on submenu link click
+  document.querySelectorAll('.mobile-submenu-item').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ─── Hero background load ─────────────────────────────────
+  const heroBg = document.getElementById('heroBg');
+  const bgImg  = new Image();
+  bgImg.onload = () => heroBg.classList.add('loaded');
+  bgImg.onerror = () => heroBg.classList.add('loaded'); // still animate even if img missing
+  bgImg.src    = 'hero_bg.jpg';
+
+  // ─── Project cards data (placeholder — WP CPT replaces) ──
+  const projects = [
+    {
+      id: 1,
+      category: 'Pametna kuća',
+      name: 'Vila Petrovaradin — Smart Home',
+      area: '280 m²',
+      location: 'Petrovaradin',
+      year: '2025',
+      gradient: 'linear-gradient(135deg, #1a3a5c 0%, #0d2035 100%)',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+    },
+    {
+      id: 2,
+      category: 'Elektroinstalacije',
+      name: 'Poslovni objekat — Liman',
+      area: '450 m²',
+      location: 'Novi Sad',
+      year: '2025',
+      gradient: 'linear-gradient(135deg, #2a1a0d 0%, #1a0d05 100%)',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>`
+    },
+    {
+      id: 3,
+      category: 'Video nadzor & Alarm',
+      name: 'Stambena zgrada — Detelinara',
+      area: '12 stanova',
+      location: 'Novi Sad',
+      year: '2025',
+      gradient: 'linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%)',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`
+    },
+    {
+      id: 4,
+      category: 'Rasveta',
+      name: 'Restoran Centar — Ambijentalna rasveta',
+      area: '180 m²',
+      location: 'Novi Sad',
+      year: '2026',
+      gradient: 'linear-gradient(135deg, #2a2a0d 0%, #1a1a05 100%)',
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+    }
+  ];
+
+  let currentIndex  = 0;
+  let autoplayTimer = null;
+  let progressTimer = null;
+  let progressValue = 0;
+  const DURATION    = 4000;
+  const TICK        = 50;
+
+  const cardsEl   = document.getElementById('projectCards');
+  const dotsEl    = document.getElementById('projectDots');
+  const currentEl = document.getElementById('currentCard');
+  document.getElementById('totalCards').textContent = projects.length;
+
+  function renderCards() {
+    cardsEl.innerHTML = '';
+    dotsEl.innerHTML  = '';
+
+    projects.forEach((p, i) => {
+      const isActive = i === currentIndex;
+
+      const card = document.createElement('div');
+      card.className = `project-card${isActive ? ' active' : ''}`;
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `Projekat: ${p.name}`);
+      card.innerHTML = `
+        <div class="project-card__inner">
+          <div class="project-card__thumb">
+            <div class="project-card__thumb-placeholder" style="background:${p.gradient}">${p.icon}</div>
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__category">${p.category}</div>
+            <div class="project-card__name">${p.name}</div>
+            <div class="project-card__meta">
+              <span class="project-card__tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                ${p.location}
+              </span>
+              <span class="project-card__tag">${p.year}</span>
+            </div>
+            <span class="project-card__status done">Završeno</span>
+          </div>
+        </div>
+        <div class="project-card__progress">
+          <div class="project-card__progress-bar" id="pb_${i}" style="width:${isActive ? progressValue + '%' : '0%'}"></div>
+        </div>
+      `;
+      card.addEventListener('click',   () => goTo(i));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') goTo(i); });
+      cardsEl.appendChild(card);
+
+      const dot = document.createElement('button');
+      dot.className = `projects__dot${isActive ? ' active' : ''}`;
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', String(isActive));
+      dot.setAttribute('aria-label', `Projekat ${i + 1}: ${p.name}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+  }
+
+  function goTo(index) {
+    currentIndex  = index;
+    progressValue = 0;
+    currentEl.textContent = index + 1;
+    renderCards();
+    clearAutoplay();
+    startAutoplay();
+  }
+
+  function startAutoplay() {
+    clearAutoplay();
+    progressValue = 0;
+
+    progressTimer = setInterval(() => {
+      progressValue += (TICK / DURATION) * 100;
+      const bar = document.getElementById(`pb_${currentIndex}`);
+      if (bar) bar.style.width = Math.min(progressValue, 100) + '%';
+    }, TICK);
+
+    autoplayTimer = setTimeout(() => {
+      currentIndex = (currentIndex + 1) % projects.length;
+      progressValue = 0;
+      currentEl.textContent = currentIndex + 1;
+      renderCards();
+      startAutoplay();
+    }, DURATION);
+  }
+
+  function clearAutoplay() {
+    clearTimeout(autoplayTimer);
+    clearInterval(progressTimer);
+  }
+
+  cardsEl.addEventListener('mouseenter', clearAutoplay);
+  cardsEl.addEventListener('mouseleave', startAutoplay);
+
+  renderCards();
+  startAutoplay();
+
+});
+</script>
+
+</body>
+</html>

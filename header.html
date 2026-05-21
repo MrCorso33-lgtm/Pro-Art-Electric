@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Art Electric — Header</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Primarne boje */
+      --teget:        #1A2530;
+      --teget-dark:   #0F1A24;
+      --teget-mid:    #243040;
+      --orange:       #ED9007;
+      --orange-hover: #C97A06;
+
+      /* Transparentne varijante */
+      --orange-glow:  rgba(237, 144, 7, 0.15);
+      --orange-dim:   rgba(237, 144, 7, 0.08);
+
+      /* Tekst */
+      --text-white:   #FFFFFF;
+      --text-body:    rgba(255, 255, 255, 0.62);
+      --text-muted:   rgba(255, 255, 255, 0.35);
+
+      /* Glassmorphism */
+      --glass:        rgba(255, 255, 255, 0.045);
+      --glass-hover:  rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.09);
+
+      /* Separator */
+      --sep:          rgba(255, 255, 255, 0.06);
+
+      /* Tipografija */
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+
+      /* Spacing */
+      --header-height: 80px;
+      --header-height-compact: 64px;
+
+      /* Radius */
+      --radius-sm:  6px;
+      --radius-md:  10px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--teget-dark);
+      color: var(--text-white);
+      min-height: 200vh; /* For scroll testing */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER — STICKY + GLASSMORPHISM
+    ═══════════════════════════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      transition: height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+    }
+
+    .header.scrolled {
+      height: var(--header-height-compact);
+      background: rgba(15, 26, 36, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       LOGO
+    ═══════════════════════════════════════════════════════ */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--orange);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .logo-mark:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--teget-dark);
+    }
+
+    .logo-text {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: var(--text-white);
+    }
+
+    .logo-text span {
+      color: var(--orange);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════ */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-body);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-white);
+      background: var(--glass);
+    }
+
+    .nav-link .chevron {
+      width: 10px;
+      height: 10px;
+      opacity: 0.5;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-item:hover .chevron {
+      transform: rotate(180deg);
+      opacity: 0.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MEGA MENU
+    ═══════════════════════════════════════════════════════ */
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      min-width: 560px;
+      background: rgba(15, 26, 36, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+
+    .nav-item:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .mega-menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .mega-menu-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+
+    .mega-menu-item:hover {
+      background: var(--glass-hover);
+    }
+
+    .mega-menu-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--orange-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mega-menu-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mega-menu-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .mega-menu-title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-white);
+    }
+
+    .mega-menu-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Mega menu category label */
+    .mega-menu-category {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      padding: 0 14px 8px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--sep);
+    }
+
+    .mega-menu-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER RIGHT — PHONE + CTA
+    ═══════════════════════════════════════════════════════ */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .header-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-body);
+      transition: color 0.15s ease;
+    }
+
+    .header-phone:hover {
+      color: var(--text-white);
+    }
+
+    .header-phone svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .header-cta {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--teget-dark);
+      background: var(--orange);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .header-cta:hover {
+      background: var(--orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .header-cta:active {
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       DEMO CONTENT (for scroll testing)
+    ═══════════════════════════════════════════════════════ */
+    .demo-content {
+      padding-top: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .demo-block {
+      width: 100%;
+      max-width: 800px;
+      height: 300px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HAMBURGER BUTTON
+    ═══════════════════════════════════════════════════════ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1100;
+    }
+
+    .hamburger-line {
+      width: 22px;
+      height: 2px;
+      background: var(--text-white);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger-line:nth-child(1) { margin-bottom: 5px; }
+    .hamburger-line:nth-child(3) { margin-top: 5px; }
+
+    .hamburger.active .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MOBILE MENU OVERLAY
+    ═══════════════════════════════════════════════════════ */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1050;
+      background: rgba(15, 26, 36, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 100px 32px 40px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-item {
+      border-bottom: 1px solid var(--sep);
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text-white);
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--orange);
+    }
+
+    .mobile-nav-link .mobile-chevron {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-muted);
+      transition: transform 0.3s ease, stroke 0.3s ease;
+    }
+
+    .mobile-nav-item.expanded .mobile-chevron {
+      transform: rotate(180deg);
+      stroke: var(--orange);
+    }
+
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .mobile-nav-item.expanded .mobile-submenu {
+      max-height: 600px;
+    }
+
+    .mobile-submenu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+    }
+
+    .mobile-submenu-item:hover {
+      background: var(--glass-hover);
+    }
+
+    .mobile-submenu-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--orange-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-submenu-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mobile-submenu-text {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+
+    .mobile-menu-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--sep);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-phone {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--text-white);
+    }
+
+    .mobile-phone svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mobile-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--teget-dark);
+      background: var(--orange);
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .mobile-cta:hover {
+      background: var(--orange-hover);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE — TABLET (≤1024px)
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav {
+        display: none;
+      }
+
+      .header-phone span {
+        display: none;
+      }
+
+      .header-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .header {
+        padding: 0 20px;
+      }
+
+      .header-right {
+        gap: 12px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤640px)
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 68px;
+        --header-height-compact: 60px;
+      }
+
+      .header {
+        padding: 0 16px;
+      }
+
+      .logo-text {
+        font-size: 16px;
+      }
+
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .logo-mark svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .mobile-menu {
+        padding: 88px 20px 32px;
+      }
+
+      .mobile-nav-link {
+        font-size: 16px;
+        padding: 16px 0;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       REDUCED MOTION
+    ═══════════════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════════════ -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <span class="logo-text">Pro Art <span>Electric</span></span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav" role="navigation" aria-label="Glavna navigacija">
+
+        <!-- Elektroinstalacije — mega menu -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Elektroinstalacije
+            <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3.5L5 6.5L8 3.5"/>
+            </svg>
+          </span>
+          <div class="mega-menu">
+            <div class="mega-menu-grid">
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Instalacije</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Kompletne instalacije</span>
+                    <span class="mega-menu-desc">Stambeni i poslovni objekti</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Razvodni ormari</span>
+                    <span class="mega-menu-desc">Projektovanje i montaža</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Jaka struja</span>
+                    <span class="mega-menu-desc">Napajanje i razvod</span>
+                  </div>
+                </a>
+              </div>
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Specijalizovano</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Slaba struja</span>
+                    <span class="mega-menu-desc">Mreža, signal, komunikacije</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Solarni sistemi</span>
+                    <span class="mega-menu-desc">Fotonaponske instalacije</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Adaptacije</span>
+                    <span class="mega-menu-desc">Rekonstrukcija postojećih sistema</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pametna kuća — mega menu -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Pametna kuća
+            <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3.5L5 6.5L8 3.5"/>
+            </svg>
+          </span>
+          <div class="mega-menu">
+            <div class="mega-menu-grid">
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Automatizacija</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Scene i automatizacije</span>
+                    <span class="mega-menu-desc">Scenariji po prostorijama</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Centralno upravljanje</span>
+                    <span class="mega-menu-desc">Jedan interfejs za sve sisteme</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Pametna rasveta</span>
+                    <span class="mega-menu-desc">Dimeri, RGB, senzori pokreta</span>
+                  </div>
+                </a>
+              </div>
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Kontrola</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Kontrola uređaja</span>
+                    <span class="mega-menu-desc">Grejanje, klima, roletne</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Integracije</span>
+                    <span class="mega-menu-desc">KNX, Tuya, Zigbee, Google, Alexa</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Daljinsko upravljanje</span>
+                    <span class="mega-menu-desc">Kontrola sa telefona, bilo gde</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video nadzor & Alarmi — mega menu -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Sigurnost
+            <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3.5L5 6.5L8 3.5"/>
+            </svg>
+          </span>
+          <div class="mega-menu">
+            <div class="mega-menu-grid">
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Video nadzor</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">IP & Wi-Fi kamere</span>
+                    <span class="mega-menu-desc">Daljinski pristup, noćno snimanje</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Snimači (DVR/NVR)</span>
+                    <span class="mega-menu-desc">Podešavanje i servis sistema</span>
+                  </div>
+                </a>
+              </div>
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Alarmi & Pristup</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Alarmni sistemi</span>
+                    <span class="mega-menu-desc">Protivprovalni, GSM, bežični</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Kontrola pristupa</span>
+                    <span class="mega-menu-desc">Interfoni, RFID, elektronske brave</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rasveta — mega menu -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Rasveta
+            <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3.5L5 6.5L8 3.5"/>
+            </svg>
+          </span>
+          <div class="mega-menu" style="min-width: 480px;">
+            <div class="mega-menu-grid">
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Tipovi rasvete</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Unutrašnja rasveta</span>
+                    <span class="mega-menu-desc">Ambijentalna, dekorativna, LED</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Spoljna rasveta</span>
+                    <span class="mega-menu-desc">Dvorišna, fasadna, staze</span>
+                  </div>
+                </a>
+              </div>
+              <div class="mega-menu-section">
+                <div class="mega-menu-category">Usluge</div>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Projektovanje</span>
+                    <span class="mega-menu-desc">Plan rasvete, proračun osvetljenja</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Montaža i adaptacija</span>
+                    <span class="mega-menu-desc">Lusteri, LED sistemi, postojeća rasveta</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Održavanje — mega menu -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Održavanje
+            <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3.5L5 6.5L8 3.5"/>
+            </svg>
+          </span>
+          <div class="mega-menu" style="min-width: 420px;">
+            <div class="mega-menu-grid" style="grid-template-columns: 1fr;">
+              <div class="mega-menu-section">
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Redovno održavanje</span>
+                    <span class="mega-menu-desc">Periodični pregledi i preventiva</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Hitne intervencije</span>
+                    <span class="mega-menu-desc">Brza reakcija na kvarove</span>
+                  </div>
+                </a>
+                <a href="#" class="mega-menu-item">
+                  <div class="mega-menu-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                  </div>
+                  <div class="mega-menu-content">
+                    <span class="mega-menu-title">Ugovorno održavanje</span>
+                    <span class="mega-menu-desc">Dijagnostika i planirani servis</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direktni linkovi -->
+        <div class="nav-item">
+          <a href="#" class="nav-link">Projekti</a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link">O nama</a>
+        </div>
+
+      </nav>
+
+      <!-- Right side — Phone + CTA + Hamburger -->
+      <div class="header-right">
+        <a href="tel:+381601234567" class="header-phone">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          <span>060 123 4567</span>
+        </a>
+        <button class="header-cta">Zakažite obilazak</button>
+        <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MOBILE MENU
+  ═══════════════════════════════════════════════════════ -->
+  <div class="mobile-menu" aria-hidden="true">
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link">
+        Elektroinstalacije
+        <svg class="mobile-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+      </div>
+      <div class="mobile-submenu">
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+          <span class="mobile-submenu-text">Kompletne instalacije</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+          <span class="mobile-submenu-text">Razvodni ormari</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <span class="mobile-submenu-text">Jaka struja</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div>
+          <span class="mobile-submenu-text">Slaba struja</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg></div>
+          <span class="mobile-submenu-text">Solarni sistemi</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+          <span class="mobile-submenu-text">Adaptacije</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link">
+        Pametna kuća
+        <svg class="mobile-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+      </div>
+      <div class="mobile-submenu">
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+          <span class="mobile-submenu-text">Scene i automatizacije</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <span class="mobile-submenu-text">Pametna rasveta</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+          <span class="mobile-submenu-text">Kontrola uređaja</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div>
+          <span class="mobile-submenu-text">Integracije sistema</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <span class="mobile-submenu-text">Daljinsko upravljanje</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link">
+        Sigurnost
+        <svg class="mobile-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+      </div>
+      <div class="mobile-submenu">
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <span class="mobile-submenu-text">IP & Wi-Fi kamere</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <span class="mobile-submenu-text">Snimači (DVR/NVR)</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <span class="mobile-submenu-text">Alarmni sistemi</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+          <span class="mobile-submenu-text">Kontrola pristupa</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link">
+        Rasveta
+        <svg class="mobile-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+      </div>
+      <div class="mobile-submenu">
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+          <span class="mobile-submenu-text">Unutrašnja rasveta</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+          <span class="mobile-submenu-text">Spoljna rasveta</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+          <span class="mobile-submenu-text">Projektovanje rasvete</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+          <span class="mobile-submenu-text">Montaža i adaptacija</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link">
+        Održavanje
+        <svg class="mobile-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+      </div>
+      <div class="mobile-submenu">
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <span class="mobile-submenu-text">Redovno održavanje</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <span class="mobile-submenu-text">Hitne intervencije</span>
+        </a>
+        <a href="#" class="mobile-submenu-item">
+          <div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+          <span class="mobile-submenu-text">Ugovorno održavanje</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <a href="#" class="mobile-nav-link" style="justify-content: flex-start;">Projekti</a>
+    </div>
+
+    <div class="mobile-nav-item">
+      <a href="#" class="mobile-nav-link" style="justify-content: flex-start;">O nama</a>
+    </div>
+
+    <!-- Mobile menu footer -->
+    <div class="mobile-menu-footer">
+      <a href="tel:+381601234567" class="mobile-phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <span>060 123 4567</span>
+      </a>
+      <a href="#" class="mobile-cta">Zakažite obilazak</a>
+    </div>
+
+  </div>
+
+  <!-- Demo content for scroll testing -->
+  <div class="demo-content">
+    <div class="demo-block">↑ Scroll down to see header transition ↑</div>
+    <div class="demo-block">Section placeholder</div>
+    <div class="demo-block">Section placeholder</div>
+    <div class="demo-block">Section placeholder</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.querySelector('.header');
+      const scrollThreshold = 80;
+
+      // Sticky header — compact mode on scroll
+      const handleScroll = () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      // ─── Mobile menu toggle ───
+      const hamburger = document.querySelector('.hamburger');
+      const mobileMenu = document.querySelector('.mobile-menu');
+
+      hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      // ─── Mobile accordion submenus ───
+      const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+      mobileNavItems.forEach(item => {
+        const link = item.querySelector('.mobile-nav-link');
+        const submenu = item.querySelector('.mobile-submenu');
+
+        if (submenu) {
+          link.addEventListener('click', () => {
+            // Close other open items
+            mobileNavItems.forEach(other => {
+              if (other !== item && other.classList.contains('expanded')) {
+                other.classList.remove('expanded');
+              }
+            });
+            item.classList.toggle('expanded');
+          });
+        }
+      });
+
+      // Close mobile menu on link click
+      const mobileSubmenuItems = document.querySelectorAll('.mobile-submenu-item');
+      mobileSubmenuItems.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
