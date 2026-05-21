@@ -53,6 +53,7 @@
 
     /* HERO */
     .kontakt-hero { background:var(--teget-dark); padding:136px 0 72px; position:relative; overflow:hidden; }
+    .kontakt-hero .pcb-texture { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='pcb' x='0' y='0' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cline x1='0' y1='30' x2='45' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='75' y1='30' x2='120' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='0' y1='90' x2='30' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='90' x2='120' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='0' x2='30' y2='20' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='40' x2='30' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='100' x2='30' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='0' x2='90' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='100' x2='90' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='45,30 60,30 60,60 90,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='30,80 30,90 60,90 60,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Ccircle cx='30' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='30' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='60' cy='60' r='3.2' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.36'/%3E%3Ccircle cx='60' cy='60' r='1.4' fill='%23ED9007' fill-opacity='0.28'/%3E%3Crect x='52' y='52' width='16' height='16' rx='2' fill='none' stroke='%23ED9007' stroke-width='0.7' stroke-opacity='0.18'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23pcb)'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
     .kontakt-hero::before { content:''; position:absolute; top:-60px; right:-80px; width:600px; height:600px; background:radial-gradient(circle,rgba(237,144,7,0.07) 0%,transparent 65%); pointer-events:none; }
     .kontakt-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
     .hero-inner { max-width:1200px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
@@ -185,8 +186,9 @@
 
     /* DIRECT CONTACT */
     .direct-section { background:var(--teget-dark); padding:80px 0; position:relative; }
+    .direct-section .dot-texture { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ED9007' fill-opacity='0.12'/%3E%3C/svg%3E"); background-size:32px 32px; pointer-events:none; z-index:0; }
     .direct-section::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
-    .section-inner { max-width:1200px; margin:0 auto; padding:0 32px; }
+    .section-inner { max-width:1200px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
     .dc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:40px; }
     .dc-card { background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius-lg); padding:22px 18px; display:flex; flex-direction:column; gap:12px; transition:background .2s,border-color .2s; text-decoration:none; }
     .dc-card:hover { background:var(--glass-hover); border-color:rgba(237,144,7,0.22); }
@@ -255,6 +257,7 @@
 
     /* PROCESS */
     .process-section { background:var(--teget-dark); padding:80px 0; position:relative; }
+    .process-section .diag-texture { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cline x1='0' y1='40' x2='40' y2='0' stroke='%23ED9007' stroke-width='0.6' stroke-opacity='0.09'/%3E%3C/svg%3E"); background-size:40px 40px; pointer-events:none; z-index:0; }
     .process-section::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
     .process-section::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 20% 80%,rgba(237,144,7,0.04) 0%,transparent 60%); pointer-events:none; }
     .process-inner { max-width:1200px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
@@ -379,6 +382,7 @@
 
 <!-- HERO -->
 <section class="kontakt-hero" aria-labelledby="hero-h1">
+  <div class="pcb-texture" aria-hidden="true"></div>
   <div class="hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Pocetna</a>
@@ -611,6 +615,7 @@
 
 <!-- DIRECT CONTACT -->
 <section class="direct-section" aria-labelledby="dc-h2">
+  <div class="dot-texture" aria-hidden="true"></div>
   <div class="section-inner">
     <div style="text-align:center;" data-anim>
       <span class="section-eyebrow">Direktan kontakt</span>
@@ -724,6 +729,7 @@
 
 <!-- PROCESS -->
 <section class="process-section" aria-labelledby="proc-h2">
+  <div class="diag-texture" aria-hidden="true"></div>
   <div class="process-inner">
     <div style="text-align:center;" data-anim>
       <span class="section-eyebrow">Kako radimo</span>
