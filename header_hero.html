@@ -2018,12 +2018,58 @@ document.addEventListener('DOMContentLoaded', () => {
   .svc-card:hover .svc-card__link { opacity: 1; transform: translateY(0); }
   .svc-card:hover .svc-card__link svg { transform: translateX(3px); }
 
-  /* Pulse canvas */
-  #pulseCanvas {
-    display: block;
+  /* Electric pulse dots — pure CSS keyframes */
+  .epulse {
+    opacity: 0;
   }
-  @media (prefers-reduced-motion: reduce) {
-    #pulseCanvas { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    /* Pulse A: left → right across top, then down, then right */
+    @keyframes pulseA {
+      0%   { transform: translate(5%,  15%); opacity: 0; }
+      3%   { opacity: 0.9; }
+      30%  { transform: translate(20%, 15%); opacity: 0.9; }
+      50%  { transform: translate(20%, 38%); opacity: 0.9; }
+      70%  { transform: translate(42%, 38%); opacity: 0.9; }
+      90%  { transform: translate(58%, 26%); opacity: 0.9; }
+      97%  { opacity: 0.9; }
+      100% { transform: translate(58%, 26%); opacity: 0; }
+    }
+    /* Pulse B: right → left across mid */
+    @keyframes pulseB {
+      0%   { transform: translate(98%, 55%); opacity: 0; }
+      3%   { opacity: 0.85; }
+      30%  { transform: translate(75%, 55%); opacity: 0.85; }
+      55%  { transform: translate(75%, 32%); opacity: 0.85; }
+      75%  { transform: translate(52%, 32%); opacity: 0.85; }
+      95%  { transform: translate(34%, 62%); opacity: 0.85; }
+      97%  { opacity: 0; }
+      100% { transform: translate(34%, 62%); opacity: 0; }
+    }
+    /* Pulse C: bottom zigzag */
+    @keyframes pulseC {
+      0%   { transform: translate(16%, 88%); opacity: 0; }
+      4%   { opacity: 0.75; }
+      35%  { transform: translate(42%, 88%); opacity: 0.75; }
+      55%  { transform: translate(42%, 70%); opacity: 0.75; }
+      75%  { transform: translate(64%, 70%); opacity: 0.75; }
+      95%  { transform: translate(85%, 82%); opacity: 0.75; }
+      97%  { opacity: 0; }
+      100% { transform: translate(85%, 82%); opacity: 0; }
+    }
+    /* Pulse D: short horizontal mid-left */
+    @keyframes pulseD {
+      0%   { transform: translate(8%,  50%); opacity: 0; }
+      4%   { opacity: 0.8; }
+      50%  { transform: translate(35%, 50%); opacity: 0.8; }
+      70%  { transform: translate(35%, 25%); opacity: 0.8; }
+      95%  { transform: translate(55%, 25%); opacity: 0.8; }
+      97%  { opacity: 0; }
+      100% { transform: translate(55%, 25%); opacity: 0; }
+    }
+    .epulse-a { animation: pulseA 4.2s ease-in-out infinite 0s; }
+    .epulse-b { animation: pulseB 5.8s ease-in-out infinite -2.3s; }
+    .epulse-c { animation: pulseC 7.1s ease-in-out infinite -4.1s; }
+    .epulse-d { animation: pulseD 6.3s ease-in-out infinite -1.5s; }
   }
 
   /* Responsive */
@@ -2042,8 +2088,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="services" id="usluge" aria-label="Naše usluge">
 
-  <!-- Electric pulse canvas — JS-driven, works in all browsers -->
-  <canvas id="pulseCanvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+  <!-- Electric pulse — pure CSS keyframe animated SVG dots -->
+  <svg aria-hidden="true" focusable="false"
+    style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible;"
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- Pulse A: travels horizontally left to right across top area -->
+    <circle class="epulse epulse-a" cx="0" cy="0" r="3" fill="#ED9007" filter="url(#glow)"/>
+
+    <!-- Pulse B: travels right side, different direction -->
+    <circle class="epulse epulse-b" cx="0" cy="0" r="2.5" fill="#ED9007" filter="url(#glow)"/>
+
+    <!-- Pulse C: bottom area -->
+    <circle class="epulse epulse-c" cx="0" cy="0" r="2" fill="#ED9007" filter="url(#glow)"/>
+
+    <!-- Pulse D: mid area, slowest -->
+    <circle class="epulse epulse-d" cx="0" cy="0" r="2.5" fill="#ED9007" filter="url(#glow)"/>
+  </svg>
 
   <div class="services__inner">
 
@@ -2159,117 +2226,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
-<script>
-// ── Electric Pulse Canvas Animation ──────────────────────────────
-(function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const canvas = document.getElementById('pulseCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  // Resize canvas to match section
-  function resize() {
-    const section = canvas.parentElement;
-    canvas.width  = section.offsetWidth;
-    canvas.height = section.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Define paths as arrays of [x_fraction, y_fraction] points
-  // Fractions so they scale with canvas size
-  const pathDefs = [
-    // Path A — top-left area, bends down then right
-    [[0, 0.15], [0.18, 0.15], [0.18, 0.38], [0.40, 0.38], [0.40, 0.26], [0.58, 0.26]],
-    // Path B — right side, comes left and bends
-    [[1.0, 0.55], [0.75, 0.55], [0.75, 0.32], [0.52, 0.32], [0.52, 0.62], [0.34, 0.62]],
-    // Path C — bottom zigzag
-    [[0.16, 0.88], [0.42, 0.88], [0.42, 0.70], [0.64, 0.70], [0.64, 0.82], [0.85, 0.82]],
-  ];
-
-  // Build a pulse object
-  function makePulse(pathIndex, speed, offset, size, alpha) {
-    return {
-      pathIndex,
-      t: offset,          // 0..1 position along path
-      speed,              // fraction per ms
-      size,               // dot radius
-      alpha,
-      trail: [],          // last N positions for tail effect
-      trailLen: 12,
-    };
-  }
-
-  const pulses = [
-    makePulse(0, 0.00022, 0.0,  3,   0.95),
-    makePulse(0, 0.00022, 0.45, 2.2, 0.70),
-    makePulse(1, 0.00016, 0.2,  3,   0.90),
-    makePulse(2, 0.00012, 0.6,  2.5, 0.80),
-  ];
-
-  // Interpolate position along a path at t (0..1)
-  function getPos(pathDef, t) {
-    const W = canvas.width, H = canvas.height;
-    const pts = pathDef.map(([fx, fy]) => [fx * W, fy * H]);
-    const segs = pts.length - 1;
-    const totalT = t * segs;
-    const seg = Math.min(Math.floor(totalT), segs - 1);
-    const local = totalT - seg;
-    const [x1, y1] = pts[seg];
-    const [x2, y2] = pts[seg + 1];
-    return [x1 + (x2 - x1) * local, y1 + (y2 - y1) * local];
-  }
-
-  let last = null;
-  function frame(ts) {
-    if (!last) last = ts;
-    const dt = Math.min(ts - last, 50); // cap at 50ms
-    last = ts;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    pulses.forEach(p => {
-      p.t = (p.t + p.speed * dt) % 1;
-      const path = pathDefs[p.pathIndex];
-      const [x, y] = getPos(path, p.t);
-
-      // Store trail
-      p.trail.push([x, y]);
-      if (p.trail.length > p.trailLen) p.trail.shift();
-
-      // Draw trail
-      p.trail.forEach(([tx, ty], i) => {
-        const trailAlpha = (i / p.trail.length) * p.alpha * 0.35;
-        const trailR = p.size * (i / p.trail.length) * 0.8;
-        ctx.beginPath();
-        ctx.arc(tx, ty, trailR, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(237,144,7,${trailAlpha})`;
-        ctx.fill();
-      });
-
-      // Outer glow
-      const grd = ctx.createRadialGradient(x, y, 0, x, y, p.size * 4);
-      grd.addColorStop(0, `rgba(237,144,7,${p.alpha * 0.28})`);
-      grd.addColorStop(1, 'rgba(237,144,7,0)');
-      ctx.beginPath();
-      ctx.arc(x, y, p.size * 4, 0, Math.PI * 2);
-      ctx.fillStyle = grd;
-      ctx.fill();
-
-      // Core dot
-      ctx.beginPath();
-      ctx.arc(x, y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(237,144,7,${p.alpha})`;
-      ctx.fill();
-    });
-
-    requestAnimationFrame(frame);
-  }
-
-  requestAnimationFrame(frame);
-})();
-</script>
 
 </body>
 </html>
