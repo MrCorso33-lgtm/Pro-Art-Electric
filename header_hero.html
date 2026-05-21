@@ -1791,5 +1791,346 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<!-- ═══════════════════════════════════════════════════════════
+     SERVICES SECTION
+════════════════════════════════════════════════════════════ -->
+<style>
+  /* ── Services Section ── */
+  .services {
+    background: var(--teget);
+    padding: 110px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* subtle radial glow top-right */
+  .services::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(237,144,7,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .services__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    gap: 24px;
+  }
+  .section-header__left {}
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--orange);
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--white);
+  }
+  .section-title em {
+    font-style: normal;
+    color: var(--orange);
+  }
+  .section-header__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .section-header__cta svg { width: 16px; height: 16px; transition: transform 0.2s; }
+  .section-header__cta:hover { color: var(--orange); }
+  .section-header__cta:hover svg { transform: translateX(4px); }
+
+  /* Services grid */
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  /* Service card */
+  .svc-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 32px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .svc-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(237,144,7,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+  }
+  .svc-card:hover {
+    border-color: rgba(237,144,7,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(237,144,7,0.12);
+  }
+  .svc-card:hover::before { opacity: 1; }
+
+  /* Featured card (first) */
+  .svc-card--featured {
+    background: linear-gradient(145deg, rgba(237,144,7,0.12) 0%, rgba(237,144,7,0.04) 100%);
+    border-color: rgba(237,144,7,0.2);
+  }
+  .svc-card--featured:hover {
+    border-color: rgba(237,144,7,0.5);
+    box-shadow: 0 20px 48px rgba(237,144,7,0.15), 0 0 0 1px rgba(237,144,7,0.2);
+  }
+
+  /* Icon */
+  .svc-card__icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(237,144,7,0.12);
+    border: 1px solid rgba(237,144,7,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .svc-card__icon svg {
+    width: 22px; height: 22px;
+    stroke: var(--orange);
+  }
+  .svc-card:hover .svc-card__icon {
+    background: rgba(237,144,7,0.2);
+    border-color: rgba(237,144,7,0.4);
+  }
+
+  /* Content */
+  .svc-card__title {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .svc-card__desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-body);
+    flex: 1;
+  }
+
+  /* Sub-items */
+  .svc-card__items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .svc-card__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+  .svc-card:hover .svc-card__item { color: rgba(255,255,255,0.55); }
+  .svc-card__item::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--orange);
+    opacity: 0.5;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+  .svc-card:hover .svc-card__item::before { opacity: 1; }
+
+  /* Arrow link */
+  .svc-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--orange);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    margin-top: auto;
+  }
+  .svc-card__link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .svc-card:hover .svc-card__link { opacity: 1; transform: translateY(0); }
+  .svc-card:hover .svc-card__link svg { transform: translateX(3px); }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .services__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .services__grid { grid-template-columns: repeat(2, 1fr); }
+    .services { padding: 72px 20px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .services__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="services" id="usluge" aria-label="Naše usluge">
+  <div class="services__inner">
+
+    <header class="section-header" data-aos>
+      <div class="section-header__left">
+        <div class="section-eyebrow">Usluge</div>
+        <h2 class="section-title">Sve što vaš dom ili<br>objekat <em>zahteva</em></h2>
+      </div>
+      <a href="#sve-usluge" class="section-header__cta">
+        Sve usluge
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </header>
+
+    <div class="services__grid">
+
+      <!-- 1. Elektroinstalacije -->
+      <a href="/elektroinstalacije" class="svc-card svc-card--featured" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="svc-card__title">Elektroinstalacije</div>
+        <p class="svc-card__desc">Kompletne elektroinstalacije za stambene i poslovne objekte — od projekta do primopredaje.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">Razvodni ormani i tabla</li>
+          <li class="svc-card__item">Unutrašnje instalacije</li>
+          <li class="svc-card__item">Spoljne instalacije</li>
+          <li class="svc-card__item">Punjaci za EV vozila</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 2. Pametna kuća -->
+      <a href="/pametna-kuca" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="svc-card__title">Pametna kuća</div>
+        <p class="svc-card__desc">Automatizacija doma — rasveta, roletne, grejanje, klima i sigurnost u jednom sistemu.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">KNX, Tuya, Zigbee sistemi</li>
+          <li class="svc-card__item">Google Home & Alexa</li>
+          <li class="svc-card__item">Scene i automatizacije</li>
+          <li class="svc-card__item">Daljinsko upravljanje</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 3. Video nadzor & Sigurnost -->
+      <a href="/sigurnost" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="svc-card__title">Video nadzor & Alarm</div>
+        <p class="svc-card__desc">IP kamere, alarmni sistemi, kontrola pristupa i video interfoni za svaki tip objekta.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">IP & Wi-Fi kamere</li>
+          <li class="svc-card__item">Protivprovalni alarmi</li>
+          <li class="svc-card__item">RFID & elektronske brave</li>
+          <li class="svc-card__item">Video interfoni</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 4. Rasveta -->
+      <a href="/rasveta" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="svc-card__title">Rasveta</div>
+        <p class="svc-card__desc">Ambijentalna, dekorativna i pametna rasveta za unutrašnje i spoljne prostore.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">LED sistemi & dimeri</li>
+          <li class="svc-card__item">RGB & ambijentalna</li>
+          <li class="svc-card__item">Fasadna & dvorišna</li>
+          <li class="svc-card__item">Plan i proračun rasvete</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 5. Održavanje & Servis -->
+      <a href="/odrzavanje" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="svc-card__title">Održavanje & Servis</div>
+        <p class="svc-card__desc">Redovno održavanje, hitne intervencije i dijagnostika kvarova — brzo i pouzdano.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">Hitne intervencije</li>
+          <li class="svc-card__item">Dijagnostika kvarova</li>
+          <li class="svc-card__item">Ugovorno održavanje</li>
+          <li class="svc-card__item">Servis video nadzora</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 </body>
 </html>
