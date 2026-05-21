@@ -2227,5 +2227,428 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 
+<!-- ═══════════════════════════════════════════════════════════
+     TRUST / ZAŠTO MI — off-white sekcija
+═══════════════════════════════════════════════════════════ -->
+<style>
+  /* ── Trust Section ── */
+  .trust {
+    background: var(--off-white);
+    padding: 110px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .trust__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Top: stats row */
+  .trust__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 80px;
+    background: rgba(15,26,36,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .trust__stat {
+    background: #fff;
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    transition: background 0.25s;
+  }
+  .trust__stat:hover { background: #f9f9fc; }
+  .trust__stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-weight: 700;
+    color: var(--teget);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .trust__stat-num span {
+    color: var(--orange);
+  }
+  .trust__stat-label {
+    font-size: 0.875rem;
+    color: #4A5568;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .trust__stat-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 16px;
+    color: var(--orange);
+    opacity: 0.85;
+  }
+
+  /* Middle: two columns — guarantees left, process right */
+  .trust__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Left: guarantees / differentiators */
+  .trust__guarantees {}
+  .trust__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .trust__heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--teget);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .trust__sub {
+    font-size: 1rem;
+    color: #4A5568;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 460px;
+  }
+  .trust__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .trust__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .trust__item-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--teget);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    margin-top: 2px;
+  }
+  .trust__item-icon svg { width: 20px; height: 20px; }
+  .trust__item-text {}
+  .trust__item-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teget);
+    margin-bottom: 4px;
+  }
+  .trust__item-desc {
+    font-size: 0.875rem;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+
+  /* Right: process steps */
+  .trust__process {}
+  .trust__process-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--teget);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .trust__process-sub {
+    font-size: 1rem;
+    color: #4A5568;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .trust__steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  /* Vertical connector line */
+  .trust__steps::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: 44px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--orange) 0%, rgba(237,144,7,0.15) 100%);
+  }
+  .trust__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 0 28px;
+    position: relative;
+  }
+  .trust__step:last-child { padding-bottom: 0; }
+  .trust__step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--teget);
+    border: 2px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--orange);
+    position: relative;
+    z-index: 1;
+    transition: background 0.25s, color 0.25s;
+  }
+  .trust__step:hover .trust__step-num {
+    background: var(--orange);
+    color: #fff;
+  }
+  .trust__step-content {}
+  .trust__step-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teget);
+    margin-bottom: 4px;
+    padding-top: 8px;
+  }
+  .trust__step-desc {
+    font-size: 0.875rem;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+
+  /* Bottom CTA bar */
+  .trust__cta-bar {
+    margin-top: 72px;
+    background: var(--teget);
+    border-radius: 20px;
+    padding: 48px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .trust__cta-bar::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(237,144,7,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .trust__cta-text {
+    position: relative; z-index: 1;
+  }
+  .trust__cta-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .trust__cta-desc {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.6;
+  }
+  .trust__cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .trust__stats { grid-template-columns: repeat(2, 1fr); }
+    .trust__body { grid-template-columns: 1fr; gap: 48px; }
+    .trust__cta-bar { flex-direction: column; text-align: center; padding: 40px 32px; }
+    .trust__cta-actions { justify-content: center; }
+  }
+  @media (max-width: 560px) {
+    .trust__stats { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+    .trust__stat { padding: 28px 20px; }
+    .trust { padding: 72px 20px; }
+    .trust__cta-bar { padding: 32px 24px; }
+    .trust__cta-actions { flex-direction: column; width: 100%; }
+    .trust__cta-actions .btn { width: 100%; justify-content: center; }
+  }
+</style>
+
+<section class="trust" id="zasto-mi" aria-label="Zašto Pro Art Electric">
+  <div class="trust__inner">
+
+    <!-- Stats row -->
+    <div class="trust__stats" role="list">
+
+      <div class="trust__stat" role="listitem" data-aos>
+        <svg class="trust__stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div class="trust__stat-num">100<span>%</span></div>
+        <div class="trust__stat-label">Završenih projekata<br>u dogovorenom roku</div>
+      </div>
+
+      <div class="trust__stat" role="listitem" data-aos style="transition-delay:0.1s">
+        <svg class="trust__stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="trust__stat-num">2<span>h</span></div>
+        <div class="trust__stat-label">Prosečno vreme<br>odgovora na upit</div>
+      </div>
+
+      <div class="trust__stat" role="listitem" data-aos style="transition-delay:0.2s">
+        <svg class="trust__stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="trust__stat-num">50<span>+</span></div>
+        <div class="trust__stat-label">Zadovoljnih klijenata<br>u Novom Sadu i okolini</div>
+      </div>
+
+      <div class="trust__stat" role="listitem" data-aos style="transition-delay:0.3s">
+        <svg class="trust__stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="trust__stat-num">2<span>g</span></div>
+        <div class="trust__stat-label">Pisana garancija<br>na sve izvedene radove</div>
+      </div>
+
+    </div>
+
+    <!-- Body: guarantees + process -->
+    <div class="trust__body">
+
+      <!-- Left: guarantees -->
+      <div class="trust__guarantees" data-aos>
+        <p class="trust__label">Zašto Pro Art Electric</p>
+        <h2 class="trust__heading">Firma koja radi<br>bez iznenađenja</h2>
+        <p class="trust__sub">U niši gde je nepoverenje prema izvođačima norma, mi gradimo reputaciju na predvidivosti, transparentnosti i pisanoj reči.</p>
+
+        <ul class="trust__items" role="list">
+          <li class="trust__item">
+            <div class="trust__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="trust__item-text">
+              <div class="trust__item-title">Licencirani izvođač — APR registracija</div>
+              <div class="trust__item-desc">Registrovano privredno društvo, PIB i MB javno dostupni. Radimo po važećim propisima i standardima.</div>
+            </div>
+          </li>
+          <li class="trust__item">
+            <div class="trust__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="trust__item-text">
+              <div class="trust__item-title">Nema skrivenih troškova</div>
+              <div class="trust__item-desc">Ponuda se daje pre početka radova, u pisanoj formi. Cena se ne menja bez vašeg odobrenja.</div>
+            </div>
+          </li>
+          <li class="trust__item">
+            <div class="trust__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="trust__item-text">
+              <div class="trust__item-title">Poštovanje rokova</div>
+              <div class="trust__item-desc">Rok se definiše u ugovoru. Ako dođe do promene — obaveštavamo vas unapred, ne posle.</div>
+            </div>
+          </li>
+          <li class="trust__item">
+            <div class="trust__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div class="trust__item-text">
+              <div class="trust__item-title">Pisana garancija na radove</div>
+              <div class="trust__item-desc">Svaki završen projekat dobija pisanu garanciju. Servis i podrška dostupni i posle primopredaje.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: process steps -->
+      <div class="trust__process" data-aos style="transition-delay:0.15s">
+        <p class="trust__label">Kako radimo</p>
+        <h2 class="trust__process-heading">Od upita do<br>primopredaje</h2>
+        <p class="trust__process-sub">Jasan proces u 5 koraka — znate šta se dešava u svakom trenutku.</p>
+
+        <ol class="trust__steps" role="list">
+          <li class="trust__step">
+            <div class="trust__step-num" aria-hidden="true">01</div>
+            <div class="trust__step-content">
+              <div class="trust__step-title">Upit i obilazak</div>
+              <div class="trust__step-desc">Kontaktirate nas — odgovaramo u roku od 2h. Dogovaramo besplatan obilazak lokacije.</div>
+            </div>
+          </li>
+          <li class="trust__step">
+            <div class="trust__step-num" aria-hidden="true">02</div>
+            <div class="trust__step-content">
+              <div class="trust__step-title">Ponuda i ugovor</div>
+              <div class="trust__step-desc">Dostavljamo pisanu ponudu sa tačnom specifikacijom radova, materijala i rokova. Bez iznenađenja.</div>
+            </div>
+          </li>
+          <li class="trust__step">
+            <div class="trust__step-num" aria-hidden="true">03</div>
+            <div class="trust__step-content">
+              <div class="trust__step-title">Projektovanje</div>
+              <div class="trust__step-desc">Za složenije projekte izrađujemo elektro projekat i dobijamo potrebne saglasnosti.</div>
+            </div>
+          </li>
+          <li class="trust__step">
+            <div class="trust__step-num" aria-hidden="true">04</div>
+            <div class="trust__step-content">
+              <div class="trust__step-title">Izvođenje radova</div>
+              <div class="trust__step-desc">Radovi se izvode prema projektu i dogovorenom rasporedu. Redovno vas informišemo o napretku.</div>
+            </div>
+          </li>
+          <li class="trust__step">
+            <div class="trust__step-num" aria-hidden="true">05</div>
+            <div class="trust__step-content">
+              <div class="trust__step-title">Primopredaja i garancija</div>
+              <div class="trust__step-desc">Testiramo sistem, predajemo dokumentaciju i izdajemo pisanu garanciju. Dostupni smo i posle.</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA bar -->
+    <div class="trust__cta-bar" data-aos>
+      <div class="trust__cta-text">
+        <div class="trust__cta-title">Spremni da krenemo — kada ste vi.</div>
+        <div class="trust__cta-desc">Besplatan obilazak i procena bez obaveze. Odgovaramo u roku od 2 sata radnim danima.</div>
+      </div>
+      <div class="trust__cta-actions">
+        <a href="#kontakt" class="btn btn--primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Zakažite obilazak
+        </a>
+        <a href="tel:+381601234567" class="btn btn--ghost-light">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          060 123 4567
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 </body>
 </html>
