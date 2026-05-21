@@ -52,7 +52,7 @@
 
 
     /* ═══════════════════════════════════════════════════════
-       HEADER — STICKY + GLASSMORPHISM
+       HEADER - STICKY + GLASSMORPHISM
     ═══════════════════════════════════════════════════════ */
     .header {
       position: fixed;
@@ -918,7 +918,7 @@
       .path-card { padding: 28px 20px; }
     }
 
-    /* ── Right — Project cards 2×2 grid ── */
+    /* ── Right , Project cards 2×2 grid ── */
     .hero__projects {
       display: flex;
       flex-direction: column;
@@ -1160,7 +1160,7 @@
   <div class="header-inner">
 
     <!-- Logo -->
-    <a href="#" class="logo" aria-label="Pro Art Electric — početna">
+    <a href="#" class="logo" aria-label="Pro Art Electric , početna">
       <div class="logo-mark" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
@@ -1472,7 +1472,7 @@
 
       <p class="hero__sub">
         Kompletne elektroinstalacije, pametna kuća, video nadzor i alarmni sistemi.
-        Od projekta do primopredaje — bez iznenađenja.
+        Od projekta do primopredaje, bez iznenađenja.
       </p>
 
       <div class="hero__cta-group">
@@ -1490,7 +1490,7 @@
 
     </div>
 
-    <!-- Right — Project cards -->
+    <!-- Right: Project cards -->
     <aside class="hero__projects" aria-label="Realizovani projekti">
       <div class="projects__header">
         <span class="projects__title">Realizovani projekti</span>
@@ -1502,7 +1502,7 @@
 
   </div>
 
-  <!-- Scroll cue — electric orange shimmer -->
+  <!-- Scroll cue: electric orange shimmer -->
   <div class="hero__scroll-cue" aria-hidden="true">
     <div class="scroll-cue__track">
       <div class="scroll-cue__shimmer"></div>
@@ -1519,7 +1519,7 @@
 <section class="dual-path" id="putanje" aria-label="Izaberite svoju putanju">
   <div class="dual-path__inner">
 
-    <!-- Left path — Quick service -->
+    <!-- Left path , Quick service -->
     <article class="path-card path-card--service" data-aos>
       <div class="path-card__glow" aria-hidden="true"></div>
       <div class="path-card__icon-wrap" aria-hidden="true">
@@ -1527,7 +1527,7 @@
       </div>
       <div class="path-card__tag">Brza servisna putanja</div>
       <h2 class="path-card__title">Treba vam usluga<br><em>sada ili uskoro?</em></h2>
-      <p class="path-card__desc">Zamena instalacija, ugradnja alarma, video nadzor, pametna rasveta — izlazimo na teren, dajemo predračun i radimo bez iznenađenja.</p>
+      <p class="path-card__desc">Zamena instalacija, ugradnja alarma, video nadzor, pametna rasveta. Izlazimo na teren, dajemo predračun i radimo bez iznenađenja.</p>
       <ul class="path-card__list" role="list">
         <li><span class="path-card__check" aria-hidden="true"></span>Obilazak i predračun bez obaveze</li>
         <li><span class="path-card__check" aria-hidden="true"></span>Odgovor u roku od 2 sata</li>
@@ -1550,7 +1550,7 @@
       <div class="divider__line"></div>
     </div>
 
-    <!-- Right path — Project consultation -->
+    <!-- Right path , Project consultation -->
     <article class="path-card path-card--project" data-aos>
       <div class="path-card__glow path-card__glow--subtle" aria-hidden="true"></div>
       <div class="path-card__icon-wrap path-card__icon-wrap--glass" aria-hidden="true">
@@ -1558,7 +1558,7 @@
       </div>
       <div class="path-card__tag path-card__tag--glass">Projektna putanja</div>
       <h2 class="path-card__title">Planirate projekat<br><em>i tražite partnera?</em></h2>
-      <p class="path-card__desc">Novogradnja, renoviranje, pametna kuća ili investicioni objekat — radimo od projektovanja do primopredaje, sa punom dokumentacijom.</p>
+      <p class="path-card__desc">Novogradnja, renoviranje, pametna kuća ili investicioni objekat , radimo od projektovanja do primopredaje, sa punom dokumentacijom.</p>
       <ul class="path-card__list" role="list">
         <li><span class="path-card__check" aria-hidden="true"></span>Konsultacija i plan sistema</li>
         <li><span class="path-card__check" aria-hidden="true"></span>Kompletan izvođački tim</li>
@@ -1633,12 +1633,12 @@ document.addEventListener('DOMContentLoaded', () => {
   bgImg.onerror = () => heroBg.classList.add('loaded'); // still animate even if img missing
   bgImg.src    = 'hero_bg.jpg';
 
-  // ─── Project cards data (placeholder — WP CPT replaces) ──
+  // ─── Project cards data (placeholder - WP CPT replaces) ──
   const projects = [
     {
       id: 1,
       category: 'Pametna kuća',
-      name: 'Vila Petrovaradin — Smart Home',
+      name: 'Vila Petrovaradin - Smart Home',
       area: '280 m²',
       location: 'Petrovaradin',
       year: '2025',
@@ -1648,7 +1648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 2,
       category: 'Elektroinstalacije',
-      name: 'Poslovni objekat — Liman',
+      name: 'Poslovni objekat - Liman',
       area: '450 m²',
       location: 'Novi Sad',
       year: '2025',
@@ -1658,7 +1658,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 3,
       category: 'Video nadzor & Alarm',
-      name: 'Stambena zgrada — Detelinara',
+      name: 'Stambena zgrada - Detelinara',
       area: '12 stanova',
       location: 'Novi Sad',
       year: '2025',
@@ -1668,7 +1668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 4,
       category: 'Rasveta',
-      name: 'Restoran Centar — Ambijentalna rasveta',
+      name: 'Restoran Centar - Ambijentalna rasveta',
       area: '180 m²',
       location: 'Novi Sad',
       year: '2026',
@@ -1812,7 +1812,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer-events: none;
     z-index: 0;
   }
-  /* radial glow top-right — above pattern */
+  /* radial glow top-right , above pattern */
   .services::before {
     content: '';
     position: absolute;
@@ -2018,7 +2018,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .svc-card:hover .svc-card__link { opacity: 1; transform: translateY(0); }
   .svc-card:hover .svc-card__link svg { transform: translateX(3px); }
 
-  /* Electric pulse dots — pure CSS keyframes */
+  /* Electric pulse dots , pure CSS keyframes */
   .epulse {
     opacity: 0;
   }
@@ -2088,7 +2088,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="services" id="usluge" aria-label="Naše usluge">
 
-  <!-- Electric pulse — pure CSS keyframe animated SVG dots -->
+  <!-- Electric pulse , pure CSS keyframe animated SVG dots -->
   <svg aria-hidden="true" focusable="false"
     style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible;"
     xmlns="http://www.w3.org/2000/svg">
@@ -2133,7 +2133,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <div class="svc-card__title">Elektroinstalacije</div>
-        <p class="svc-card__desc">Kompletne elektroinstalacije za stambene i poslovne objekte — od projekta do primopredaje.</p>
+        <p class="svc-card__desc">Kompletne elektroinstalacije za stambene i poslovne objekte , od projekta do primopredaje.</p>
         <ul class="svc-card__items" role="list">
           <li class="svc-card__item">Razvodni ormani i tabla</li>
           <li class="svc-card__item">Unutrašnje instalacije</li>
@@ -2152,7 +2152,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <div class="svc-card__title">Pametna kuća</div>
-        <p class="svc-card__desc">Automatizacija doma — rasveta, roletne, grejanje, klima i sigurnost u jednom sistemu.</p>
+        <p class="svc-card__desc">Automatizacija doma , rasveta, roletne, grejanje, klima i sigurnost u jednom sistemu.</p>
         <ul class="svc-card__items" role="list">
           <li class="svc-card__item">KNX, Tuya, Zigbee sistemi</li>
           <li class="svc-card__item">Google Home & Alexa</li>
@@ -2209,7 +2209,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
         </div>
         <div class="svc-card__title">Održavanje & Servis</div>
-        <p class="svc-card__desc">Redovno održavanje, hitne intervencije i dijagnostika kvarova — brzo i pouzdano.</p>
+        <p class="svc-card__desc">Redovno održavanje, hitne intervencije i dijagnostika kvarova , brzo i pouzdano.</p>
         <ul class="svc-card__items" role="list">
           <li class="svc-card__item">Hitne intervencije</li>
           <li class="svc-card__item">Dijagnostika kvarova</li>
@@ -2228,7 +2228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     TRUST / ZAŠTO MI — off-white sekcija
+     TRUST / ZAŠTO MI - off-white sekcija
 ═══════════════════════════════════════════════════════════ -->
 <style>
   /* ── Trust Section ── */
@@ -2287,7 +2287,7 @@ document.addEventListener('DOMContentLoaded', () => {
     opacity: 0.85;
   }
 
-  /* Middle: two columns — guarantees left, process right */
+  /* Middle: two columns , guarantees left, process right */
   .trust__body {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2547,7 +2547,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="trust__item-text">
-              <div class="trust__item-title">Licencirani izvođač — APR registracija</div>
+              <div class="trust__item-title">Licencirani izvođač , APR registracija</div>
               <div class="trust__item-desc">Registrovano privredno društvo, PIB i MB javno dostupni. Radimo po važećim propisima i standardima.</div>
             </div>
           </li>
@@ -2566,7 +2566,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="trust__item-text">
               <div class="trust__item-title">Poštovanje rokova</div>
-              <div class="trust__item-desc">Rok se definiše u ugovoru. Ako dođe do promene — obaveštavamo vas unapred, ne posle.</div>
+              <div class="trust__item-desc">Rok se definiše u ugovoru. Ako dođe do promene , obaveštavamo vas unapred, ne posle.</div>
             </div>
           </li>
           <li class="trust__item">
@@ -2585,14 +2585,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="trust__process" data-aos style="transition-delay:0.15s">
         <p class="trust__label">Kako radimo</p>
         <h2 class="trust__process-heading">Od upita do<br>primopredaje</h2>
-        <p class="trust__process-sub">Jasan proces u 5 koraka — znate šta se dešava u svakom trenutku.</p>
+        <p class="trust__process-sub">Jasan proces u 5 koraka , znate šta se dešava u svakom trenutku.</p>
 
         <ol class="trust__steps" role="list">
           <li class="trust__step">
             <div class="trust__step-num" aria-hidden="true">01</div>
             <div class="trust__step-content">
               <div class="trust__step-title">Upit i obilazak</div>
-              <div class="trust__step-desc">Kontaktirate nas — odgovaramo u roku od 2h. Dogovaramo besplatan obilazak lokacije.</div>
+              <div class="trust__step-desc">Kontaktirate nas, odgovaramo u roku od 2h. Dogovaramo besplatan obilazak lokacije.</div>
             </div>
           </li>
           <li class="trust__step">
@@ -2631,7 +2631,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Bottom CTA bar -->
     <div class="trust__cta-bar" data-aos>
       <div class="trust__cta-text">
-        <div class="trust__cta-title">Spremni da krenemo — kada ste vi.</div>
+        <div class="trust__cta-title">Spremni da krenemo , kada ste vi.</div>
         <div class="trust__cta-desc">Besplatan obilazak i procena bez obaveze. Odgovaramo u roku od 2 sata radnim danima.</div>
       </div>
       <div class="trust__cta-actions">
@@ -2651,7 +2651,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     ISTAKNUTI PROJEKTI — tamna sekcija
+     ISTAKNUTI PROJEKTI - tamna sekcija
 ═══════════════════════════════════════════════════════════ -->
 <style>
   /* ── Projects Section ── */
@@ -2960,7 +2960,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="projects__header">
       <div class="projects__header-left" data-aos>
         <p class="projects__label">Realizovani projekti</p>
-        <h2 class="projects__heading">Svaki projekat —<br>priča za sebe.<span>.</span></h2>
+        <h2 class="projects__heading">Svaki projekat ,<br>priča za sebe.<span>.</span></h2>
       </div>
       <a href="/projekti" class="projects__all-link" data-aos style="transition-delay:0.1s">
         Svi projekti
@@ -2990,7 +2990,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
         </div>
         <div class="proj-card__body">
-          <h3 class="proj-card__title">Vila Petrovaradin — Kompletan Smart Home</h3>
+          <h3 class="proj-card__title">Vila Petrovaradin , Kompletan Smart Home</h3>
           <p class="proj-card__desc">KNX automatizacija, pametna rasveta, kontrola klime i roletni, video interfon i alarmni sistem. Integracija sa Google Home.</p>
           <div class="proj-card__meta">
             <span class="proj-card__meta-item">
@@ -3030,12 +3030,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
         </div>
         <div class="proj-card__body">
-          <h3 class="proj-card__title">Poslovni objekat Liman — Kompletna instalacija</h3>
+          <h3 class="proj-card__title">Poslovni objekat Liman , Kompletna instalacija</h3>
           <p class="proj-card__desc">Projektovanje i izvođenje elektroinstalacija za poslovni prostor. Razvodni ormani, EV punšači, LED rasveta, UPS sistemi.</p>
           <div class="proj-card__meta">
             <span class="proj-card__meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Novi Sad — Liman
+              Novi Sad, Liman
             </span>
             <span class="proj-card__meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -3070,12 +3070,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
         </div>
         <div class="proj-card__body">
-          <h3 class="proj-card__title">Stambena zgrada Detelinara — Sigurnosni sistem</h3>
+          <h3 class="proj-card__title">Stambena zgrada Detelinara , Sigurnosni sistem</h3>
           <p class="proj-card__desc">IP video nadzor sa 24 kamere, protivprovalni alarm, kontrola pristupa i video interfon za 12 stanova. GSM dojava.</p>
           <div class="proj-card__meta">
             <span class="proj-card__meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Novi Sad — Detelinara
+              Novi Sad, Detelinara
             </span>
             <span class="proj-card__meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -3140,7 +3140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="brands__header">
       <span class="brands__eyebrow">Oprema i tehnologije</span>
       <h2 class="brands__title">Sistemi sa kojima radimo</h2>
-      <p class="brands__sub">Koristimo isključivo proverene brendove i sertifikovane sisteme — bez kompromisa na kvalitetu.</p>
+      <p class="brands__sub">Koristimo isključivo proverene brendove i sertifikovane sisteme, bez kompromisa na kvalitetu.</p>
     </div>
 
     <div class="brands__grid">
@@ -3183,7 +3183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="brand-card__info">
           <span class="brand-card__category">Alarmni sistemi</span>
-          <p class="brand-card__desc">Češki lider u sigurnosnim sistemima — pouzdan, intuitivan i jednostavan za upravljanje.</p>
+          <p class="brand-card__desc">Češki lider u sigurnosnim sistemima , pouzdan, intuitivan i jednostavan za upravljanje.</p>
         </div>
       </div>
 
@@ -3197,7 +3197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="brand-card__info">
           <span class="brand-card__category">Pametna kuća</span>
-          <p class="brand-card__desc">WiFi pametni prekidači, utičnice, senzori i automatizacija — dostupno i pouzdano rešenje za svaki dom.</p>
+          <p class="brand-card__desc">WiFi pametni prekidači, utičnice, senzori i automatizacija , dostupno i pouzdano rešenje za svaki dom.</p>
         </div>
       </div>
 
@@ -3211,7 +3211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="brand-card__info">
           <span class="brand-card__category">Međunarodni standard</span>
-          <p class="brand-card__desc">Jedini globalni otvoreni standard za kućnu i poslovnu automatizaciju — kompatibilan sa 500+ proizvođača.</p>
+          <p class="brand-card__desc">Jedini globalni otvoreni standard za kućnu i poslovnu automatizaciju , kompatibilan sa 500+ proizvođača.</p>
           <span class="brand-card__badge">ISO 14543-3 sertifikovan</span>
         </div>
       </div>
@@ -3430,7 +3430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="reviews__header" data-rev-animate>
       <span class="reviews__eyebrow">Recenzije klijenata</span>
       <h2 class="reviews__title" id="reviews-heading">Šta kažu naši klijenti</h2>
-      <p class="reviews__sub">Svaki projekat je jedinstven. Ono što ostaje isto — poverenje koje gradimo pre, tokom i posle instalacije.</p>
+      <p class="reviews__sub">Svaki projekat je jedinstven. Ono što ostaje isto , poverenje koje gradimo pre, tokom i posle instalacije.</p>
     </div>
 
     <!-- Summary bar -->
@@ -3476,7 +3476,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="review-card__tag">Pametna kuća</span>
         </div>
         <blockquote class="review-card__quote">
-          <p>"Rekonstrukcija stana je bila veliki projekat i bojao sam se haosa. Pro Art Electric je sve uradio uredno, prema planu i bez iznenađenja. Pametno osvetljenje i automatizacija su tačno ono što smo zamislili — možda i bolje."</p>
+          <p>"Rekonstrukcija stana je bila veliki projekat i bojao sam se haosa. Pro Art Electric je sve uradio uredno, prema planu i bez iznenađenja. Pametno osvetljenje i automatizacija su tačno ono što smo zamislili, možda i bolje."</p>
         </blockquote>
         <footer class="review-card__footer">
           <div class="review-card__avatar" aria-hidden="true">MJ</div>
@@ -3508,7 +3508,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="review-card__tag review-card__tag--featured">Elektroinstalacije</span>
         </div>
         <blockquote class="review-card__quote">
-          <p>"Gradili smo kuću i imali smo lošeg iskustva sa prethodnim majstorom. Pro Art Electric je preuzeo projekat, napravio detaljan plan i sve izveo po standardu. Atestna dokumentacija je bila uredna i kompletna — bez čekanja i bez doplata."</p>
+          <p>"Gradili smo kuću i imali smo lošeg iskustva sa prethodnim majstorom. Pro Art Electric je preuzeo projekat, napravio detaljan plan i sve izveo po standardu. Atestna dokumentacija je bila uredna i kompletna, bez čekanja i bez doplata."</p>
         </blockquote>
         <footer class="review-card__footer">
           <div class="review-card__avatar" aria-hidden="true">SN</div>
@@ -3569,7 +3569,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="review-card__tag">Alarmni sistem</span>
         </div>
         <blockquote class="review-card__quote">
-          <p>"Odličan tim, profesionalan pristup. Alarm je instaliran u porodičnoj kući za jedan dan. Objasnili su sve detalje, pokazali kako se koristi i ostavili kontakt za podršku. Mesec dana kasnije — sve radi savršeno."</p>
+          <p>"Odličan tim, profesionalan pristup. Alarm je instaliran u porodičnoj kući za jedan dan. Objasnili su sve detalje, pokazali kako se koristi i ostavili kontakt za podršku. Mesec dana kasnije, sve radi savršeno."</p>
         </blockquote>
         <footer class="review-card__footer">
           <div class="review-card__avatar" aria-hidden="true">DM</div>
@@ -3601,7 +3601,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="review-card__tag">Rasveta</span>
         </div>
         <blockquote class="review-card__quote">
-          <p>"Projektovanje i ugradnja LED rasvete u poslovnom prostoru. Rezultat je bio iznad očekivanja — prostor izgleda potpuno drugačije, a račun za struju je vidno manji. Svaka pohvala za urednost i preciznost rada."</p>
+          <p>"Projektovanje i ugradnja LED rasvete u poslovnom prostoru. Rezultat je bio iznad očekivanja. Prostor izgleda potpuno drugačije, a račun za struju je vidno manji. Svaka pohvala za urednost i preciznost rada."</p>
         </blockquote>
         <footer class="review-card__footer">
           <div class="review-card__avatar" aria-hidden="true">TV</div>
@@ -3633,7 +3633,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="review-card__tag">Održavanje</span>
         </div>
         <blockquote class="review-card__quote">
-          <p>"Imali smo kvar na razvodu u stanu — struja je padala bez razloga. Ekipa je stigla isti dan, pronašla problem za sat vremena i sve popravila. Cena je bila fer, a majstor je objasnio šta je bio uzrok. To se pamti."</p>
+          <p>"Imali smo kvar na razvodu u stanu , struja je padala bez razloga. Ekipa je stigla isti dan, pronašla problem za sat vremena i sve popravila. Cena je bila fer, a majstor je objasnio šta je bio uzrok. To se pamti."</p>
         </blockquote>
         <footer class="review-card__footer">
           <div class="review-card__avatar" aria-hidden="true">JP</div>
@@ -4060,8 +4060,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Left: text content -->
       <div class="zone__content" data-zone-animate>
         <span class="zone__eyebrow">Zona pokrivanja</span>
-        <h2 class="zone__title" id="zone-heading">Dolazimo do Vas — u Novom Sadu i šire</h2>
-        <p class="zone__desc">Naš tim je baziran u Novom Sadu i pokriva celu Vojvodinu. Za veće projekte i specijalizovane sisteme, dolazimo i van regiona — po dogovoru.</p>
+        <h2 class="zone__title" id="zone-heading">Dolazimo do Vas, u Novom Sadu i šire</h2>
+        <p class="zone__desc">Naš tim je baziran u Novom Sadu i pokriva celu Vojvodinu. Za veće projekte i specijalizovane sisteme, dolazimo i van regiona, po dogovoru.</p>
 
         <!-- Zone list -->
         <ul class="zone__list" role="list">
@@ -4100,7 +4100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="zone__item-text">
               <strong>Ostala Srbija</strong>
-              <span>Beograd, Niš, Kragujevac i ostali gradovi — za veće projekte pametnih kuća i poslovnih objekata</span>
+              <span>Beograd, Niš, Kragujevac i ostali gradovi, za veće projekte pametnih kuća i poslovnih objekata</span>
             </div>
             <span class="zone__item-badge">Po dogovoru</span>
           </li>
@@ -4595,8 +4595,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-1" role="region">
             <div class="faq__answer-inner">
-              <p>Počinju sa <strong>besplatnim obilazkom</strong> — dolazimo na lokaciju, sagledavamo situaciju i razgovaramo o Vašim potrebama. Nakon toga, u roku od 1&ndash;3 radna dana dobijate detaljan predračun sa jasno navedenim stavkama. Tek kada odobrite predračun, dogovaramo termin i počinjemo radove.</p>
-              <p>Nema skrivenih troškova — sve što nije u predračunu, ne naplćujemo bez prethodnog dogovora.</p>
+              <p>Počinju sa <strong>besplatnim obilazkom</strong>. Dolazimo na lokaciju, sagledavamo situaciju i razgovaramo o Vašim potrebama. Nakon toga, u roku od 1&ndash;3 radna dana dobijate detaljan predračun sa jasno navedenim stavkama. Tek kada odobrite predračun, dogovaramo termin i počinjemo radove.</p>
+              <p>Nema skrivenih troškova. Sve što nije u predračunu, ne naplćujemo bez prethodnog dogovora.</p>
             </div>
           </div>
         </div>
@@ -4610,7 +4610,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-2" role="region">
             <div class="faq__answer-inner">
-              <p>Radimo i jedno i drugo. Servisna putanja je namenjena upravo manjim intervencijama — zamena osigurača, kvar na razvodu, ugradnja utikača ili prekidača, zamena bojlera. Dolazimo brzo, rešavamo problem i ne naplćujemo više nego što je potrebno.</p>
+              <p>Radimo i jedno i drugo. Servisna putanja je namenjena upravo manjim intervencijama: zamena osigurača, kvar na razvodu, ugradnja utikača ili prekidača, zamena bojlera. Dolazimo brzo, rešavamo problem i ne naplćujemo više nego što je potrebno.</p>
               <p>Za veće projekte (rekonstrukcija, nova gradnja, pametna kuća) koristimo projektnu putanju sa detaljnim planiranjem.</p>
             </div>
           </div>
@@ -4625,7 +4625,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-3" role="region">
             <div class="faq__answer-inner">
-              <p>Cena zavisi od sistema koji birate, kvadrature i nivoa automatizacije. Postoje rešenja za različite budžete — od WiFi pametnih prekidača (WISE) koji se mogu ugraditi i u postojeću instalaciju, do KNX sistema za kompletnu automatizaciju doma ili poslovnog prostora.</p>
+              <p>Cena zavisi od sistema koji birate, kvadrature i nivoa automatizacije. Postoje rešenja za različite budžete , od WiFi pametnih prekidača (WISE) koji se mogu ugraditi i u postojeću instalaciju, do KNX sistema za kompletnu automatizaciju doma ili poslovnog prostora.</p>
               <p>Na obilazku Vam pružamo konkretan predlog sistema sa cenama za Vaš prostor. Nema opštih cenovnika jer svaki projekat je drugačiji.</p>
             </div>
           </div>
@@ -4640,8 +4640,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-4" role="region">
             <div class="faq__answer-inner">
-              <p>Da, za sve elektroinstalacijske radove koji to zahtevaju ispostavljamo <strong>atestnu dokumentaciju</strong> prema važećim standardima. Ovo je posebno važno za novu gradnju i rekonstrukciju — bez atesta ne možete dobiti upotrebnu dozvolu.</p>
-              <p>Dokumentacija je uredna, kompletna i ispostavljana na vreme — bez doplata i bez čekanja.</p>
+              <p>Da, za sve elektroinstalacijske radove koji to zahtevaju ispostavljamo <strong>atestnu dokumentaciju</strong> prema važećim standardima. Ovo je posebno važno za novu gradnju i rekonstrukciju. Bez atesta ne možete dobiti upotrebnu dozvolu.</p>
+              <p>Dokumentacija je uredna, kompletna i ispostavljana na vreme, bez doplata i bez čekanja.</p>
             </div>
           </div>
         </div>
@@ -4660,7 +4660,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-5" role="region">
             <div class="faq__answer-inner">
-              <p>Za standardni stambeni objekat (kuća ili stan), instalacija video nadzora ili alarmnog sistema traje <strong>1 radni dan</strong>. Za veće objekte (poslovni prostor, skladište, višespratnica) — 2&ndash;3 dana.</p>
+              <p>Za standardni stambeni objekat (kuća ili stan), instalacija video nadzora ili alarmnog sistema traje <strong>1 radni dan</strong>. Za veće objekte (poslovni prostor, skladište, višespratnica) , 2&ndash;3 dana.</p>
               <p>Po završetku Vam pokazujemo kako se koristi sistem i aplikacija, i ostavljamo kontakt za tehničku podršku.</p>
             </div>
           </div>
@@ -4675,7 +4675,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <div class="faq__answer" id="faq-6" role="region">
             <div class="faq__answer-inner">
-              <p>Radno vreme je ponedeljak&ndash;petak, 08:00&ndash;17:00. Za hitne kvarove u Novom Sadu dostupni smo i van radnog vremena — javite se na Viber ili WhatsApp i dogovorimo se.</p>
+              <p>Radno vreme je ponedeljak&ndash;petak, 08:00&ndash;17:00. Za hitne kvarove u Novom Sadu dostupni smo i van radnog vremena. Javite se na Viber ili WhatsApp i dogovorimo se.</p>
               <p>Zakazani radovi se mogu dogovoriti i za subotu uz prethodnu najavu.</p>
             </div>
           </div>
@@ -4691,7 +4691,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="faq__answer" id="faq-7" role="region">
             <div class="faq__answer-inner">
               <p>Dajemo <strong>2 godine garancije</strong> na sve izvedene radove. Ako se pojavi problem koji je posledica naše instalacije, dolazimo i rešavamo ga bez naplate.</p>
-              <p>Oprema dolazi sa garancijom proizvođača (Hikvision, Teknim, Jablotron, WISE, KNX) — u zavisnosti od sistema, to je 2&ndash;5 godina.</p>
+              <p>Oprema dolazi sa garancijom proizvođača (Hikvision, Teknim, Jablotron, WISE, KNX), u zavisnosti od sistema, to je 2&ndash;5 godina.</p>
             </div>
           </div>
         </div>
@@ -4706,7 +4706,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="faq__answer" id="faq-8" role="region">
             <div class="faq__answer-inner">
               <p>U većini slučajeva, postojeća instalacija se može nadograditi bez rušenja. Pametni prekidači i utičnice (WISE sistem) se montiraju na postojeće kutije. Video nadzor i alarm se mogu dodati bez većih građevinskih radova.</p>
-              <p>Na obilazku procenjujemo stanje postojeće instalacije i dajemo Vam iskrenu preporuku — šta se može sačuvati, a šta treba zameniti.</p>
+              <p>Na obilazku procenjujemo stanje postojeće instalacije i dajemo Vam iskrenu preporuku: šta se može sačuvati, a šta treba zameniti.</p>
             </div>
           </div>
         </div>
@@ -5025,7 +5025,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="footer-cta-bar__inner">
       <div class="footer-cta-bar__text" data-footer-animate>
         <h2 class="footer-cta-bar__title">Spremi za sledeći korak?</h2>
-        <p class="footer-cta-bar__sub">Zakažite besplatan obilazak ili pošaljite upit — odgovaramo u roku od 24h.</p>
+        <p class="footer-cta-bar__sub">Zakažite besplatan obilazak ili pošaljite upit, odgovaramo u roku od 24h.</p>
       </div>
       <div class="footer-cta-bar__actions" data-footer-animate>
         <a href="tel:+381XXXXXXXX" class="footer-cta-bar__btn footer-cta-bar__btn--primary">
@@ -5061,7 +5061,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Pro Art <span>Electric</span>
           </div>
         </a>
-        <p class="footer__tagline">Elektroinstalacije, pametna kuća i sigurnosni sistemi — Novi Sad i Vojvodina.</p>
+        <p class="footer__tagline">Elektroinstalacije, pametna kuća i sigurnosni sistemi, Novi Sad i Vojvodina.</p>
 
         <!-- Contact info -->
         <address class="footer__contact">
