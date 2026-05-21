@@ -2650,5 +2650,490 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 
+<!-- ═══════════════════════════════════════════════════════════
+     ISTAKNUTI PROJEKTI — tamna sekcija
+═══════════════════════════════════════════════════════════ -->
+<style>
+  /* ── Projects Section ── */
+  .projects {
+    background: var(--teget);
+    padding: 110px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .projects::before {
+    content: '';
+    position: absolute;
+    left: -120px; bottom: -120px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(237,144,7,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .projects__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  /* Header row */
+  .projects__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .projects__header-left {}
+  .projects__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .projects__heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+  }
+  .projects__heading span { color: var(--orange); }
+  .projects__all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-decoration: none;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(237,144,7,0.3);
+    transition: border-color 0.2s, gap 0.2s;
+  }
+  .projects__all-link:hover { border-color: var(--orange); gap: 12px; }
+  .projects__all-link svg { width: 16px; height: 16px; transition: transform 0.2s; }
+  .projects__all-link:hover svg { transform: translateX(3px); }
+
+  /* Filter tabs */
+  .projects__filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .projects__filter {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .projects__filter:hover {
+    border-color: rgba(237,144,7,0.4);
+    color: rgba(255,255,255,0.85);
+  }
+  .projects__filter.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Cards grid */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Project card */
+  .proj-card {
+    background: #1A2530;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.25s, box-shadow 0.3s;
+    position: relative;
+  }
+  .proj-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(237,144,7,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(237,144,7,0.15);
+  }
+
+  /* Card image area */
+  .proj-card__img {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: #0d1820;
+  }
+  .proj-card__img-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+  .proj-card:hover .proj-card__img-bg { transform: scale(1.05); }
+
+  /* Placeholder gradient image for cards without real photo */
+  .proj-card__img-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+  }
+  .proj-card:hover .proj-card__img-placeholder { transform: scale(1.05); }
+  .proj-card__img-placeholder svg {
+    width: 56px; height: 56px;
+    opacity: 0.25;
+    color: var(--orange);
+  }
+
+  /* Category badge on image */
+  .proj-card__badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .proj-card__badge--smart   { background: rgba(99,102,241,0.75); color: #fff; }
+  .proj-card__badge--elektro { background: rgba(237,144,7,0.85); color: #0F1A24; }
+  .proj-card__badge--cctv    { background: rgba(239,68,68,0.75); color: #fff; }
+  .proj-card__badge--rasveta { background: rgba(16,185,129,0.75); color: #fff; }
+  .proj-card__badge--odrzavanje { background: rgba(100,116,139,0.85); color: #fff; }
+
+  /* Status badge */
+  .proj-card__status {
+    position: absolute;
+    top: 14px; right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.3);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #10B981;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .proj-card__status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    animation: pulse-green 2s infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* Card body */
+  .proj-card__body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .proj-card__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+  }
+  .proj-card__desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  /* Meta row */
+  .proj-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .proj-card__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .proj-card__meta-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* Card footer */
+  .proj-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .proj-card__cta {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+  .proj-card:hover .proj-card__cta { gap: 10px; }
+  .proj-card__cta svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .proj-card:hover .proj-card__cta svg { transform: translateX(2px); }
+
+  /* Tags */
+  .proj-card__tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .proj-card__tag {
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  /* Bottom CTA row */
+  .projects__bottom {
+    margin-top: 56px;
+    text-align: center;
+  }
+  .projects__bottom-text {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+  .projects__bottom-text strong { color: rgba(255,255,255,0.75); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .projects__grid { grid-template-columns: repeat(2, 1fr); }
+    .projects__header { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .projects__grid { grid-template-columns: 1fr; }
+    .projects { padding: 72px 20px; }
+    .proj-card__img { height: 180px; }
+  }
+</style>
+
+<section class="projects" id="projekti" aria-label="Realizovani projekti">
+  <div class="projects__inner">
+
+    <!-- Header -->
+    <div class="projects__header">
+      <div class="projects__header-left" data-aos>
+        <p class="projects__label">Realizovani projekti</p>
+        <h2 class="projects__heading">Svaki projekat —<br>priča za sebe.<span>.</span></h2>
+      </div>
+      <a href="/projekti" class="projects__all-link" data-aos style="transition-delay:0.1s">
+        Svi projekti
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="projects__filters" role="tablist" aria-label="Filtriraj projekte po kategoriji" data-aos>
+      <button class="projects__filter active" role="tab" aria-selected="true" data-filter="all">Svi projekti</button>
+      <button class="projects__filter" role="tab" aria-selected="false" data-filter="smart">Pametna kuća</button>
+      <button class="projects__filter" role="tab" aria-selected="false" data-filter="elektro">Elektroinstalacije</button>
+      <button class="projects__filter" role="tab" aria-selected="false" data-filter="cctv">Video nadzor</button>
+      <button class="projects__filter" role="tab" aria-selected="false" data-filter="rasveta">Rasveta</button>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="projects__grid" id="projectsGrid">
+
+      <!-- Card 1: Smart Home -->
+      <a href="/projekti/vila-petrovaradin" class="proj-card" data-category="smart" data-aos>
+        <div class="proj-card__img">
+          <div class="proj-card__img-placeholder" style="background: linear-gradient(135deg, #1a2a3a 0%, #0d1e2e 50%, #1a2530 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--smart">Pametna kuća</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">Vila Petrovaradin — Kompletan Smart Home</h3>
+          <p class="proj-card__desc">KNX automatizacija, pametna rasveta, kontrola klime i roletni, video interfon i alarmni sistem. Integracija sa Google Home.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Petrovaradin
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              280 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">KNX</span>
+              <span class="proj-card__tag">Google Home</span>
+              <span class="proj-card__tag">Alarm</span>
+            </div>
+            <span class="proj-card__cta">
+              Pogledajte
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Elektroinstalacije -->
+      <a href="/projekti/poslovni-objekat-liman" class="proj-card" data-category="elektro" data-aos style="transition-delay:0.1s">
+        <div class="proj-card__img">
+          <div class="proj-card__img-placeholder" style="background: linear-gradient(135deg, #1e2a1a 0%, #0d1a0d 50%, #1a2520 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--elektro">Elektroinstalacije</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">Poslovni objekat Liman — Kompletna instalacija</h3>
+          <p class="proj-card__desc">Projektovanje i izvođenje elektroinstalacija za poslovni prostor. Razvodni ormani, EV punšači, LED rasveta, UPS sistemi.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad — Liman
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              450 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">Poslovni</span>
+              <span class="proj-card__tag">EV Punšač</span>
+              <span class="proj-card__tag">LED</span>
+            </div>
+            <span class="proj-card__cta">
+              Pogledajte
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: CCTV + Alarm -->
+      <a href="/projekti/stambena-zgrada-detelinara" class="proj-card" data-category="cctv" data-aos style="transition-delay:0.2s">
+        <div class="proj-card__img">
+          <div class="proj-card__img-placeholder" style="background: linear-gradient(135deg, #2a1a1a 0%, #1e0d0d 50%, #251a1a 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--cctv">Video nadzor</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">Stambena zgrada Detelinara — Sigurnosni sistem</h3>
+          <p class="proj-card__desc">IP video nadzor sa 24 kamere, protivprovalni alarm, kontrola pristupa i video interfon za 12 stanova. GSM dojava.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad — Detelinara
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              12 stanova
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">IP Kamere</span>
+              <span class="proj-card__tag">GSM Alarm</span>
+              <span class="proj-card__tag">RFID</span>
+            </div>
+            <span class="proj-card__cta">
+              Pogledajte
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="projects__bottom" data-aos>
+      <p class="projects__bottom-text">Ovo su samo neki od naših realizovanih projekata. <strong>Svaki projekat je jedinstven.</strong></p>
+      <a href="/projekti" class="btn btn--primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Pogledajte sve projekte
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  /* ── Projects filter ── */
+  (function() {
+    const filters = document.querySelectorAll('.projects__filter');
+    const cards   = document.querySelectorAll('.proj-card');
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        const cat = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = cat === 'all' || card.dataset.category === cat;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+
+
 </body>
 </html>
