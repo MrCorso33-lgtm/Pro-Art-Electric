@@ -2022,6 +2022,19 @@ document.addEventListener('DOMContentLoaded', () => {
   .svc-card:hover .svc-card__link { opacity: 1; transform: translateY(0); }
   .svc-card:hover .svc-card__link svg { transform: translateX(3px); }
 
+  /* Pulse SVG overlay */
+  .services__pulses {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .services__pulses { display: none; }
+  }
+
   /* Responsive */
   @media (max-width: 1100px) {
     .services__grid { grid-template-columns: repeat(3, 1fr); }
@@ -2037,6 +2050,92 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <section class="services" id="usluge" aria-label="Naše usluge">
+
+  <!-- Electric pulse animated overlay — aria-hidden, purely decorative -->
+  <svg class="services__pulses" aria-hidden="true" focusable="false"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 1200 520"
+       preserveAspectRatio="xMidYMid slice">
+
+    <!-- Path A: horizontal run top-left, bends down, continues right -->
+    <path id="pathA"
+      d="M 0 80 H 220 V 200 H 480 V 140 H 680"
+      fill="none" stroke="none"/>
+
+    <!-- Path B: starts mid-right, bends down-left -->
+    <path id="pathB"
+      d="M 1200 300 H 900 V 180 H 640 V 320 H 420"
+      fill="none" stroke="none"/>
+
+    <!-- Path C: bottom run, short zigzag -->
+    <path id="pathC"
+      d="M 200 480 H 500 V 380 H 760 V 440 H 1000"
+      fill="none" stroke="none"/>
+
+    <!-- Pulse A — bright dot travelling path A -->
+    <g>
+      <!-- glow halo -->
+      <circle r="7" fill="rgba(237,144,7,0.18)">
+        <animateMotion dur="4.2s" repeatCount="indefinite" begin="0s">
+          <mpath href="#pathA"/>
+        </animateMotion>
+      </circle>
+      <!-- core dot -->
+      <circle r="2.5" fill="#ED9007" opacity="0.9">
+        <animateMotion dur="4.2s" repeatCount="indefinite" begin="0s">
+          <mpath href="#pathA"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.05;0.92;1" dur="4.2s" repeatCount="indefinite" begin="0s"/>
+      </circle>
+    </g>
+
+    <!-- Pulse A2 — second dot on same path, offset -->
+    <g>
+      <circle r="5" fill="rgba(237,144,7,0.12)">
+        <animateMotion dur="4.2s" repeatCount="indefinite" begin="-1.8s">
+          <mpath href="#pathA"/>
+        </animateMotion>
+      </circle>
+      <circle r="2" fill="#ED9007" opacity="0.7">
+        <animateMotion dur="4.2s" repeatCount="indefinite" begin="-1.8s">
+          <mpath href="#pathA"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.92;1" dur="4.2s" repeatCount="indefinite" begin="-1.8s"/>
+      </circle>
+    </g>
+
+    <!-- Pulse B — dot travelling path B, different speed -->
+    <g>
+      <circle r="7" fill="rgba(237,144,7,0.15)">
+        <animateMotion dur="5.8s" repeatCount="indefinite" begin="-2.3s">
+          <mpath href="#pathB"/>
+        </animateMotion>
+      </circle>
+      <circle r="2.5" fill="#ED9007" opacity="0.85">
+        <animateMotion dur="5.8s" repeatCount="indefinite" begin="-2.3s">
+          <mpath href="#pathB"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.05;0.92;1" dur="5.8s" repeatCount="indefinite" begin="-2.3s"/>
+      </circle>
+    </g>
+
+    <!-- Pulse C — dot on bottom path, slowest -->
+    <g>
+      <circle r="6" fill="rgba(237,144,7,0.13)">
+        <animateMotion dur="7.1s" repeatCount="indefinite" begin="-4.1s">
+          <mpath href="#pathC"/>
+        </animateMotion>
+      </circle>
+      <circle r="2" fill="#ED9007" opacity="0.75">
+        <animateMotion dur="7.1s" repeatCount="indefinite" begin="-4.1s">
+          <mpath href="#pathC"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.05;0.92;1" dur="7.1s" repeatCount="indefinite" begin="-4.1s"/>
+      </circle>
+    </g>
+
+  </svg>
+
   <div class="services__inner">
 
     <header class="section-header" data-aos>
