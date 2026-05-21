@@ -2051,90 +2051,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="services" id="usluge" aria-label="Naše usluge">
 
-  <!-- Electric pulse animated overlay — aria-hidden, purely decorative -->
-  <svg class="services__pulses" aria-hidden="true" focusable="false"
-       xmlns="http://www.w3.org/2000/svg"
-       viewBox="0 0 1200 520"
-       preserveAspectRatio="xMidYMid slice">
-
-    <!-- Path A: horizontal run top-left, bends down, continues right -->
-    <path id="pathA"
-      d="M 0 80 H 220 V 200 H 480 V 140 H 680"
-      fill="none" stroke="none"/>
-
-    <!-- Path B: starts mid-right, bends down-left -->
-    <path id="pathB"
-      d="M 1200 300 H 900 V 180 H 640 V 320 H 420"
-      fill="none" stroke="none"/>
-
-    <!-- Path C: bottom run, short zigzag -->
-    <path id="pathC"
-      d="M 200 480 H 500 V 380 H 760 V 440 H 1000"
-      fill="none" stroke="none"/>
-
-    <!-- Pulse A — bright dot travelling path A -->
-    <g>
-      <!-- glow halo -->
-      <circle r="7" fill="rgba(237,144,7,0.18)">
-        <animateMotion dur="4.2s" repeatCount="indefinite" begin="0s">
-          <mpath href="#pathA"/>
-        </animateMotion>
-      </circle>
-      <!-- core dot -->
-      <circle r="2.5" fill="#ED9007" opacity="0.9">
-        <animateMotion dur="4.2s" repeatCount="indefinite" begin="0s">
-          <mpath href="#pathA"/>
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.05;0.92;1" dur="4.2s" repeatCount="indefinite" begin="0s"/>
-      </circle>
-    </g>
-
-    <!-- Pulse A2 — second dot on same path, offset -->
-    <g>
-      <circle r="5" fill="rgba(237,144,7,0.12)">
-        <animateMotion dur="4.2s" repeatCount="indefinite" begin="-1.8s">
-          <mpath href="#pathA"/>
-        </animateMotion>
-      </circle>
-      <circle r="2" fill="#ED9007" opacity="0.7">
-        <animateMotion dur="4.2s" repeatCount="indefinite" begin="-1.8s">
-          <mpath href="#pathA"/>
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.92;1" dur="4.2s" repeatCount="indefinite" begin="-1.8s"/>
-      </circle>
-    </g>
-
-    <!-- Pulse B — dot travelling path B, different speed -->
-    <g>
-      <circle r="7" fill="rgba(237,144,7,0.15)">
-        <animateMotion dur="5.8s" repeatCount="indefinite" begin="-2.3s">
-          <mpath href="#pathB"/>
-        </animateMotion>
-      </circle>
-      <circle r="2.5" fill="#ED9007" opacity="0.85">
-        <animateMotion dur="5.8s" repeatCount="indefinite" begin="-2.3s">
-          <mpath href="#pathB"/>
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.05;0.92;1" dur="5.8s" repeatCount="indefinite" begin="-2.3s"/>
-      </circle>
-    </g>
-
-    <!-- Pulse C — dot on bottom path, slowest -->
-    <g>
-      <circle r="6" fill="rgba(237,144,7,0.13)">
-        <animateMotion dur="7.1s" repeatCount="indefinite" begin="-4.1s">
-          <mpath href="#pathC"/>
-        </animateMotion>
-      </circle>
-      <circle r="2" fill="#ED9007" opacity="0.75">
-        <animateMotion dur="7.1s" repeatCount="indefinite" begin="-4.1s">
-          <mpath href="#pathC"/>
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.05;0.92;1" dur="7.1s" repeatCount="indefinite" begin="-4.1s"/>
-      </circle>
-    </g>
-
-  </svg>
+  <!-- Electric pulse canvas — JS-driven, works in all browsers -->
+  <canvas id="pulseCanvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
 
   <div class="services__inner">
 
@@ -2249,6 +2167,118 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 </section>
+
+<script>
+// ── Electric Pulse Canvas Animation ──────────────────────────────
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canvas = document.getElementById('pulseCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Resize canvas to match section
+  function resize() {
+    const section = canvas.parentElement;
+    canvas.width  = section.offsetWidth;
+    canvas.height = section.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Define paths as arrays of [x_fraction, y_fraction] points
+  // Fractions so they scale with canvas size
+  const pathDefs = [
+    // Path A — top-left area, bends down then right
+    [[0, 0.15], [0.18, 0.15], [0.18, 0.38], [0.40, 0.38], [0.40, 0.26], [0.58, 0.26]],
+    // Path B — right side, comes left and bends
+    [[1.0, 0.55], [0.75, 0.55], [0.75, 0.32], [0.52, 0.32], [0.52, 0.62], [0.34, 0.62]],
+    // Path C — bottom zigzag
+    [[0.16, 0.88], [0.42, 0.88], [0.42, 0.70], [0.64, 0.70], [0.64, 0.82], [0.85, 0.82]],
+  ];
+
+  // Build a pulse object
+  function makePulse(pathIndex, speed, offset, size, alpha) {
+    return {
+      pathIndex,
+      t: offset,          // 0..1 position along path
+      speed,              // fraction per ms
+      size,               // dot radius
+      alpha,
+      trail: [],          // last N positions for tail effect
+      trailLen: 12,
+    };
+  }
+
+  const pulses = [
+    makePulse(0, 0.00022, 0.0,  3,   0.95),
+    makePulse(0, 0.00022, 0.45, 2.2, 0.70),
+    makePulse(1, 0.00016, 0.2,  3,   0.90),
+    makePulse(2, 0.00012, 0.6,  2.5, 0.80),
+  ];
+
+  // Interpolate position along a path at t (0..1)
+  function getPos(pathDef, t) {
+    const W = canvas.width, H = canvas.height;
+    const pts = pathDef.map(([fx, fy]) => [fx * W, fy * H]);
+    const segs = pts.length - 1;
+    const totalT = t * segs;
+    const seg = Math.min(Math.floor(totalT), segs - 1);
+    const local = totalT - seg;
+    const [x1, y1] = pts[seg];
+    const [x2, y2] = pts[seg + 1];
+    return [x1 + (x2 - x1) * local, y1 + (y2 - y1) * local];
+  }
+
+  let last = null;
+  function frame(ts) {
+    if (!last) last = ts;
+    const dt = Math.min(ts - last, 50); // cap at 50ms
+    last = ts;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    pulses.forEach(p => {
+      p.t = (p.t + p.speed * dt) % 1;
+      const path = pathDefs[p.pathIndex];
+      const [x, y] = getPos(path, p.t);
+
+      // Store trail
+      p.trail.push([x, y]);
+      if (p.trail.length > p.trailLen) p.trail.shift();
+
+      // Draw trail
+      p.trail.forEach(([tx, ty], i) => {
+        const trailAlpha = (i / p.trail.length) * p.alpha * 0.35;
+        const trailR = p.size * (i / p.trail.length) * 0.8;
+        ctx.beginPath();
+        ctx.arc(tx, ty, trailR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(237,144,7,${trailAlpha})`;
+        ctx.fill();
+      });
+
+      // Outer glow
+      const grd = ctx.createRadialGradient(x, y, 0, x, y, p.size * 4);
+      grd.addColorStop(0, `rgba(237,144,7,${p.alpha * 0.28})`);
+      grd.addColorStop(1, 'rgba(237,144,7,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, p.size * 4, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(237,144,7,${p.alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
 
 </body>
 </html>
