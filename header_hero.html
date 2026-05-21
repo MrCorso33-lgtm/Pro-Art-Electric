@@ -4051,5 +4051,523 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+<!-- ===== SERVICE ZONE SECTION ===== -->
+<section class="zone" id="zona-pokrivanja" aria-labelledby="zone-heading">
+  <div class="zone__inner">
+
+    <div class="zone__layout">
+
+      <!-- Left: text content -->
+      <div class="zone__content" data-zone-animate>
+        <span class="zone__eyebrow">Zona pokrivanja</span>
+        <h2 class="zone__title" id="zone-heading">Dolazimo do Vas — u Novom Sadu i šire</h2>
+        <p class="zone__desc">Naš tim je baziran u Novom Sadu i pokriva celu Vojvodinu. Za veće projekte i specijalizovane sisteme, dolazimo i van regiona — po dogovoru.</p>
+
+        <!-- Zone list -->
+        <ul class="zone__list" role="list">
+          <li class="zone__item zone__item--primary">
+            <div class="zone__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="zone__item-text">
+              <strong>Novi Sad i okolina</strong>
+              <span>Liman, Satelit, Detelinara, Sremska Kamenica, Petrovaradin, Futog, Kać, Bečej, Vrbas, Temerin</span>
+            </div>
+            <span class="zone__item-badge zone__item-badge--green">Brzi odziv</span>
+          </li>
+          <li class="zone__item">
+            <div class="zone__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="zone__item-text">
+              <strong>Vojvodina</strong>
+              <span>Subotica, Zrenjanin, Pančevo, Sombor, Kikinda, Ruma, Sremska Mitrovica i ostali gradovi</span>
+            </div>
+            <span class="zone__item-badge">Projektni radovi</span>
+          </li>
+          <li class="zone__item">
+            <div class="zone__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="zone__item-text">
+              <strong>Ostala Srbija</strong>
+              <span>Beograd, Niš, Kragujevac i ostali gradovi — za veće projekte pametnih kuća i poslovnih objekata</span>
+            </div>
+            <span class="zone__item-badge">Po dogovoru</span>
+          </li>
+        </ul>
+
+        <!-- Response time info -->
+        <div class="zone__response">
+          <div class="zone__response-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span><strong>Obilasci</strong> se zakazuju 3&ndash;5 dana unapred</span>
+          </div>
+          <div class="zone__response-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span><strong>Hitni servisi</strong> u roku od 24h za Novi Sad</span>
+          </div>
+        </div>
+
+        <a href="#kontakt" class="zone__cta">
+          Proverite dostupnost za Vašu lokaciju
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Right: SVG map visual -->
+      <div class="zone__map" data-zone-animate aria-hidden="true">
+        <div class="zone__map-card">
+          <!-- Stylized Serbia/Vojvodina SVG map -->
+          <svg class="zone__map-svg" viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa zone pokrivanja">
+            <!-- Background glow -->
+            <defs>
+              <radialGradient id="mapGlow" cx="45%" cy="40%" r="50%">
+                <stop offset="0%" stop-color="rgba(237,144,7,0.15)"/>
+                <stop offset="100%" stop-color="rgba(237,144,7,0)"/>
+              </radialGradient>
+              <filter id="softBlur">
+                <feGaussianBlur stdDeviation="2"/>
+              </filter>
+            </defs>
+
+            <!-- Vojvodina region (simplified shape) -->
+            <path class="zone__region zone__region--vojvodina"
+              d="M 60 60 L 340 55 L 345 180 L 280 200 L 240 195 L 200 210 L 160 200 L 120 210 L 80 195 L 55 175 Z"
+              />
+
+            <!-- Central Serbia (simplified) -->
+            <path class="zone__region zone__region--serbia"
+              d="M 55 175 L 80 195 L 120 210 L 160 200 L 200 210 L 240 195 L 280 200 L 345 180 L 350 280 L 310 310 L 260 320 L 220 315 L 180 320 L 140 310 L 100 295 L 60 270 Z"
+              />
+
+            <!-- Danube river (Dunav) -->
+            <path class="zone__river"
+              d="M 55 175 Q 100 170 140 178 Q 180 185 220 180 Q 265 175 310 185 Q 335 190 345 180"
+              fill="none"
+              />
+
+            <!-- Novi Sad marker -->
+            <g class="zone__marker zone__marker--primary" transform="translate(148, 148)">
+              <circle r="22" fill="rgba(237,144,7,0.15)" class="zone__pulse-ring"/>
+              <circle r="14" fill="rgba(237,144,7,0.25)"/>
+              <circle r="7" fill="var(--orange)"/>
+              <circle r="3" fill="#fff"/>
+            </g>
+
+            <!-- Subotica -->
+            <g class="zone__marker zone__marker--secondary" transform="translate(185, 72)">
+              <circle r="5" fill="rgba(237,144,7,0.5)"/>
+              <circle r="2.5" fill="rgba(237,144,7,0.8)"/>
+            </g>
+
+            <!-- Zrenjanin -->
+            <g class="zone__marker zone__marker--secondary" transform="translate(268, 130)">
+              <circle r="5" fill="rgba(237,144,7,0.5)"/>
+              <circle r="2.5" fill="rgba(237,144,7,0.8)"/>
+            </g>
+
+            <!-- Sombor -->
+            <g class="zone__marker zone__marker--secondary" transform="translate(82, 88)">
+              <circle r="5" fill="rgba(237,144,7,0.5)"/>
+              <circle r="2.5" fill="rgba(237,144,7,0.8)"/>
+            </g>
+
+            <!-- Belgrade -->
+            <g class="zone__marker zone__marker--tertiary" transform="translate(148, 222)">
+              <circle r="5" fill="rgba(255,255,255,0.2)"/>
+              <circle r="2.5" fill="rgba(255,255,255,0.4)"/>
+            </g>
+
+            <!-- Labels -->
+            <text x="148" y="178" class="zone__label zone__label--primary" text-anchor="middle">Novi Sad</text>
+            <text x="185" y="62" class="zone__label" text-anchor="middle">Subotica</text>
+            <text x="268" y="120" class="zone__label" text-anchor="middle">Zrenjanin</text>
+            <text x="82" y="78" class="zone__label" text-anchor="middle">Sombor</text>
+            <text x="148" y="240" class="zone__label zone__label--muted" text-anchor="middle">Beograd</text>
+
+            <!-- Vojvodina label -->
+            <text x="200" y="115" class="zone__region-label" text-anchor="middle">VOJVODINA</text>
+          </svg>
+
+          <!-- Legend -->
+          <div class="zone__legend">
+            <div class="zone__legend-item">
+              <span class="zone__legend-dot zone__legend-dot--primary"></span>
+              <span>Primarno područje</span>
+            </div>
+            <div class="zone__legend-item">
+              <span class="zone__legend-dot zone__legend-dot--secondary"></span>
+              <span>Vojvodina</span>
+            </div>
+            <div class="zone__legend-item">
+              <span class="zone__legend-dot zone__legend-dot--tertiary"></span>
+              <span>Po dogovoru</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.zone__layout -->
+  </div>
+</section>
+
+<style>
+/* ===== SERVICE ZONE SECTION ===== */
+.zone {
+  background: var(--off-white, #F5F5FA);
+  padding: 96px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.zone::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,26,36,0.12), transparent);
+}
+.zone__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.zone__layout {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 64px;
+  align-items: center;
+}
+
+/* Content side */
+.zone__eyebrow {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.zone__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 700;
+  color: var(--teget);
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.zone__desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: rgba(15,26,36,0.65);
+  line-height: 1.7;
+  margin: 0 0 32px;
+  max-width: 480px;
+}
+
+/* Zone list */
+.zone__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.zone__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid rgba(15,26,36,0.08);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.zone__item:hover {
+  border-color: rgba(237,144,7,0.3);
+  box-shadow: 0 4px 20px rgba(237,144,7,0.08);
+}
+.zone__item--primary {
+  border-color: rgba(237,144,7,0.25);
+  background: linear-gradient(135deg, #fff 0%, rgba(237,144,7,0.03) 100%);
+}
+.zone__item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(237,144,7,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.zone__item-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--orange);
+}
+.zone__item-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.zone__item-text strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--teget);
+}
+.zone__item-text span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(15,26,36,0.55);
+  line-height: 1.5;
+}
+.zone__item-badge {
+  flex-shrink: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(15,26,36,0.06);
+  color: rgba(15,26,36,0.5);
+  border: 1px solid rgba(15,26,36,0.1);
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.zone__item-badge--green {
+  background: rgba(34,197,94,0.1);
+  color: #16a34a;
+  border-color: rgba(34,197,94,0.25);
+}
+
+/* Response time */
+.zone__response {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 16px 18px;
+  background: rgba(15,26,36,0.04);
+  border-radius: 10px;
+  border: 1px solid rgba(15,26,36,0.07);
+}
+.zone__response-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(15,26,36,0.65);
+}
+.zone__response-item strong {
+  color: var(--teget);
+  font-weight: 600;
+}
+
+/* CTA */
+.zone__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--orange);
+  color: var(--teget);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.zone__cta:hover {
+  background: var(--orange-dark, #C97A06);
+  transform: translateY(-1px);
+}
+.zone__cta svg { flex-shrink: 0; }
+
+/* Map card */
+.zone__map-card {
+  background: var(--teget, #0F1A24);
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(15,26,36,0.18);
+}
+.zone__map-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 40%, rgba(237,144,7,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.zone__map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SVG map elements */
+.zone__region--vojvodina {
+  fill: rgba(237,144,7,0.12);
+  stroke: rgba(237,144,7,0.35);
+  stroke-width: 1.5;
+}
+.zone__region--serbia {
+  fill: rgba(255,255,255,0.04);
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 1;
+}
+.zone__river {
+  stroke: rgba(100,160,220,0.35);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.zone__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  fill: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+.zone__label--primary {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  fill: rgba(255,255,255,0.85);
+}
+.zone__label--muted {
+  fill: rgba(255,255,255,0.25);
+}
+.zone__region-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  fill: rgba(237,144,7,0.5);
+  letter-spacing: 0.2em;
+}
+
+/* Pulse animation for primary marker */
+@keyframes zonePulse {
+  0%, 100% { r: 22; opacity: 0.6; }
+  50% { r: 28; opacity: 0.2; }
+}
+.zone__pulse-ring {
+  animation: zonePulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Legend */
+.zone__legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  flex-wrap: wrap;
+}
+.zone__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+}
+.zone__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.zone__legend-dot--primary { background: var(--orange); }
+.zone__legend-dot--secondary { background: rgba(237,144,7,0.5); }
+.zone__legend-dot--tertiary { background: rgba(255,255,255,0.25); }
+
+/* Scroll animations */
+[data-zone-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-zone-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-zone-animate]:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .zone__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .zone__map { order: -1; }
+  .zone__map-card { max-width: 480px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .zone { padding: 64px 0 56px; }
+  .zone__inner { padding: 0 20px; }
+  .zone__item { flex-wrap: wrap; }
+  .zone__item-badge { align-self: auto; }
+  .zone__legend { gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-zone-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .zone__pulse-ring {
+    animation: none !important;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var zoneItems = document.querySelectorAll('[data-zone-animate]');
+  if (!zoneItems.length) return;
+  var zoneObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        zoneObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  zoneItems.forEach(function(el) { zoneObs.observe(el); });
+})();
+</script>
+
+
 </body>
 </html>
