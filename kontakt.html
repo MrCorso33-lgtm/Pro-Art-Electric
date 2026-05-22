@@ -31,27 +31,377 @@
       --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-xl: 20px;
     }
 
-    /* HEADER */
-    .header { position: fixed; top:0; left:0; right:0; z-index:1000; height:72px; background:rgba(15,26,36,0.88); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--glass-border); transition:height .2s ease,background .2s ease; }
-    .header.compact { height:60px; background:rgba(15,26,36,0.97); }
-    .header__inner { max-width:1200px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    .header__logo { display:flex; align-items:center; gap:10px; }
-    .logo-mark { width:32px; height:32px; background:var(--orange); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--teget-dark); }
-    .logo-mark svg { width:16px; height:16px; }
-    .logo-text { font-family:var(--font-heading); font-size:15px; font-weight:700; color:#fff; letter-spacing:-0.3px; }
-    .logo-text span { color:var(--orange); }
-    .header__nav { display:flex; align-items:center; gap:4px; }
-    .nav-link { font-size:14px; font-weight:500; color:var(--text-body); padding:6px 12px; border-radius:var(--radius-sm); transition:color .15s,background .15s; }
-    .nav-link:hover { color:#fff; background:var(--glass); }
-    .nav-link.active { color:var(--orange); }
-    .header__right { display:flex; align-items:center; gap:12px; }
-    .header__phone { font-family:var(--font-heading); font-size:14px; font-weight:600; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:6px; transition:color .15s; }
-    .header__phone:hover { color:#fff; }
-    .header__phone svg { width:14px; height:14px; stroke:var(--orange); }
-    .header__cta { display:inline-flex; align-items:center; gap:7px; padding:9px 18px; background:var(--orange); color:var(--teget-dark); font-family:var(--font-heading); font-size:13px; font-weight:600; border-radius:var(--radius-sm); transition:background .15s,transform .1s; }
-    .header__cta:hover { background:var(--orange-hover); transform:translateY(-1px); }
+    /* ═══════════════════════════════════════════════════════
+       HEADER - STICKY + GLASSMORPHISM
+    ═══════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════
+           HEADER - STICKY + GLASSMORPHISM
+        ═══════════════════════════════════════════════════════ */
+        .header {
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          z-index: 1000;
+          height: var(--header-height);
+          display: flex;
+          align-items: center;
+          padding: 0 32px;
+          transition: height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+          background: transparent;
+          border-bottom: 1px solid transparent;
+        }
+        .header.scrolled {
+          height: var(--header-compact);
+          background: rgba(15, 26, 36, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid var(--glass-border);
+        }
+        .header-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          max-width: 1440px;
+          margin: 0 auto;
+        }
+    
+        /* ── Logo ── */
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-shrink: 0;
+        }
+        .logo-mark {
+          width: 38px; height: 38px;
+          background: var(--orange);
+          border-radius: var(--radius-sm);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s ease;
+        }
+        .logo-mark:hover { transform: scale(1.05); }
+        .logo-mark svg { width: 20px; height: 20px; fill: var(--teget); }
+        .logo-text {
+          font-family: var(--font-head);
+          font-weight: 700;
+          font-size: 18px;
+          letter-spacing: -0.5px;
+          color: var(--white);
+        }
+        .logo-text span { color: var(--orange); }
+    
+        /* ── Desktop Nav ── */
+        .nav {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+        .nav-item { position: relative; }
+        .nav-link {
+          font-family: var(--font-body);
+          font-weight: 500;
+          font-size: 13px;
+          color: var(--text-body);
+          padding: 8px 12px;
+          border-radius: var(--radius-sm);
+          transition: color 0.15s ease, background 0.15s ease;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .nav-link:hover, .nav-link.active {
+          color: var(--white);
+          background: var(--glass-bg);
+        }
+        .nav-link .chevron {
+          width: 10px; height: 10px;
+          opacity: 0.5;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .nav-item:hover .chevron { transform: rotate(180deg); opacity: 0.8; }
+    
+        /* ── Mega Menu ── */
+        .mega-menu {
+          position: absolute;
+          top: calc(100% + 12px);
+          left: 50%;
+          transform: translateX(-50%) translateY(8px);
+          min-width: 560px;
+          background: rgba(15, 26, 36, 0.96);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius-md);
+          padding: 24px;
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        }
+        .nav-item:hover .mega-menu {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: all;
+          transform: translateX(-50%) translateY(0);
+        }
+        .mega-menu-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+        }
+        .mega-menu-section { display: flex; flex-direction: column; gap: 4px; }
+        .mega-menu-category {
+          font-family: var(--font-body);
+          font-weight: 600;
+          font-size: 11px;
+          letter-spacing: 1.2px;
+          text-transform: uppercase;
+          color: var(--orange);
+          padding: 0 14px 8px;
+          margin-bottom: 4px;
+          border-bottom: 1px solid var(--sep);
+        }
+        .mega-menu-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 12px 14px;
+          border-radius: var(--radius-sm);
+          transition: background 0.15s ease;
+          cursor: pointer;
+        }
+        .mega-menu-item:hover { background: var(--glass-hover); }
+        .mega-menu-icon {
+          width: 36px; height: 36px;
+          border-radius: var(--radius-sm);
+          background: var(--orange-dim);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .mega-menu-icon svg {
+          width: 18px; height: 18px;
+          stroke: var(--orange);
+          fill: none;
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .mega-menu-content { display: flex; flex-direction: column; gap: 2px; }
+        .mega-menu-title {
+          font-family: var(--font-head);
+          font-weight: 600;
+          font-size: 14px;
+          color: var(--white);
+        }
+        .mega-menu-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    
+        /* ── Header Right ── */
+        .header-right {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          flex-shrink: 0;
+        }
+        .header-phone {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: var(--font-body);
+          font-weight: 500;
+          font-size: 14px;
+          color: var(--text-body);
+          transition: color 0.15s ease;
+        }
+        .header-phone:hover { color: var(--white); }
+        .header-phone svg {
+          width: 16px; height: 16px;
+          stroke: var(--orange);
+          fill: none;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .header-cta {
+          font-family: var(--font-head);
+          font-weight: 600;
+          font-size: 13px;
+          color: var(--teget);
+          background: var(--orange);
+          padding: 10px 20px;
+          border-radius: var(--radius-sm);
+          border: none;
+          cursor: pointer;
+          transition: background 0.15s ease, transform 0.1s ease;
+        }
+        .header-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+        .header-cta:active { transform: translateY(0); }
+    
+        /* ── Hamburger ── */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 44px; height: 44px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          z-index: 1100;
+        }
+        .hamburger-line {
+          width: 22px; height: 2px;
+          background: var(--white);
+          border-radius: 2px;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .hamburger-line:nth-child(1) { margin-bottom: 5px; }
+        .hamburger-line:nth-child(3) { margin-top: 5px; }
+        .hamburger.active .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
+        .hamburger.active .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    
+        /* ── Mobile Menu Overlay ── */
+        .mobile-menu {
+          display: none;
+          position: fixed;
+          inset: 0;
+          z-index: 1050;
+          background: rgba(15, 26, 36, 0.98);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 100px 32px 40px;
+          overflow-y: auto;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-menu.open { opacity: 1; visibility: visible; }
+        .mobile-nav-item { border-bottom: 1px solid var(--sep); }
+        .mobile-nav-link {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 0;
+          font-family: var(--font-head);
+          font-weight: 600;
+          font-size: 18px;
+          color: var(--white);
+          cursor: pointer;
+          transition: color 0.15s ease;
+        }
+        .mobile-nav-link:hover { color: var(--orange); }
+        .mobile-nav-link .mobile-chevron {
+          width: 14px; height: 14px;
+          stroke: var(--text-muted);
+          fill: none;
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          transition: transform 0.3s ease, stroke 0.3s ease;
+        }
+        .mobile-nav-item.expanded .mobile-chevron { transform: rotate(180deg); stroke: var(--orange); }
+        .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .mobile-nav-item.expanded .mobile-submenu { max-height: 600px; }
+        .mobile-submenu-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          border-radius: var(--radius-sm);
+          transition: background 0.15s ease;
+        }
+        .mobile-submenu-item:hover { background: var(--glass-hover); }
+        .mobile-submenu-icon {
+          width: 32px; height: 32px;
+          border-radius: var(--radius-sm);
+          background: var(--orange-dim);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .mobile-submenu-icon svg {
+          width: 16px; height: 16px;
+          stroke: var(--orange);
+          fill: none;
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .mobile-submenu-text {
+          font-family: var(--font-body);
+          font-weight: 500;
+          font-size: 14px;
+          color: var(--text-body);
+        }
+        .mobile-menu-footer {
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid var(--sep);
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .mobile-phone {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-family: var(--font-body);
+          font-weight: 500;
+          font-size: 16px;
+          color: var(--white);
+        }
+        .mobile-phone svg {
+          width: 18px; height: 18px;
+          stroke: var(--orange);
+          fill: none;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .mobile-cta {
+          display: block;
+          text-align: center;
+          font-family: var(--font-head);
+          font-weight: 600;
+          font-size: 15px;
+          color: var(--teget);
+          background: var(--orange);
+          padding: 14px 24px;
+          border-radius: var(--radius-sm);
+          border: none;
+          cursor: pointer;
+          transition: background 0.15s ease;
+        }
+        .mobile-cta:hover { background: var(--orange-dark); }
 
-    /* HERO */
+    @media (max-width: 1024px) {
+      .nav { display: none; }
+      .header-phone span { display: none; }
+      .header-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .header { padding: 0 20px; }
+      .header-right { gap: 12px; }
+    }
+    @media (max-width: 640px) {
+      :root { --header-height: 68px; --header-compact: 60px; }
+      .header { padding: 0 16px; }
+      .logo-text { font-size: 16px; }
+      .logo-mark { width: 34px; height: 34px; }
+      .logo-mark svg { width: 18px; height: 18px; }
+      .mobile-menu { padding: 88px 20px 32px; }
+      .mobile-nav-link { font-size: 16px; padding: 16px 0; }
+    }
+
+        /* HERO */
     .kontakt-hero { background:var(--teget-dark); padding:136px 0 72px; position:relative; overflow:hidden; }
     .kontakt-hero .pcb-texture { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='pcb' x='0' y='0' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cline x1='0' y1='30' x2='45' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='75' y1='30' x2='120' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='0' y1='90' x2='30' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='90' x2='120' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='0' x2='30' y2='20' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='40' x2='30' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='100' x2='30' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='0' x2='90' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='100' x2='90' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='45,30 60,30 60,60 90,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='30,80 30,90 60,90 60,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Ccircle cx='30' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='30' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='60' cy='60' r='3.2' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.36'/%3E%3Ccircle cx='60' cy='60' r='1.4' fill='%23ED9007' fill-opacity='0.28'/%3E%3Crect x='52' y='52' width='16' height='16' rx='2' fill='none' stroke='%23ED9007' stroke-width='0.7' stroke-opacity='0.18'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23pcb)'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
     .kontakt-hero::before { content:''; position:absolute; top:-60px; right:-80px; width:600px; height:600px; background:radial-gradient(circle,rgba(237,144,7,0.07) 0%,transparent 65%); pointer-events:none; }
@@ -353,33 +703,293 @@
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header" id="vrh" role="banner">
-  <div class="header__inner">
-    <a href="/" class="header__logo" aria-label="Pro Art Electric pocetna">
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header class="header" role="banner">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="header_hero.html" class="logo" aria-label="Pro Art Electric , početna">
       <div class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
-      <div class="logo-text">Pro Art <span>Electric</span></div>
+      <span class="logo-text">Pro Art <span>Electric</span></span>
     </a>
-    <nav class="header__nav" role="navigation" aria-label="Glavna navigacija">
-      <a href="/elektroinstalacije" class="nav-link">Elektroinstalacije</a>
-      <a href="/pametna-kuća" class="nav-link">Pametna kuća</a>
-      <a href="/video-nadzor" class="nav-link">Video nadzor</a>
-      <a href="/projekti" class="nav-link">Projekti</a>
-      <a href="/o-nama" class="nav-link">O nama</a>
-      <a href="/kontakt" class="nav-link active" aria-current="page">Kontakt</a>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav" role="navigation" aria-label="Glavna navigacija">
+
+      <!-- Elektroinstalacije -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Elektroinstalacije
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Instalacije</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kompletne instalacije</span><span class="mega-menu-desc">Stambeni i poslovni objekti</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Razvodni ormari</span><span class="mega-menu-desc">Projektovanje i montaža</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Jaka struja</span><span class="mega-menu-desc">Napajanje i razvod</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Slaba struja</span><span class="mega-menu-desc">Mreža, signal, komunikacije</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Solarni sistemi</span><span class="mega-menu-desc">Fotonaponske instalacije</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Adaptacije</span><span class="mega-menu-desc">Rekonstrukcija postojećih sistema</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pametna kuća -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Pametna kuća
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Automatizacija</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Scene i automatizacije</span><span class="mega-menu-desc">Scenariji po prostorijama</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Centralno upravljanje</span><span class="mega-menu-desc">Jedan interfejs za sve sisteme</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Pametna rasveta</span><span class="mega-menu-desc">Dimeri, RGB, senzori pokreta</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Kontrola</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kontrola uređaja</span><span class="mega-menu-desc">Grejanje, klima, roletne</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Integracije</span><span class="mega-menu-desc">KNX, Tuya, Zigbee, Google, Alexa</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Daljinsko upravljanje</span><span class="mega-menu-desc">Kontrola sa telefona, bilo gde</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sigurnost -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Sigurnost
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Video nadzor</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">IP &amp; Wi-Fi kamere</span><span class="mega-menu-desc">Daljinski pristup, noćno snimanje</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Snimači (DVR/NVR)</span><span class="mega-menu-desc">Podešavanje i servis sistema</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Alarmi &amp; Pristup</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Alarmni sistemi</span><span class="mega-menu-desc">Protivprovalni, GSM, bežični</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kontrola pristupa</span><span class="mega-menu-desc">Interfoni, RFID, elektronske brave</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rasveta -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Rasveta
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" style="min-width: 480px;" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Tipovi rasvete</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Unutrašnja rasveta</span><span class="mega-menu-desc">Ambijentalna, dekorativna, LED</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Spoljna rasveta</span><span class="mega-menu-desc">Dvorišna, fasadna, staze</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Usluge</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Projektovanje</span><span class="mega-menu-desc">Plan rasvete, proračun osvetljenja</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Montaža i adaptacija</span><span class="mega-menu-desc">Lusteri, LED sistemi, postojeća rasveta</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Održavanje -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Održavanje
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" style="min-width: 420px;" role="menu">
+          <div class="mega-menu-grid" style="grid-template-columns: 1fr;">
+            <div class="mega-menu-section">
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Redovno održavanje</span><span class="mega-menu-desc">Periodični pregledi i preventiva</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Hitne intervencije</span><span class="mega-menu-desc">Brza reakcija na kvarove</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Ugovorno održavanje</span><span class="mega-menu-desc">Dijagnostika i planirani servis</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direktni linkovi -->
+      <div class="nav-item"><a href="header_hero.html#projekti" class="nav-link">Projekti</a></div>
+      <div class="nav-item"><a href="o-nama.html" class="nav-link">O nama</a></div>
+      <div class="nav-item"><a href="kontakt.html" class="nav-link active" aria-current="page">Kontakt</a></div>
+
     </nav>
-    <div class="header__right">
-      <a href="tel:+381646436538" class="header__phone">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        064 643 6538
+
+    <!-- Right: Phone + CTA + Hamburger -->
+    <div class="header-right">
+      <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas: 060 123 4567">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <span>064 643 6538</span>
       </a>
-      <a href="#forma" class="header__cta">Zakažite obilazak</a>
+      <a href="#forma" class="header-cta">Zakažite obilazak</a>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
+
   </div>
 </header>
+<!-- ═══════════════════════════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════════════════════════ -->
+<div class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobilni meni">
 
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Elektroinstalacije<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div><span class="mobile-submenu-text">Kompletne instalacije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><span class="mobile-submenu-text">Razvodni ormari</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><span class="mobile-submenu-text">Jaka struja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div><span class="mobile-submenu-text">Slaba struja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/></svg></div><span class="mobile-submenu-text">Solarni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Adaptacije</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Pametna kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><span class="mobile-submenu-text">Scene i automatizacije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div><span class="mobile-submenu-text">Pametna rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div><span class="mobile-submenu-text">Kontrola uređaja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div><span class="mobile-submenu-text">Integracije sistema</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><span class="mobile-submenu-text">Daljinsko upravljanje</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Sigurnost<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">IP &amp; Wi-Fi kamere</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><span class="mobile-submenu-text">Snimači (DVR/NVR)</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Kontrola pristupa</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Rasveta<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><span class="mobile-submenu-text">Unutrašnja rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><span class="mobile-submenu-text">Spoljna rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><span class="mobile-submenu-text">Projektovanje rasvete</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Montaža i adaptacija</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Održavanje<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span class="mobile-submenu-text">Redovno održavanje</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><span class="mobile-submenu-text">Hitne intervencije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><span class="mobile-submenu-text">Ugovorno održavanje</span></a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-item"><a href="header_hero.html#projekti" class="mobile-nav-link" style="justify-content:flex-start;">Projekti</a></div>
+  <div class="mobile-nav-item"><a href="o-nama.html" class="mobile-nav-link" style="justify-content:flex-start;">O nama</a></div>
+
+  <div class="mobile-menu-footer">
+    <a href="tel:+381646436538" class="mobile-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      060 123 4567
+    </a>
+    <a href="#forma" class="mobile-cta">Zakažite obilazak</a>
+  </div>
+
+</div>
 <!-- HERO -->
 <section class="kontakt-hero" aria-labelledby="hero-h1">
   <div class="pcb-texture" aria-hidden="true"></div>
@@ -853,139 +1463,64 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-
-  // Header compact on scroll
-  var header = document.getElementById('vrh');
-  window.addEventListener('scroll', function() {
-    header.classList.toggle('compact', window.scrollY > 80);
+document.addEventListener('DOMContentLoaded', () => {
+  // Sticky header
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
   }, { passive: true });
-
-  // Scroll animations
-  var animEls = document.querySelectorAll('[data-anim]');
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
+  // Mobile menu toggle
+  const hamburger  = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  // Mobile accordion
+  document.querySelectorAll('.mobile-nav-item').forEach(item => {
+    const link    = item.querySelector('.mobile-nav-link');
+    const submenu = item.querySelector('.mobile-submenu');
+    if (!submenu) return;
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-nav-item.expanded').forEach(other => {
+        if (other !== item) other.classList.remove('expanded');
+      });
+      item.classList.toggle('expanded');
+    });
+  });
+  // Close on submenu item click
+  document.querySelectorAll('.mobile-submenu-item').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  });
+});
+// ─── Scroll-triggered animations ─────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const animEls = document.querySelectorAll('[data-anim]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
-  animEls.forEach(function(el) { io.observe(el); });
-
-  // Multi-step form
-  var currentStep = 1;
-  var totalSteps = 3;
-
-  function showStep(n) {
-    for (var i = 1; i <= totalSteps; i++) {
-      var s = document.getElementById('s' + i);
-      if (s) s.classList.toggle('active', i === n);
-    }
-    updateProgress(n);
-    var back = document.getElementById('btn-back');
-    var next = document.getElementById('btn-next');
-    if (back) back.style.visibility = n > 1 ? 'visible' : 'hidden';
-    if (next) {
-      if (n === totalSteps) {
-        next.textContent = '';
-        next.innerHTML = 'Pošalji upit <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:13px;height:13px;stroke:currentColor;"><polyline points="20 6 9 17 4 12"/></svg>';
-        next.setAttribute('aria-label', 'Pošalji upit');
-      } else {
-        next.innerHTML = 'Sledeci korak <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:13px;height:13px;stroke:currentColor;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
-        next.setAttribute('aria-label', 'Sledeci korak');
-      }
-    }
-  }
-
-  function updateProgress(n) {
-    for (var i = 1; i <= totalSteps; i++) {
-      var dot = document.getElementById('pd' + i);
-      var step = document.getElementById('ps' + i);
-      if (!dot || !step) continue;
-      dot.classList.remove('active', 'done');
-      step.classList.remove('active', 'done');
-      if (i < n) { dot.classList.add('done'); step.classList.add('done'); }
-      else if (i === n) { dot.classList.add('active'); step.classList.add('active'); }
-    }
-    for (var j = 1; j < totalSteps; j++) {
-      var line = document.getElementById('pl' + j);
-      if (!line) continue;
-      line.classList.remove('done', 'active');
-      if (j < n) line.classList.add('done');
-      else if (j === n) line.classList.add('active');
-    }
-  }
-
-  function validateStep(n) {
-    var ok = true;
-    if (n === 1) {
-      var usluga = document.querySelector('input[name="usluga"]:checked');
-      var objekat = document.querySelector('input[name="objekat"]:checked');
-      var grad = document.getElementById('grad');
-      var faza = document.getElementById('faza');
-      var eu = document.getElementById('e-usluga');
-      var eo = document.getElementById('e-objekat');
-      var eg = document.getElementById('e-grad');
-      var ef = document.getElementById('e-faza');
-      if (!usluga) { eu.classList.add('show'); ok = false; } else { eu.classList.remove('show'); }
-      if (!objekat) { eo.classList.add('show'); ok = false; } else { eo.classList.remove('show'); }
-      if (!grad || !grad.value.trim()) { grad.classList.add('err'); eg.classList.add('show'); ok = false; } else { grad.classList.remove('err'); eg.classList.remove('show'); }
-      if (!faza || !faza.value) { faza.classList.add('err'); ef.classList.add('show'); ok = false; } else { faza.classList.remove('err'); ef.classList.remove('show'); }
-    }
-    if (n === 2) {
-      var opis = document.getElementById('opis');
-      var eop = document.getElementById('e-opis');
-      if (!opis || opis.value.trim().length < 20) { opis.classList.add('err'); eop.classList.add('show'); ok = false; } else { opis.classList.remove('err'); eop.classList.remove('show'); }
-    }
-    if (n === 3) {
-      var ime = document.getElementById('ime');
-      var tel = document.getElementById('telefon');
-      var email = document.getElementById('email');
-      var sag = document.getElementById('saglasnost');
-      var ei = document.getElementById('e-ime');
-      var et = document.getElementById('e-telefon');
-      var ee = document.getElementById('e-email');
-      var es = document.getElementById('e-saglasnost');
-      if (!ime || !ime.value.trim()) { ime.classList.add('err'); ei.classList.add('show'); ok = false; } else { ime.classList.remove('err'); ei.classList.remove('show'); }
-      if (!tel || !/^0[0-9]{8,9}$/.test(tel.value.replace(/\s/g,''))) { tel.classList.add('err'); et.classList.add('show'); ok = false; } else { tel.classList.remove('err'); et.classList.remove('show'); }
-      if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('err'); ee.classList.add('show'); ok = false; } else { if(email) email.classList.remove('err'); ee.classList.remove('show'); }
-      if (!sag || !sag.checked) { es.classList.add('show'); ok = false; } else { es.classList.remove('show'); }
-    }
-    return ok;
-  }
-
-  var btnNext = document.getElementById('btn-next');
-  var btnBack = document.getElementById('btn-back');
-
-  if (btnNext) btnNext.addEventListener('click', function() {
-    if (!validateStep(currentStep)) return;
-    if (currentStep < totalSteps) {
-      currentStep++;
-      showStep(currentStep);
-      window.scrollTo({ top: document.getElementById('forma').offsetTop - 90, behavior: 'smooth' });
-    } else {
-      // Submit
-      var formNav = document.getElementById('form-nav');
-      var formSuccess = document.getElementById('form-success');
-      var progressBar = document.querySelector('.progress-bar');
-      for (var i = 1; i <= totalSteps; i++) {
-        var s = document.getElementById('s' + i);
-        if (s) s.classList.remove('active');
-      }
-      if (formNav) formNav.style.display = 'none';
-      if (progressBar) progressBar.style.display = 'none';
-      if (formSuccess) formSuccess.classList.add('active');
-      window.scrollTo({ top: document.getElementById('forma').offsetTop - 90, behavior: 'smooth' });
-    }
-  });
-
-  if (btnBack) btnBack.addEventListener('click', function() {
-    if (currentStep > 1) {
-      currentStep--;
-      showStep(currentStep);
-      window.scrollTo({ top: document.getElementById('forma').offsetTop - 90, behavior: 'smooth' });
-    }
-  });
-
-  showStep(1);
+  animEls.forEach(el => io.observe(el));
 });
 </script>
 </body>
