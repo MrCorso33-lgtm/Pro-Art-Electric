@@ -464,6 +464,8 @@
 
     /* ===================== TIM ===================== */
     .tim { background:var(--teget); padding:88px 0; position:relative; overflow:hidden; }
+    .tim::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.25),transparent); }
+    .tim::after { content:''; position:absolute; bottom:-160px; right:-160px; width:520px; height:520px; background:radial-gradient(circle,rgba(237,144,7,0.07) 0%,transparent 65%); pointer-events:none; }
     .dot-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ED9007' fill-opacity='0.12'/%3E%3C/svg%3E");
       background-size:32px 32px; }
@@ -496,6 +498,8 @@
 
     /* ===================== LICENCE ===================== */
     .licence { background:var(--teget-dark); padding:88px 0; position:relative; overflow:hidden; }
+    .licence::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
+    .licence::after { content:''; position:absolute; top:-100px; left:-100px; width:480px; height:480px; background:radial-gradient(circle,rgba(237,144,7,0.06) 0%,transparent 65%); pointer-events:none; }
     .diag-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cline x1='0' y1='40' x2='40' y2='0' stroke='%23ED9007' stroke-width='0.6' stroke-opacity='0.09'/%3E%3C/svg%3E");
       background-size:40px 40px; }
@@ -541,6 +545,8 @@
 
     /* ===================== GARANCIJA ===================== */
     .garancija { background:var(--teget); padding:88px 0; position:relative; overflow:hidden; }
+    .garancija::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.25),transparent); }
+    .garancija::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 80% 20%,rgba(237,144,7,0.05) 0%,transparent 55%),radial-gradient(circle at 15% 75%,rgba(237,144,7,0.04) 0%,transparent 50%); pointer-events:none; }
     .garancija .dot-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ED9007' fill-opacity='0.12'/%3E%3C/svg%3E");
       background-size:32px 32px; }
