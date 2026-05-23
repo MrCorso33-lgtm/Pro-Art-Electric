@@ -412,7 +412,7 @@
     .hero { background:var(--teget-dark); padding:140px 0 80px; position:relative; overflow:hidden; }
     .pcb-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='pcb' x='0' y='0' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cline x1='0' y1='30' x2='45' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='75' y1='30' x2='120' y2='30' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='0' y1='90' x2='30' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='90' x2='120' y2='90' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='0' x2='30' y2='20' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='40' x2='30' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='30' y1='100' x2='30' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='0' x2='90' y2='80' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cline x1='90' y1='100' x2='90' y2='120' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='45,30 60,30 60,60 90,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Cpolyline points='30,80 30,90 60,90 60,60' fill='none' stroke='%23ED9007' stroke-width='0.8' stroke-opacity='0.22'/%3E%3Ccircle cx='30' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='30' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='30' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='90' cy='90' r='2.8' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.32'/%3E%3Ccircle cx='60' cy='60' r='3.2' fill='none' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.36'/%3E%3Ccircle cx='60' cy='60' r='1.4' fill='%23ED9007' fill-opacity='0.28'/%3E%3Crect x='52' y='52' width='16' height='16' rx='2' fill='none' stroke='%23ED9007' stroke-width='0.7' stroke-opacity='0.18'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23pcb)'/%3E%3C/svg%3E"); }
-    .hero::before { content:''; position:absolute; top:-80px; right:-100px; width:700px; height:700px; background:radial-gradient(circle,rgba(237,144,7,0.06) 0%,transparent 65%); pointer-events:none; }
+    .hero::before { content:''; position:absolute; top:-80px; right:-100px; width:700px; height:700px; background:radial-gradient(circle,rgba(237,144,7,0.18) 0%,transparent 65%); pointer-events:none; }
     .hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
     .hero-inner { max-width:1200px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
     .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
@@ -464,10 +464,10 @@
 
     /* ===================== TIM ===================== */
     .tim { background:var(--teget); padding:88px 0; position:relative; overflow:hidden; }
-    .tim::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.25),transparent); }
-    .tim::after { content:''; position:absolute; bottom:-160px; right:-160px; width:520px; height:520px; background:radial-gradient(circle,rgba(237,144,7,0.07) 0%,transparent 65%); pointer-events:none; }
+    .tim::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.6),transparent); }
+    .tim::after { content:''; position:absolute; bottom:-160px; right:-160px; width:600px; height:600px; background:radial-gradient(circle,rgba(237,144,7,0.18) 0%,transparent 65%); pointer-events:none; }
     .dot-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ED9007' fill-opacity='0.12'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1.4' fill='%23ED9007' fill-opacity='0.28'/%3E%3C/svg%3E");
       background-size:32px 32px; }
     .tim-inner { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 32px; }
     .tim-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:52px; }
@@ -498,10 +498,10 @@
 
     /* ===================== LICENCE ===================== */
     .licence { background:var(--teget-dark); padding:88px 0; position:relative; overflow:hidden; }
-    .licence::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.2),transparent); }
-    .licence::after { content:''; position:absolute; top:-100px; left:-100px; width:480px; height:480px; background:radial-gradient(circle,rgba(237,144,7,0.06) 0%,transparent 65%); pointer-events:none; }
+    .licence::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.55),transparent); }
+    .licence::after { content:''; position:absolute; top:-100px; left:-100px; width:560px; height:560px; background:radial-gradient(circle,rgba(237,144,7,0.16) 0%,transparent 65%); pointer-events:none; }
     .diag-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cline x1='0' y1='40' x2='40' y2='0' stroke='%23ED9007' stroke-width='0.6' stroke-opacity='0.09'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cline x1='0' y1='40' x2='40' y2='0' stroke='%23ED9007' stroke-width='1' stroke-opacity='0.2'/%3E%3C/svg%3E");
       background-size:40px 40px; }
     .licence-inner { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 32px; }
     .licence-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; margin-top:52px; }
@@ -545,10 +545,10 @@
 
     /* ===================== GARANCIJA ===================== */
     .garancija { background:var(--teget); padding:88px 0; position:relative; overflow:hidden; }
-    .garancija::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.25),transparent); }
-    .garancija::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 80% 20%,rgba(237,144,7,0.05) 0%,transparent 55%),radial-gradient(circle at 15% 75%,rgba(237,144,7,0.04) 0%,transparent 50%); pointer-events:none; }
+    .garancija::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(237,144,7,0.6),transparent); }
+    .garancija::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 80% 20%,rgba(237,144,7,0.16) 0%,transparent 55%),radial-gradient(circle at 15% 75%,rgba(237,144,7,0.12) 0%,transparent 50%); pointer-events:none; }
     .garancija .dot-texture { position:absolute; inset:0; pointer-events:none; z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ED9007' fill-opacity='0.12'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='1' cy='1' r='1.4' fill='%23ED9007' fill-opacity='0.28'/%3E%3C/svg%3E");
       background-size:32px 32px; }
     .garancija-inner { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 32px; }
     .garancija-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; margin-top:52px; }
