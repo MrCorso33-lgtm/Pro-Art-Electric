@@ -535,6 +535,7 @@
     .partneri { background:var(--light-bg); padding:88px 0; }
     .partneri-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:52px; }
     .partner-card { background:#fff; border:1px solid var(--sep-light); border-radius:var(--radius-xl); padding:28px 24px; text-align:center; transition:border-color .2s,box-shadow .2s,transform .2s; }
+    .partner-card--featured { border-color:rgba(237,144,7,0.3); background:rgba(237,144,7,0.03); }
     .partner-card:hover { border-color:rgba(237,144,7,0.3); box-shadow:0 8px 32px rgba(237,144,7,0.1); transform:translateY(-3px); }
     .partner-logo { height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
     .partner-logo-img { max-height:52px; max-width:150px; object-fit:contain; }
@@ -610,6 +611,7 @@
 
       .partneri { padding:64px 0; }
       .partneri-grid { grid-template-columns:repeat(2,1fr); gap:16px; }
+      .partner-card--featured { grid-column:auto; }
 
       .garancija { padding:64px 0; }
       .garancija-grid { gap:28px; }
@@ -1311,6 +1313,7 @@
         <p class="section-desc" style="margin:0 auto;">Koristimo opremu i sisteme vodećih svetskih proizvođača. Ovo nije slučajan izbor, nego rezultat iskustva i testiranja u praksi.</p>
       </div>
       <div class="partneri-grid">
+        <!-- Hikvision -->
         <div class="partner-card" data-anim data-anim-delay="1">
           <div class="partner-logo">
             <img src="https://www.hikvision.com/content/dam/hikvision/en/marketing/image/logo/Hikvision-logo.png"
@@ -1318,28 +1321,52 @@
                  alt="Hikvision" class="partner-logo-img">
             <div class="partner-logo-text" style="display:none">Hikvision</div>
           </div>
-          <div class="partner-cat">Video nadzor i sigurnost</div>
-          <p class="partner-desc">Svetski lider u sistemima video nadzora. Koristimo Hikvision kamere i NVR sisteme za stambene i poslovne objekte, sa garantovanom podrškom i rezervnim delovima.</p>
+          <div class="partner-cat">Video nadzor</div>
+          <p class="partner-desc">Vodeći svetski proizvođač IP kamera, DVR/NVR sistema i pametnih sigurnosnih rešenja.</p>
         </div>
+        <!-- Teknim -->
         <div class="partner-card" data-anim data-anim-delay="2">
-          <div class="partner-logo">
-            <img src="knx_logo.png"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
-                 alt="KNX" class="partner-logo-img">
-            <div class="partner-logo-text" style="display:none">KNX</div>
-          </div>
-          <div class="partner-cat">Pametna kuća i automatizacija</div>
-          <p class="partner-desc">Međunarodni standard za automatizaciju zgrada. KNX sistemi su kompatibilni sa svim vodećim brendovima i garantuju dugoročnu pouzdanost i nadogradivost.</p>
-        </div>
-        <div class="partner-card" data-anim data-anim-delay="3">
           <div class="partner-logo">
             <img src="teknim_logo.png"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
                  alt="Teknim" class="partner-logo-img">
             <div class="partner-logo-text" style="display:none">Teknim</div>
           </div>
-          <div class="partner-cat">Elektro materijal i oprema</div>
-          <p class="partner-desc">Pouzdani dobavljač elektro materijala i opreme. Koristimo Teknim proizvode za instalacije jake struje, razvodne table i kablovske sisteme.</p>
+          <div class="partner-cat">Alarmni sistemi</div>
+          <p class="partner-desc">Turski proizvođač profesionalnih alarmnih i protivpožarnih sistema sa 30+ godina iskustva.</p>
+        </div>
+        <!-- Jablotron -->
+        <div class="partner-card" data-anim data-anim-delay="3">
+          <div class="partner-logo">
+            <img src="jablotron_logo.svg"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                 alt="Jablotron" class="partner-logo-img">
+            <div class="partner-logo-text" style="display:none">Jablotron</div>
+          </div>
+          <div class="partner-cat">Alarmni sistemi</div>
+          <p class="partner-desc">Češki lider u sigurnosnim sistemima — pouzdan, intuitivan i jednostavan za upravljanje.</p>
+        </div>
+        <!-- WISE Smart Home -->
+        <div class="partner-card" data-anim data-anim-delay="4">
+          <div class="partner-logo">
+            <img src="wise_logo.png"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                 alt="WISE Smart Home" class="partner-logo-img">
+            <div class="partner-logo-text" style="display:none">WISE</div>
+          </div>
+          <div class="partner-cat">Pametna kuća</div>
+          <p class="partner-desc">WiFi pametni prekidači, utičnice, senzori i automatizacija — dostupno i pouzdano rešenje za svaki dom.</p>
+        </div>
+        <!-- KNX -->
+        <div class="partner-card partner-card--featured" data-anim data-anim-delay="5">
+          <div class="partner-logo">
+            <img src="knx_logo.png"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                 alt="KNX Standard" class="partner-logo-img">
+            <div class="partner-logo-text" style="display:none">KNX</div>
+          </div>
+          <div class="partner-cat">Međunarodni standard</div>
+          <p class="partner-desc">Jedini globalni otvoreni standard za kućnu i poslovnu automatizaciju — kompatibilan sa 500+ proizvođača.</p>
         </div>
       </div>
     </div>
