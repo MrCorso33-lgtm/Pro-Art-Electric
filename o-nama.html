@@ -69,28 +69,15 @@
         .logo {
           display: flex;
           align-items: center;
-          gap: 12px;
           flex-shrink: 0;
         }
-        .logo-mark {
-          width: 38px; height: 38px;
-          background: var(--orange);
-          border-radius: var(--radius-sm);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.2s ease;
+        .logo-img {
+          height: 48px;
+          width: auto;
+          display: block;
+          transition: opacity 0.2s ease;
         }
-        .logo-mark:hover { transform: scale(1.05); }
-        .logo-mark svg { width: 20px; height: 20px; fill: var(--teget); }
-        .logo-text {
-          font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 18px;
-          letter-spacing: -0.5px;
-          color: var(--white);
-        }
-        .logo-text span { color: var(--orange); }
+        .logo:hover .logo-img { opacity: 0.88; }
     
         /* ── Desktop Nav ── */
         .nav {
@@ -394,9 +381,7 @@
     @media (max-width: 640px) {
       :root { --header-height: 68px; --header-compact: 60px; }
       .header { padding: 0 16px; }
-      .logo-text { font-size: 16px; }
-      .logo-mark { width: 34px; height: 34px; }
-      .logo-mark svg { width: 18px; height: 18px; }
+      .logo-img { height: 40px; }
       .mobile-menu { padding: 88px 20px 32px; }
       .mobile-nav-link { font-size: 16px; padding: 16px 0; }
     }
@@ -694,10 +679,7 @@
 
     <!-- Logo -->
     <a href="header_hero.html" class="logo" aria-label="Pro Art Electric , početna">
-      <div class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      </div>
-      <span class="logo-text">Pro Art <span>Electric</span></span>
+      <img src="logo.png" alt="Pro Art Electric" class="logo-img" width="140" height="48">
     </a>
 
     <!-- Desktop Navigation -->
