@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pametna kuća — Novi Sad | Pro Art Electric</title>
+  <meta name="description" content="Kompletan sistem pametne kuće u stambenom objektu u Novom Sadu. KNX automatizacija, Hikvision video nadzor, LED rasveta.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://proartelectric.rs/projekti/pametna-kuca-novi-sad">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pametna kuća — Novi Sad | Pro Art Electric">
+  <meta property="og:description" content="Kompletan sistem pametne kuće u stambenom objektu u Novom Sadu.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://proartelectric.rs/projekti/pametna-kuca-novi-sad">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       ROOT & RESET
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --narandzasta: #F5A623;
+      --narandzasta-dark: #D4891A;
+      --teget: #1A2B3C;
+      --teget-dark: #0F1A24;
+      --teget-light: #243447;
+      --bela: #FFFFFF;
+      --siva: #8A9BB0;
+      --siva-light: #F4F6F9;
+      --siva-border: #E2E8F0;
+      --glass-border: rgba(245,166,35,0.15);
+      --header-height: 80px;
+      --header-compact: 64px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.18);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.25s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--siva-light);
+      color: var(--teget);
+      line-height: 1.6;
+      padding-top: var(--header-height);
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER - STICKY + GLASSMORPHISM
+    ═══════════════════════════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      transition: height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      background: rgba(15, 26, 36, 0.95);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .header.scrolled {
+      height: var(--header-compact);
+      background: rgba(15, 26, 36, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; flex-shrink: 0; }
+    .logo-img { height: 48px; width: auto; display: block; transition: opacity 0.2s ease; }
+    .logo:hover .logo-img { opacity: 0.88; }
+
+    /* Desktop Nav */
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.875rem; font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--narandzasta); background: rgba(245,166,35,0.08); }
+    .nav-link.active { color: var(--narandzasta); font-weight: 600; }
+    .chevron { width: 10px; height: 10px; transition: transform 0.2s; }
+    .nav-item:hover .chevron { transform: rotate(180deg); }
+
+    /* Mega menu */
+    .mega-menu {
+      position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: var(--teget-dark);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      min-width: 480px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+    }
+    .nav-item:hover .mega-menu, .nav-item:focus-within .mega-menu {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    .mega-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .mega-menu-category { font-size: 0.7rem; font-weight: 700; color: var(--narandzasta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .mega-menu-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px; border-radius: var(--radius-sm); transition: background 0.15s; }
+    .mega-menu-item:hover { background: rgba(255,255,255,0.05); }
+    .mega-menu-icon { width: 32px; height: 32px; background: rgba(245,166,35,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .mega-menu-icon svg { width: 16px; height: 16px; stroke: var(--narandzasta); fill: none; stroke-width: 1.5; }
+    .mega-menu-title { display: block; font-size: 0.82rem; font-weight: 600; color: var(--bela); }
+    .mega-menu-desc { display: block; font-size: 0.72rem; color: var(--siva); margin-top: 1px; }
+
+    /* Header right */
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .header-phone { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500; }
+    .header-phone svg { width: 16px; height: 16px; stroke: var(--narandzasta); fill: none; stroke-width: 2; }
+    .header-phone:hover { color: var(--narandzasta); }
+    .btn-cta {
+      background: var(--narandzasta); color: var(--teget-dark);
+      padding: 10px 20px; border-radius: var(--radius-sm);
+      font-size: 0.85rem; font-weight: 700;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .btn-cta:hover { background: var(--narandzasta-dark); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--bela); border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--teget-dark);
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      padding: 80px 24px 40px;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; color: var(--bela); font-size: 1rem; font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+    }
+    .mobile-nav-link.active { color: var(--narandzasta); }
+    .mobile-submenu { display: none; padding: 8px 0 8px 16px; }
+    .mobile-submenu.open { display: block; }
+    .mobile-submenu a { display: block; padding: 8px 0; color: var(--siva); font-size: 0.875rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .mobile-submenu a:hover { color: var(--narandzasta); }
+    .mobile-cta { margin-top: 24px; background: var(--narandzasta); color: var(--teget-dark); padding: 14px; border-radius: var(--radius-sm); font-weight: 700; text-align: center; display: block; }
+    .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; display: none; }
+    .mobile-menu-overlay.open { display: block; }
+
+    /* ═══════════════════════════════════════════════════════
+       BREADCRUMB
+    ═══════════════════════════════════════════════════════ */
+    .breadcrumb {
+      background: var(--teget-dark);
+      padding: 12px 32px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .breadcrumb-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; color: var(--siva);
+    }
+    .breadcrumb-inner a { color: var(--siva); transition: color 0.2s; }
+    .breadcrumb-inner a:hover { color: var(--narandzasta); }
+    .breadcrumb-inner .sep { color: rgba(255,255,255,0.2); }
+    .breadcrumb-inner .current { color: var(--narandzasta); font-weight: 500; }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO — PROJECT HEADER
+    ═══════════════════════════════════════════════════════ */
+    .project-hero {
+      background: var(--teget-dark);
+      padding: 48px 32px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,166,35,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .project-hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: 48px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .project-hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.3);
+      color: var(--narandzasta);
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 5px 12px; border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .project-hero-badge svg { width: 12px; height: 12px; fill: currentColor; }
+    .project-hero h1 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800; color: var(--bela);
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .project-hero h1 span { color: var(--narandzasta); }
+    .project-hero-desc {
+      font-size: 1rem; color: rgba(255,255,255,0.7);
+      line-height: 1.7; margin-bottom: 28px;
+      max-width: 560px;
+    }
+    .project-hero-meta {
+      display: flex; flex-wrap: wrap; gap: 20px;
+    }
+    .project-hero-meta-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.6);
+    }
+    .project-hero-meta-item svg { width: 16px; height: 16px; stroke: var(--narandzasta); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .project-hero-meta-item strong { color: var(--bela); font-weight: 600; }
+
+    /* Hero sidebar card */
+    .project-hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      backdrop-filter: blur(8px);
+    }
+    .project-status {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 20px;
+    }
+    .project-status-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+      flex-shrink: 0;
+    }
+    .project-status-dot.in-progress { background: var(--narandzasta); box-shadow: 0 0 0 3px rgba(245,166,35,0.2); }
+    .project-status-text { font-size: 0.8rem; font-weight: 600; color: #22c55e; text-transform: uppercase; letter-spacing: 0.06em; }
+    .project-status-text.in-progress { color: var(--narandzasta); }
+    .project-card-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 20px;
+    }
+    .project-card-stat {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      text-align: center;
+    }
+    .project-card-stat-value { font-size: 1.3rem; font-weight: 800; color: var(--narandzasta); display: block; }
+    .project-card-stat-label { font-size: 0.7rem; color: var(--siva); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    .project-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .project-card-tag {
+      background: rgba(245,166,35,0.1);
+      border: 1px solid rgba(245,166,35,0.2);
+      color: var(--narandzasta);
+      font-size: 0.7rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .project-card-cta {
+      display: block; width: 100%;
+      background: var(--narandzasta); color: var(--teget-dark);
+      padding: 13px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.875rem;
+      text-align: center;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .project-card-cta:hover { background: var(--narandzasta-dark); transform: translateY(-1px); }
+
+    /* ═══════════════════════════════════════════════════════
+       MAIN CONTENT LAYOUT
+    ═══════════════════════════════════════════════════════ */
+    .project-body {
+      max-width: 1200px; margin: 0 auto;
+      padding: 48px 32px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+    .project-main { min-width: 0; }
+    .project-sidebar { position: sticky; top: calc(var(--header-compact) + 24px); }
+
+    /* ═══════════════════════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════════════════════ */
+    .gallery-section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 1.3rem; font-weight: 800; color: var(--teget);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; display: block;
+      width: 4px; height: 24px;
+      background: var(--narandzasta);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 260px 180px;
+      gap: 8px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .gallery-item {
+      background: var(--teget-light);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:first-child {
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--teget) 0%, var(--teget-light) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; color: rgba(255,255,255,0.3);
+    }
+    .gallery-placeholder svg { width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .gallery-placeholder span { font-size: 0.75rem; }
+    .gallery-count {
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(0,0,0,0.6); color: var(--bela);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       DESCRIPTION
+    ═══════════════════════════════════════════════════════ */
+    .description-section { margin-bottom: 48px; }
+    .description-text {
+      font-size: 0.95rem; color: #4A5568;
+      line-height: 1.8;
+    }
+    .description-text p { margin-bottom: 16px; }
+    .description-text p:last-child { margin-bottom: 0; }
+    .description-text strong { color: var(--teget); font-weight: 700; }
+    .description-text a { color: var(--narandzasta); font-weight: 600; border-bottom: 1px solid rgba(245,166,35,0.3); transition: border-color 0.2s; }
+    .description-text a:hover { border-color: var(--narandzasta); }
+
+    /* ═══════════════════════════════════════════════════════
+       SCOPE OF WORK (ŠTA JE URAĐENO)
+    ═══════════════════════════════════════════════════════ */
+    .scope-section { margin-bottom: 48px; }
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .scope-item {
+      background: var(--bela);
+      border: 1px solid var(--siva-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .scope-item:hover { border-color: rgba(245,166,35,0.4); box-shadow: var(--shadow-sm); }
+    .scope-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(245,166,35,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .scope-icon svg { width: 18px; height: 18px; stroke: var(--narandzasta); fill: none; stroke-width: 1.8; }
+    .scope-item-title { font-size: 0.875rem; font-weight: 700; color: var(--teget); margin-bottom: 2px; }
+    .scope-item-desc { font-size: 0.78rem; color: var(--siva); line-height: 1.5; }
+
+    /* ═══════════════════════════════════════════════════════
+       CHALLENGES & SOLUTIONS
+    ═══════════════════════════════════════════════════════ */
+    .challenges-section { margin-bottom: 48px; }
+    .challenge-item {
+      background: var(--bela);
+      border: 1px solid var(--siva-border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; align-items: start;
+    }
+    .challenge-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .challenge-label.problem { color: #EF4444; }
+    .challenge-label.solution { color: #22c55e; }
+    .challenge-text { font-size: 0.85rem; color: #4A5568; line-height: 1.6; }
+    .challenge-divider { width: 1px; background: var(--siva-border); align-self: stretch; display: none; }
+
+    /* ═══════════════════════════════════════════════════════
+       TECH STACK (KORIŠĆENA OPREMA)
+    ═══════════════════════════════════════════════════════ */
+    .tech-section { margin-bottom: 48px; }
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tech-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bela);
+      border: 1px solid var(--siva-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.82rem; font-weight: 600; color: var(--teget);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .tech-badge:hover { border-color: rgba(245,166,35,0.4); box-shadow: var(--shadow-sm); }
+    .tech-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--narandzasta); flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════════════════════
+       RESULTS (REZULTATI)
+    ═══════════════════════════════════════════════════════ */
+    .results-section { margin-bottom: 48px; }
+    .results-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .result-card {
+      background: var(--teget-dark);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .result-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,166,35,0.12) 0%, transparent 70%);
+    }
+    .result-value {
+      font-size: 2rem; font-weight: 900; color: var(--narandzasta);
+      display: block; margin-bottom: 4px;
+      position: relative; z-index: 1;
+    }
+    .result-label {
+      font-size: 0.78rem; color: rgba(255,255,255,0.6);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      position: relative; z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TESTIMONIAL
+    ═══════════════════════════════════════════════════════ */
+    .testimonial-section { margin-bottom: 48px; }
+    .testimonial-card {
+      background: var(--bela);
+      border: 1px solid var(--siva-border);
+      border-left: 4px solid var(--narandzasta);
+      border-radius: var(--radius-md);
+      padding: 28px 28px 24px;
+    }
+    .testimonial-stars { color: var(--narandzasta); font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 0.95rem; color: #4A5568; line-height: 1.8;
+      font-style: italic; margin-bottom: 16px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--narandzasta);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; color: var(--teget-dark);
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-weight: 700; font-size: 0.875rem; color: var(--teget); }
+    .testimonial-role { font-size: 0.75rem; color: var(--siva); }
+
+    /* ═══════════════════════════════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════════════════════════════ */
+    .sidebar-card {
+      background: var(--bela);
+      border: 1px solid var(--siva-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .sidebar-card-title {
+      font-size: 0.85rem; font-weight: 800; color: var(--teget);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--siva-border);
+    }
+    .sidebar-detail-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--siva-border);
+      gap: 12px;
+    }
+    .sidebar-detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-detail-label { font-size: 0.78rem; color: var(--siva); flex-shrink: 0; }
+    .sidebar-detail-value { font-size: 0.82rem; font-weight: 600; color: var(--teget); text-align: right; }
+    .sidebar-detail-value.orange { color: var(--narandzasta); }
+
+    .sidebar-cta-btn {
+      display: block; width: 100%;
+      background: var(--narandzasta); color: var(--teget-dark);
+      padding: 13px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.875rem;
+      text-align: center; margin-bottom: 10px;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .sidebar-cta-btn:hover { background: var(--narandzasta-dark); transform: translateY(-1px); }
+    .sidebar-cta-btn.outline {
+      background: transparent;
+      border: 2px solid var(--narandzasta);
+      color: var(--narandzasta);
+    }
+    .sidebar-cta-btn.outline:hover { background: rgba(245,166,35,0.08); }
+
+    .related-project {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--siva-border);
+      transition: background 0.15s;
+    }
+    .related-project:last-child { border-bottom: none; padding-bottom: 0; }
+    .related-project:hover { opacity: 0.85; }
+    .related-project-thumb {
+      width: 56px; height: 44px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--teget) 0%, var(--teget-light) 100%);
+      flex-shrink: 0; overflow: hidden;
+    }
+    .related-project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .related-project-title { font-size: 0.82rem; font-weight: 600; color: var(--teget); line-height: 1.4; margin-bottom: 3px; }
+    .related-project-meta { font-size: 0.72rem; color: var(--siva); }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER CTA BAR
+    ═══════════════════════════════════════════════════════ */
+    .footer-cta-bar {
+      background: var(--teget);
+      padding: 40px 32px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .footer-cta-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .footer-cta-bar-text h2 { font-size: 1.4rem; font-weight: 800; color: var(--bela); margin-bottom: 6px; }
+    .footer-cta-bar-text p { font-size: 0.875rem; color: var(--siva); }
+    .footer-cta-bar-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .footer-cta-bar-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.875rem;
+      transition: all var(--transition);
+    }
+    .footer-cta-bar-btn.primary { background: var(--narandzasta); color: var(--teget-dark); }
+    .footer-cta-bar-btn.primary:hover { background: var(--narandzasta-dark); transform: translateY(-1px); }
+    .footer-cta-bar-btn.secondary { background: transparent; border: 2px solid rgba(255,255,255,0.2); color: var(--bela); }
+    .footer-cta-bar-btn.secondary:hover { border-color: rgba(255,255,255,0.5); }
+    .footer-cta-bar-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--teget-dark);
+      padding: 56px 32px 0;
+      border-top: 1px solid var(--glass-border);
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px; padding-bottom: 48px;
+    }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 40px; width: auto; }
+    .footer-brand-desc { font-size: 0.82rem; color: var(--siva); line-height: 1.7; margin-bottom: 16px; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 0.82rem; color: var(--siva); }
+    .footer-contact-item svg { width: 14px; height: 14px; stroke: var(--narandzasta); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+    .footer-contact-item a { color: var(--siva); transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--narandzasta); }
+    .footer-messengers { display: flex; gap: 8px; margin-top: 14px; }
+    .footer__messenger-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: var(--radius-sm);
+      font-size: 0.75rem; font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .footer__messenger-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .footer__messenger-btn svg { width: 14px; height: 14px; fill: currentColor; }
+    .footer__messenger-btn--viber { background: #7360F2; color: #fff; }
+    .footer__messenger-btn--whatsapp { background: #25D366; color: #fff; }
+    .footer-col-title { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { font-size: 0.82rem; color: var(--siva); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--narandzasta); }
+    .footer-worktime { font-size: 0.78rem; color: var(--siva); margin-top: 16px; line-height: 1.6; }
+    .footer-worktime strong { color: rgba(255,255,255,0.6); }
+    .footer-zone-badge { display: inline-block; background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.2); color: var(--narandzasta); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+    .footer-zone-text { font-size: 0.82rem; color: var(--siva); line-height: 1.7; }
+    .footer-rating { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+    .footer-rating-stars { color: var(--narandzasta); font-size: 0.85rem; }
+    .footer-rating-text { font-size: 0.78rem; color: var(--siva); }
+    .footer-social { display: flex; gap: 8px; margin-top: 12px; }
+    .footer-social a { width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .footer-social a:hover { background: rgba(245,166,35,0.15); }
+    .footer-social svg { width: 14px; height: 14px; fill: var(--siva); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom-legal { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+    .footer-bottom-legal span { margin: 0 8px; opacity: 0.4; }
+    .footer-bottom-copy { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+    .footer-bottom-links { display: flex; gap: 16px; }
+    .footer-bottom-links a { font-size: 0.72rem; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--narandzasta); }
+
+    /* Float contact */
+    .float-contact { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 900; }
+    .float-contact__btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-contact__btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
+    .float-contact__btn svg { width: 22px; height: 22px; fill: #fff; }
+    .float-contact__btn--viber { background: #7360F2; }
+    .float-contact__btn--whatsapp { background: #25D366; }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .project-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .project-hero-card { max-width: 480px; }
+      .project-body { grid-template-columns: 1fr; }
+      .project-sidebar { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .nav { display: none; }
+      .header-phone { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 768px) {
+      body { padding-top: var(--header-compact); }
+      .header { height: var(--header-compact); padding: 0 20px; }
+      .breadcrumb { padding: 10px 20px; }
+      .project-hero { padding: 32px 20px 40px; }
+      .project-body { padding: 32px 20px; }
+      .scope-grid { grid-template-columns: 1fr; }
+      .challenge-item { grid-template-columns: 1fr; gap: 12px; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: 240px 160px 160px; }
+      .gallery-item:first-child { grid-row: span 1; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-cta-bar-inner { flex-direction: column; align-items: flex-start; }
+      .footer { padding: 40px 20px 0; }
+    }
+    @media (max-width: 480px) {
+      .project-hero h1 { font-size: 1.6rem; }
+      .project-hero-meta { flex-direction: column; gap: 10px; }
+      .project-card-stats { grid-template-columns: 1fr 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .tech-grid { gap: 8px; }
+      .footer-cta-bar-actions { flex-direction: column; width: 100%; }
+      .footer-cta-bar-btn { justify-content: center; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .float-contact { bottom: 16px; right: 16px; }
+      .float-contact__btn { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a href="header_hero.html" class="logo" aria-label="Pro Art Electric, početna">
+      <img src="logo.png" alt="Pro Art Electric" class="logo-img" width="140" height="48">
+    </a>
+
+    <nav class="nav" role="navigation" aria-label="Glavna navigacija">
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Elektroinstalacije
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Instalacije</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Kompletne instalacije</span><span class="mega-menu-desc">Stambeni i poslovni objekti</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Razvodni ormari</span><span class="mega-menu-desc">Projektovanje i montaža</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 12h6l3-9 3 18 3-9h5"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Slaba struja</span><span class="mega-menu-desc">Mreža, signal, komunikacije</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Atestovanje</span><span class="mega-menu-desc">Tehnički pregled i dokumentacija</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Pametna kuća
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Automatizacija</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">KNX sistemi</span><span class="mega-menu-desc">Međunarodni standard</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Tuya / WISE</span><span class="mega-menu-desc">Smart home platforme</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Kontrola</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Roletne i žaluzine</span><span class="mega-menu-desc">Motorizovano upravljanje</span></div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M1 6l11 7L23 6M1 6v12a2 2 0 002 2h18a2 2 0 002-2V6"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Pametno osvetljenje</span><span class="mega-menu-desc">Dimeri i scene</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Sigurnost
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Video nadzor</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Hikvision kamere</span><span class="mega-menu-desc">IP i analogni sistemi</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Alarmi</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Jablotron alarmi</span><span class="mega-menu-desc">Profesionalna zaštita</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="projekti.html" class="nav-link active">Projekti</a>
+      <a href="o-nama.html" class="nav-link">O nama</a>
+      <a href="kontakt.html" class="nav-link">Kontakt</a>
+    </nav>
+
+    <div class="header-right">
+      <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        064 643 6538
+      </a>
+      <a href="kontakt.html" class="btn-cta">Zakažite obilazak</a>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobilna navigacija">
+  <div class="mobile-nav-link" data-toggle="elektro">Elektroinstalacije <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+  <div class="mobile-submenu" id="elektro">
+    <a href="#">Kompletne instalacije</a>
+    <a href="#">Razvodni ormari</a>
+    <a href="#">Slaba struja</a>
+    <a href="#">Atestovanje</a>
+  </div>
+  <div class="mobile-nav-link" data-toggle="smart">Pametna kuća <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+  <div class="mobile-submenu" id="smart">
+    <a href="#">KNX sistemi</a>
+    <a href="#">Tuya / WISE</a>
+    <a href="#">Roletne i žaluzine</a>
+    <a href="#">Pametno osvetljenje</a>
+  </div>
+  <div class="mobile-nav-link" data-toggle="sig">Sigurnost <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+  <div class="mobile-submenu" id="sig">
+    <a href="#">Hikvision kamere</a>
+    <a href="#">Jablotron alarmi</a>
+  </div>
+  <a href="projekti.html" class="mobile-nav-link active" style="display:block">Projekti</a>
+  <a href="o-nama.html" class="mobile-nav-link" style="display:block">O nama</a>
+  <a href="kontakt.html" class="mobile-nav-link" style="display:block">Kontakt</a>
+  <a href="kontakt.html" class="mobile-cta">Zakažite besplatan obilazak →</a>
+</div>
+<div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="header_hero.html">Početna</a>
+    <span class="sep">›</span>
+    <a href="projekti.html">Projekti</a>
+    <span class="sep">›</span>
+    <span class="current">Pametna kuća — Novi Sad</span>
+  </div>
+</nav>
+
+<!-- ===== PROJECT HERO ===== -->
+<section class="project-hero">
+  <div class="project-hero-inner">
+    <div class="project-hero-content">
+      <div class="project-hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Pametna kuća
+      </div>
+      <h1>Kompletna automatizacija<br><span>stambenog objekta</span></h1>
+      <p class="project-hero-desc">
+        Kompletan sistem pametne kuće u stambenom objektu površine 180m² u Novom Sadu. 
+        KNX automatizacija, Hikvision video nadzor, LED rasveta sa dimerom i 
+        integrisano upravljanje svim sistemima putem jedne aplikacije.
+      </p>
+      <div class="project-hero-meta">
+        <div class="project-hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><strong>Novi Sad</strong>, Vojvodina</span>
+        </div>
+        <div class="project-hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span><strong>2024</strong></span>
+        </div>
+        <div class="project-hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span><strong>180m²</strong> stambeni objekat</span>
+        </div>
+        <div class="project-hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span><strong>3 nedelje</strong> realizacija</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-hero-card">
+      <div class="project-status">
+        <div class="project-status-dot"></div>
+        <span class="project-status-text">Završen projekat</span>
+      </div>
+      <div class="project-card-stats">
+        <div class="project-card-stat">
+          <span class="project-card-stat-value">180m²</span>
+          <span class="project-card-stat-label">Površina</span>
+        </div>
+        <div class="project-card-stat">
+          <span class="project-card-stat-value">3 ned.</span>
+          <span class="project-card-stat-label">Trajanje</span>
+        </div>
+        <div class="project-card-stat">
+          <span class="project-card-stat-value">12</span>
+          <span class="project-card-stat-label">KNX zona</span>
+        </div>
+        <div class="project-card-stat">
+          <span class="project-card-stat-value">4.9★</span>
+          <span class="project-card-stat-label">Ocena</span>
+        </div>
+      </div>
+      <div class="project-card-tags">
+        <span class="project-card-tag">KNX</span>
+        <span class="project-card-tag">Hikvision</span>
+        <span class="project-card-tag">LED rasveta</span>
+        <span class="project-card-tag">Automatizacija</span>
+      </div>
+      <a href="kontakt.html" class="project-card-cta">Zakažite sličan projekat →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAIN BODY ===== -->
+<div class="project-body">
+
+  <!-- LEFT: Main content -->
+  <main class="project-main">
+
+    <!-- Gallery -->
+    <section class="gallery-section">
+      <h2 class="section-title">Galerija projekta</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Glavna fotografija projekta</span>
+          </div>
+          <span class="gallery-count">1 / 8</span>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Razvodni ormar</span>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>KNX panel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="description-section">
+      <h2 class="section-title">O projektu</h2>
+      <div class="description-text">
+        <p>
+          Klijent je kontaktirao Pro Art Electric sa zahtevom za <strong>kompletnom automatizacijom novoizgrađene kuće</strong> 
+          površine 180m² u Novom Sadu. Cilj je bio integrisati sve električne sisteme u jedinstven, 
+          intuitivan sistem upravljanja koji se može kontrolisati putem mobilne aplikacije ili zidnih panela.
+        </p>
+        <p>
+          Projekat je obuhvatio <strong>KNX automatizaciju</strong> sa 12 zona, kompletne elektroinstalacije, 
+          <a href="kontakt.html">Hikvision video nadzor</a> sa 8 kamera, LED rasvetu sa dimerom u svakoj prostoriji 
+          i sistem za upravljanje roletama. Sve je integrisano u WISE Smart Home platformu.
+        </p>
+        <p>
+          Poseban izazov bio je uskladiti rokove sa ostalim majstorima na gradilištu i 
+          završiti sve instalacije pre gletovanja zidova. Zahvaljujući detaljnom planiranju, 
+          projekat je završen u dogovorenom roku od 3 nedelje, bez kašnjenja.
+        </p>
+      </div>
+    </section>
+
+    <!-- Scope of work -->
+    <section class="scope-section">
+      <h2 class="section-title">Šta je urađeno</h2>
+      <div class="scope-grid">
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">Elektroinstalacije</div>
+            <div class="scope-item-desc">Kompletne instalacije jake i slabe struje, razvodni ormar sa zaštitama</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">KNX automatizacija</div>
+            <div class="scope-item-desc">12 zona, zidni paneli, integracija sa mobilnom aplikacijom</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">Video nadzor</div>
+            <div class="scope-item-desc">8 Hikvision IP kamera, NVR snimač, mobilni pristup</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">LED rasveta</div>
+            <div class="scope-item-desc">Dimabilna LED rasveta u svim prostorijama, scene i rasporedi</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">Roletne i žaluzine</div>
+            <div class="scope-item-desc">Motorizovane roletne na 8 prozora, automatski raspored</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <div class="scope-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="scope-item-title">Atestna dokumentacija</div>
+            <div class="scope-item-desc">Tehnički pregled, atestna dokumentacija i pisana garancija</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges & Solutions -->
+    <section class="challenges-section">
+      <h2 class="section-title">Izazovi i rešenja</h2>
+      <div class="challenge-item">
+        <div>
+          <div class="challenge-label problem">Izazov</div>
+          <div class="challenge-text">Usklađivanje sa ostalim ekipama na gradilištu — gips, vodoinstalater i fasader su radili istovremeno.</div>
+        </div>
+        <div>
+          <div class="challenge-label solution">Rešenje</div>
+          <div class="challenge-text">Detaljan plan sa redosledom radova i dnevna koordinacija sa izvođačem. Sve instalacije završene pre gletovanja.</div>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div>
+          <div class="challenge-label problem">Izazov</div>
+          <div class="challenge-text">Integracija KNX sistema sa postojećim Tuya uređajima koje je klijent već kupio.</div>
+        </div>
+        <div>
+          <div class="challenge-label solution">Rešenje</div>
+          <div class="challenge-text">Implementiran KNX-IP gateway koji omogućava komunikaciju između oba sistema kroz WISE platformu.</div>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div>
+          <div class="challenge-label problem">Izazov</div>
+          <div class="challenge-text">Klijent je zahtevao da sve kamere budu skrivene u enterijeru, bez vidljivih nosača.</div>
+        </div>
+        <div>
+          <div class="challenge-label solution">Rešenje</div>
+          <div class="challenge-text">Ugrađene Hikvision mini dome kamere direktno u plafon, kablovi provučeni kroz plafon pre gletovanja.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="tech-section">
+      <h2 class="section-title">Korišćena oprema</h2>
+      <div class="tech-grid">
+        <div class="tech-badge"><div class="tech-badge-dot"></div>KNX ABB i-bus</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Hikvision DS-2CD2143G2</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>WISE Smart Home</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Schneider Electric</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Legrand Valena Life</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Somfy roletne</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Osram LED trake</div>
+        <div class="tech-badge"><div class="tech-badge-dot"></div>Hikvision NVR DS-7608</div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results-section">
+      <h2 class="section-title">Rezultati</h2>
+      <div class="results-grid">
+        <div class="result-card">
+          <span class="result-value">40%</span>
+          <span class="result-label">Ušteda energije</span>
+        </div>
+        <div class="result-card">
+          <span class="result-value">100%</span>
+          <span class="result-label">Zadovoljstvo klijenta</span>
+        </div>
+        <div class="result-card">
+          <span class="result-value">0</span>
+          <span class="result-label">Kašnjenja u isporuci</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial-section">
+      <h2 class="section-title">Komentar klijenta</h2>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Pro Art Electric je obavio posao profesionalno i u roku. Sve je funkcionisalo od prvog dana, 
+          bez naknadnih popravki. Posebno sam zadovoljan što su sve instalacije bile gotove pre gletovanja 
+          — nije bilo nikakvih naknadnih probijanja zidova. Toplo preporučujem!"
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Marko P.</div>
+            <div class="testimonial-role">Vlasnik objekta, Novi Sad</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RIGHT: Sidebar -->
+  <aside class="project-sidebar">
+
+    <!-- Project details -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Detalji projekta</div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Kategorija</span>
+        <span class="sidebar-detail-value">Pametna kuća</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Lokacija</span>
+        <span class="sidebar-detail-value">Novi Sad</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Godina</span>
+        <span class="sidebar-detail-value">2024</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Površina</span>
+        <span class="sidebar-detail-value">180m²</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Trajanje</span>
+        <span class="sidebar-detail-value">3 nedelje</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Status</span>
+        <span class="sidebar-detail-value orange">✓ Završen</span>
+      </div>
+      <div class="sidebar-detail-row">
+        <span class="sidebar-detail-label">Garancija</span>
+        <span class="sidebar-detail-value">2 godine</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Sličan projekat?</div>
+      <a href="kontakt.html" class="sidebar-cta-btn">Zakažite besplatan obilazak</a>
+      <a href="tel:+381646436538" class="sidebar-cta-btn outline">Pozovite odmah</a>
+    </div>
+
+    <!-- Related projects -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Slični projekti</div>
+      <a href="projekti.html" class="related-project">
+        <div class="related-project-thumb"></div>
+        <div>
+          <div class="related-project-title">Video nadzor — Poslovni objekat</div>
+          <div class="related-project-meta">Novi Sad · 2024</div>
+        </div>
+      </a>
+      <a href="projekti.html" class="related-project">
+        <div class="related-project-thumb"></div>
+        <div>
+          <div class="related-project-title">Elektroinstalacije — Stan 75m²</div>
+          <div class="related-project-meta">Novi Sad · 2023</div>
+        </div>
+      </a>
+      <a href="projekti.html" class="related-project">
+        <div class="related-project-thumb"></div>
+        <div>
+          <div class="related-project-title">LED rasveta — Restoran</div>
+          <div class="related-project-meta">Novi Sad · 2024</div>
+        </div>
+      </a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ===== FOOTER CTA BAR ===== -->
+<div class="footer-cta-bar">
+  <div class="footer-cta-bar-inner">
+    <div class="footer-cta-bar-text">
+      <h2>Spremi za sledeći korak?</h2>
+      <p>Zakažite besplatan obilazak ili pošaljite upit, odgovaramo u roku od 24h.</p>
+    </div>
+    <div class="footer-cta-bar-actions">
+      <a href="tel:+381646436538" class="footer-cta-bar-btn primary">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Pozovite odmah
+      </a>
+      <a href="kontakt.html" class="footer-cta-bar-btn secondary">
+        Zakažite obilazak →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-grid">
+    <!-- Brand col -->
+    <div>
+      <div class="footer-brand-logo">
+        <a href="header_hero.html"><img src="logo.png" alt="Pro Art Electric" height="40"></a>
+      </div>
+      <p class="footer-brand-desc">Elektroinstalacije, pametna kuća i sigurnosni sistemi u Novom Sadu i Vojvodini. Licencirani izvođač, pisana garancija na sve radove.</p>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+381646436538">064 643 6538</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:info@proartelectric.rs">info@proartelectric.rs</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Vojvode Bojovića 10/3, 21000 Novi Sad</span>
+      </div>
+      <div class="footer-messengers">
+        <a href="viber://chat?number=%2B381646436538" class="footer__messenger-btn footer__messenger-btn--viber" aria-label="Kontaktirajte nas na Viber-u">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M11.4 0C5.5 0 .9 4.4.9 9.8c0 2.8 1.2 5.4 3.2 7.3v3.5c0 .3.3.5.5.4l3.4-1.3c1 .3 2 .4 3 .4 5.9 0 10.5-4.4 10.5-9.8S17.3 0 11.4 0zm0 17.9c-.9 0-1.9-.1-2.7-.4l-.3-.1-2.4.9v-2.5l-.2-.2C4 14 2.9 12 2.9 9.8c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.1-8.5 8.1z"/></svg>
+          Viber
+        </a>
+        <a href="https://wa.me/381646436538" target="_blank" rel="noopener" class="footer__messenger-btn footer__messenger-btn--whatsapp" aria-label="Kontaktirajte nas na WhatsApp-u">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 0C5.149 0 0 5.149 0 11.5c0 2.117.576 4.1 1.578 5.802L0 24l6.851-1.553A11.44 11.44 0 0011.5 23C17.851 23 23 17.851 23 11.5S17.851 0 11.5 0zm0 21.1a9.572 9.572 0 01-4.896-1.345l-.35-.208-3.637.824.84-3.546-.228-.364A9.558 9.558 0 011.9 11.5C1.9 6.195 6.195 1.9 11.5 1.9S21.1 6.195 21.1 11.5 16.805 21.1 11.5 21.1z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Usluge col -->
+    <div>
+      <div class="footer-col-title">Usluge</div>
+      <ul class="footer-links">
+        <li><a href="#">Elektroinstalacije</a></li>
+        <li><a href="#">Pametna kuća</a></li>
+        <li><a href="#">Video nadzor</a></li>
+        <li><a href="#">Alarmni sistemi</a></li>
+        <li><a href="#">LED rasveta</a></li>
+        <li><a href="#">Održavanje</a></li>
+      </ul>
+    </div>
+
+    <!-- Kompanija col -->
+    <div>
+      <div class="footer-col-title">Kompanija</div>
+      <ul class="footer-links">
+        <li><a href="o-nama.html">O nama</a></li>
+        <li><a href="projekti.html">Projekti</a></li>
+        <li><a href="kontakt.html">FAQ</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+      <div class="footer-worktime">
+        <strong>Radno vreme:</strong><br>
+        Pon–Pet: 08:00–17:00<br>
+        Hitni kvarovi: 24h
+      </div>
+    </div>
+
+    <!-- Zona col -->
+    <div>
+      <div class="footer-col-title">Zona pokrivanja</div>
+      <div class="footer-zone-badge">Novi Sad · Vojvodina · Srbija</div>
+      <p class="footer-zone-text">Pokrivamo Novi Sad i okolinu u radijusu 50km. Za veće projekte dolazimo širom Vojvodine i Srbije.</p>
+      <div class="footer-rating">
+        <span class="footer-rating-stars">★★★★★</span>
+        <span class="footer-rating-text">4.9/5 na osnovu recenzija</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-legal">
+      Branislav Vujasin PR Pro Art Electric
+      <span>|</span> PIB: 115297032
+      <span>|</span> MB: 68254604
+      <span>|</span> Vojvode Bojovića 10/3, 21000 Novi Sad
+    </div>
+    <div class="footer-bottom-links">
+      <a href="#">Politika privatnosti</a>
+    </div>
+    <div class="footer-bottom-copy">© 2025 Pro Art Electric. Sva prava zadržana.</div>
+  </div>
+</footer>
+
+<!-- Float contact -->
+<div class="float-contact" aria-label="Brzi kontakt">
+  <a href="viber://chat?number=%2B381646436538" class="float-contact__btn float-contact__btn--viber" aria-label="Kontaktirajte nas na Viber-u">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11.4 0C5.5 0 .9 4.4.9 9.8c0 2.8 1.2 5.4 3.2 7.3v3.5c0 .3.3.5.5.4l3.4-1.3c1 .3 2 .4 3 .4 5.9 0 10.5-4.4 10.5-9.8S17.3 0 11.4 0zm0 17.9c-.9 0-1.9-.1-2.7-.4l-.3-.1-2.4.9v-2.5l-.2-.2C4 14 2.9 12 2.9 9.8c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.1-8.5 8.1z"/></svg>
+  </a>
+  <a href="https://wa.me/381646436538" target="_blank" rel="noopener" class="float-contact__btn float-contact__btn--whatsapp" aria-label="Kontaktirajte nas na WhatsApp-u">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 0C5.149 0 0 5.149 0 11.5c0 2.117.576 4.1 1.578 5.802L0 24l6.851-1.553A11.44 11.44 0 0011.5 23C17.851 23 23 17.851 23 11.5S17.851 0 11.5 0zm0 21.1a9.572 9.572 0 01-4.896-1.345l-.35-.208-3.637.824.84-3.546-.228-.364A9.558 9.558 0 011.9 11.5C1.9 6.195 6.195 1.9 11.5 1.9S21.1 6.195 21.1 11.5 16.805 21.1 11.5 21.1z"/></svg>
+  </a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Sticky header
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Hamburger + mobile menu
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-overlay');
+
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+  overlay.addEventListener('click', () => toggleMenu(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+
+  // Mobile accordion
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(link => {
+    link.addEventListener('click', () => {
+      const id = link.dataset.toggle;
+      const sub = document.getElementById(id);
+      if (sub) sub.classList.toggle('open');
+    });
+  });
+
+  // Mega menu keyboard
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const trigger = item.querySelector('.nav-link');
+    const menu = item.querySelector('.mega-menu');
+    if (!trigger || !menu) return;
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !isOpen);
+      }
+    });
+  });
+});
+</script>
+
+<script>
+(function() {
+  var footerItems = document.querySelectorAll('[data-footer-animate]');
+  if (!footerItems.length) return;
+  var footerObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        footerObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  footerItems.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    footerObs.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
