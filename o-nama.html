@@ -565,6 +565,116 @@
     .gar-highlight p:last-child { margin-bottom:0; }
     .gar-highlight strong { color:#fff; }
 
+    /* ===================== RESPONSIVE ===================== */
+
+    /* ── Tablet landscape (≤1024px) ── */
+    @media(max-width:1024px){
+      .hero-grid { grid-template-columns:1fr; gap:48px; }
+      .hero-stats { grid-template-columns:repeat(2,1fr); }
+      .ko-smo-grid { grid-template-columns:1fr; gap:40px; }
+      .tim-grid { grid-template-columns:repeat(2,1fr); }
+      .tim-stats-row { grid-template-columns:repeat(2,1fr); }
+      .proces-steps { grid-template-columns:repeat(3,1fr); gap:20px; }
+      .proces-steps::before { display:none; }
+      .licence-grid { grid-template-columns:1fr; gap:32px; }
+      .partneri-grid { grid-template-columns:repeat(2,1fr); }
+      .garancija-grid { grid-template-columns:1fr; gap:36px; }
+      .section-inner { padding:0 28px; }
+    }
+
+    /* ── Tablet portrait (≤768px) ── */
+    @media(max-width:768px){
+      .section-inner { padding:0 20px; }
+      .hero { padding:110px 0 60px; }
+      .hero-inner { padding:0 20px; }
+      .hero-grid { gap:36px; }
+      .hero-title { font-size:clamp(1.7rem,5vw,2.3rem); }
+      .hero-desc { font-size:.95rem; }
+      .hero-stats { grid-template-columns:repeat(2,1fr); gap:10px; }
+      .stat-card--wide { grid-column:auto; }
+
+      .ko-smo { padding:64px 0; }
+      .ko-smo-grid { gap:28px; }
+      .section-header { margin-bottom:36px; }
+
+      .tim { padding:64px 0; }
+      .tim-grid { grid-template-columns:1fr; gap:16px; }
+      .tim-stats-row { grid-template-columns:repeat(2,1fr); gap:12px; }
+
+      .proces { padding:64px 0; }
+      .proces-steps { grid-template-columns:repeat(2,1fr); gap:20px; }
+      .proces-steps::before { display:none; }
+
+      .licence { padding:64px 0; }
+      .licence-grid { gap:24px; }
+
+      .partneri { padding:64px 0; }
+      .partneri-grid { grid-template-columns:repeat(2,1fr); gap:16px; }
+
+      .garancija { padding:64px 0; }
+      .garancija-grid { gap:28px; }
+    }
+
+    /* ── Mobile (≤480px) ── */
+    @media(max-width:480px){
+      .section-inner { padding:0 16px; }
+      .hero { padding:100px 0 48px; }
+      .hero-inner { padding:0 16px; }
+      .hero-title { font-size:1.6rem; }
+      .hero-desc { font-size:.9rem; }
+      .hero-stats { grid-template-columns:1fr 1fr; gap:8px; }
+      .stat-card { padding:18px 16px; }
+      .stat-num { font-size:1.8rem; }
+      .hero-cta-row { flex-direction:column; }
+      .btn-primary, .btn-secondary { width:100%; justify-content:center; }
+
+      .ko-smo { padding:52px 0; }
+      .ko-smo-grid { gap:24px; }
+      .diff-item { padding:14px 16px; }
+
+      .tim { padding:52px 0; }
+      .tim-grid { grid-template-columns:1fr; gap:14px; }
+      .tim-card { padding:22px 18px; }
+      .tim-stats-row { grid-template-columns:repeat(2,1fr); gap:10px; }
+      .tim-stat { padding:16px 12px; }
+      .tim-stat-num { font-size:1.5rem; }
+
+      .proces { padding:52px 0; }
+      .proces-steps { grid-template-columns:1fr; gap:0; }
+      .step { display:flex; flex-direction:row; text-align:left; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--sep-light); }
+      .step:last-child { border-bottom:none; }
+      .step-num { width:48px; height:48px; font-size:1.1rem; flex-shrink:0; margin:0; }
+      .step-icon { margin:0 0 8px; }
+
+      .licence { padding:52px 0; }
+      .licence-grid { gap:20px; }
+      .licence-card { padding:16px 18px; }
+      .apr-block { padding:22px 18px; }
+
+      .partneri { padding:52px 0; }
+      .partneri-grid { grid-template-columns:1fr; gap:14px; }
+
+      .garancija { padding:52px 0; }
+      .garancija-grid { gap:24px; }
+      .gar-card { padding:16px 18px; }
+      .gar-highlight { padding:22px 18px; }
+
+      .section-title { font-size:1.35rem; }
+      .section-desc { font-size:.9rem; }
+    }
+
+    /* ── Small mobile (≤360px) ── */
+    @media(max-width:360px){
+      .section-inner { padding:0 14px; }
+      .hero-inner { padding:0 14px; }
+      .hero-title { font-size:1.4rem; }
+      .hero-stats { grid-template-columns:1fr; }
+      .stat-card--wide { grid-column:auto; }
+      .tim-stats-row { grid-template-columns:1fr 1fr; }
+      .partneri-grid { grid-template-columns:1fr; }
+      .section-title { font-size:1.2rem; }
+    }
+
     </style>
 </head>
 <body>
