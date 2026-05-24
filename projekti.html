@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="sr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Realizovani projekti Pro Art Electric — elektroinstalacije, pametna kuća, video nadzor, alarmni sistemi i LED rasveta u Novom Sadu i Vojvodini.">
+  <title>Projekti — Pro Art Electric | Novi Sad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --teget:         #0F1A24;
+      --teget-mid:     #1A2530;
+      --teget-light:   #243040;
+      --orange:        #ED9007;
+      --orange-dark:   #C97A06;
+      --orange-glow:   rgba(237, 144, 7, 0.15);
+      --orange-dim:    rgba(237, 144, 7, 0.08);
+      --white:         #FFFFFF;
+      --off-white:     #F5F5FA;
+      --text-body:     rgba(255, 255, 255, 0.62);
+      --text-muted:    rgba(255, 255, 255, 0.38);
+      --glass-bg:      rgba(255, 255, 255, 0.045);
+      --glass-hover:   rgba(255, 255, 255, 0.08);
+      --glass-border:  rgba(255, 255, 255, 0.09);
+      --sep:           rgba(255, 255, 255, 0.06);
+      --font-head:     'Space Grotesk', sans-serif;
+      --font-body:     'Inter', sans-serif;
+      --header-height: 80px;
+      --header-compact: 64px;
+      --radius-sm:     6px;
+      --radius-md:     10px;
+      --radius-lg:     14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--teget); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul, li { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER - STICKY + GLASSMORPHISM
+    ═══════════════════════════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      transition: height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      height: var(--header-compact);
+      background: rgba(15, 26, 36, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    /* ── Logo ── */
+    .logo { display: flex; align-items: center; flex-shrink: 0; }
+    .logo-img { height: 48px; width: auto; display: block; transition: opacity 0.2s ease; }
+    .logo:hover .logo-img { opacity: 0.88; }
+    /* ── Desktop Nav ── */
+    .nav { display: flex; align-items: center; gap: 2px; }
+    .nav-item { position: relative; }
+    .nav-link {
+      font-family: var(--font-body); font-weight: 500; font-size: 13px;
+      color: var(--text-body); padding: 8px 12px; border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background 0.15s ease;
+      display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--white); background: var(--glass-bg); }
+    .nav-link .chevron { width: 10px; height: 10px; opacity: 0.5; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .nav-item:hover .chevron { transform: rotate(180deg); opacity: 0.8; }
+    /* ── Mega Menu ── */
+    .mega-menu {
+      position: absolute; top: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      min-width: 560px; background: rgba(15, 26, 36, 0.96);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+      padding: 24px; opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .nav-item:hover .mega-menu { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .mega-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .mega-menu-section { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu-category {
+      font-family: var(--font-body); font-weight: 600; font-size: 11px;
+      letter-spacing: 1.2px; text-transform: uppercase; color: var(--orange);
+      padding: 0 14px 8px; margin-bottom: 4px; border-bottom: 1px solid var(--sep);
+    }
+    .mega-menu-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+      border-radius: var(--radius-sm); transition: background 0.15s ease; cursor: pointer;
+    }
+    .mega-menu-item:hover { background: var(--glass-hover); }
+    .mega-menu-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      background: var(--orange-dim); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .mega-menu-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .mega-menu-content { display: flex; flex-direction: column; gap: 2px; }
+    .mega-menu-title { font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--white); }
+    .mega-menu-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    /* ── Header Right ── */
+    .header-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+    .header-phone { display: flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--text-body); transition: color 0.15s ease; }
+    .header-phone:hover { color: var(--white); }
+    .header-phone svg { width: 16px; height: 16px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .header-cta {
+      font-family: var(--font-head); font-weight: 600; font-size: 13px;
+      color: var(--teget); background: var(--orange); padding: 10px 20px;
+      border-radius: var(--radius-sm); border: none; cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .header-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .header-cta:active { transform: translateY(0); }
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 0; z-index: 1100;
+    }
+    .hamburger-line { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .hamburger-line:nth-child(1) { margin-bottom: 5px; }
+    .hamburger-line:nth-child(3) { margin-top: 5px; }
+    .hamburger.active .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
+    .hamburger.active .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* ── Mobile Menu ── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 1050;
+      background: rgba(15, 26, 36, 0.98); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); padding: 100px 32px 40px;
+      overflow-y: auto; opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-nav-item { border-bottom: 1px solid var(--sep); }
+    .mobile-nav-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; font-family: var(--font-head); font-weight: 600;
+      font-size: 18px; color: var(--white); cursor: pointer; transition: color 0.15s ease;
+    }
+    .mobile-nav-link:hover { color: var(--orange); }
+    .mobile-nav-link .mobile-chevron { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s ease, stroke 0.3s ease; }
+    .mobile-nav-item.expanded .mobile-chevron { transform: rotate(180deg); stroke: var(--orange); }
+    .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-nav-item.expanded .mobile-submenu { max-height: 600px; }
+    .mobile-submenu-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--radius-sm); transition: background 0.15s ease; }
+    .mobile-submenu-item:hover { background: var(--glass-hover); }
+    .mobile-submenu-icon { width: 32px; height: 32px; border-radius: var(--radius-sm); background: var(--orange-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .mobile-submenu-icon svg { width: 16px; height: 16px; stroke: var(--orange); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .mobile-submenu-text { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--text-body); }
+    .mobile-menu-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--sep); display: flex; flex-direction: column; gap: 16px; }
+    .mobile-phone { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-weight: 500; font-size: 16px; color: var(--white); }
+    .mobile-phone svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .mobile-cta { display: block; text-align: center; font-family: var(--font-head); font-weight: 600; font-size: 15px; color: var(--teget); background: var(--orange); padding: 14px 24px; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: background 0.15s ease; }
+    .mobile-cta:hover { background: var(--orange-dark); }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO — PROJEKTI
+    ═══════════════════════════════════════════════════════ */
+    .page-hero {
+      position: relative;
+      padding: calc(var(--header-height) + 72px) 0 80px;
+      background: var(--teget);
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(237,144,7,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(237,144,7,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* dot grid pattern */
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.4' fill='rgba(255,255,255,0.22)'/%3E%3C/svg%3E");
+      background-size: 32px 32px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .page-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .page-hero__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .page-hero__breadcrumb a { color: var(--text-muted); transition: color 0.15s; }
+    .page-hero__breadcrumb a:hover { color: var(--orange); }
+    .page-hero__breadcrumb svg { width: 12px; height: 12px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+    .page-hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .page-hero__label-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 8px rgba(237,144,7,0.6); }
+    .page-hero__title {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .page-hero__title span { color: var(--orange); }
+    .page-hero__sub {
+      font-size: 18px;
+      color: var(--text-body);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .page-hero__stats {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .page-hero__stat {}
+    .page-hero__stat-num {
+      font-family: var(--font-head);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .page-hero__stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROJECTS SECTION
+    ═══════════════════════════════════════════════════════ */
+    .projects-page {
+      padding: 80px 0 100px;
+      background: var(--off-white);
+    }
+    .projects-page__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Filter tabs */
+    .proj-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .proj-filter {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(15,26,36,0.14);
+      background: #fff;
+      color: rgba(15,26,36,0.55);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .proj-filter:hover { border-color: var(--orange); color: var(--orange); }
+    .proj-filter.active { background: var(--orange); border-color: var(--orange); color: #fff; font-weight: 600; }
+
+    /* Grid */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* Card */
+    .proj-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(15,26,36,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.25s ease;
+    }
+    .proj-card.visible { opacity: 1; transform: translateY(0); }
+    .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,26,36,0.14); }
+    .proj-card.hidden { display: none; }
+
+    /* Card image area */
+    .proj-card__img {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .proj-card__img-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .proj-card__img-bg svg {
+      width: 64px;
+      height: 64px;
+      stroke: rgba(255,255,255,0.3);
+      fill: none;
+      stroke-width: 1;
+    }
+    .proj-card__badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .proj-card__badge--smart   { background: rgba(99,102,241,0.85); color: #fff; }
+    .proj-card__badge--elektro { background: rgba(237,144,7,0.92); color: #0F1A24; }
+    .proj-card__badge--cctv    { background: rgba(239,68,68,0.85); color: #fff; }
+    .proj-card__badge--rasveta { background: rgba(16,185,129,0.85); color: #fff; }
+    .proj-card__badge--odrzavanje { background: rgba(100,116,139,0.92); color: #fff; }
+    .proj-card__status {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 100px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      font-size: 11px;
+      font-weight: 600;
+      color: #10B981;
+      backdrop-filter: blur(8px);
+    }
+    .proj-card__status-dot { width: 6px; height: 6px; border-radius: 50%; background: #10B981; animation: pulse-green 2s infinite; }
+    @keyframes pulse-green { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    /* Card body */
+    .proj-card__body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .proj-card__title { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; color: #0F1A24; margin-bottom: 8px; line-height: 1.3; letter-spacing: -0.2px; }
+    .proj-card__desc { font-size: 0.85rem; color: rgba(15,26,36,0.55); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+    .proj-card__meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .proj-card__meta-item { display: flex; align-items: center; gap: 5px; font-size: 0.78rem; color: rgba(15,26,36,0.45); }
+    .proj-card__meta-item svg { width: 13px; height: 13px; flex-shrink: 0; stroke: rgba(15,26,36,0.35); fill: none; stroke-width: 2; }
+    .proj-card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(15,26,36,0.07); }
+    .proj-card__tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .proj-card__tag { padding: 3px 8px; border-radius: 4px; background: rgba(15,26,36,0.06); font-size: 0.7rem; color: rgba(15,26,36,0.45); font-weight: 500; }
+    .proj-card__cta { font-family: var(--font-head); font-size: 0.82rem; font-weight: 600; color: var(--orange); display: flex; align-items: center; gap: 6px; transition: gap 0.2s; white-space: nowrap; }
+    .proj-card:hover .proj-card__cta { gap: 10px; }
+    .proj-card__cta svg { width: 14px; height: 14px; stroke: var(--orange); fill: none; stroke-width: 2; transition: transform 0.2s; }
+    .proj-card:hover .proj-card__cta svg { transform: translateX(2px); }
+
+    /* No results */
+    .proj-no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      color: rgba(15,26,36,0.35);
+      font-size: 1rem;
+      display: none;
+    }
+    .proj-no-results.visible { display: block; }
+
+    /* ═══════════════════════════════════════════════════════
+       STATS STRIP
+    ═══════════════════════════════════════════════════════ */
+    .stats-strip {
+      background: var(--teget);
+      padding: 72px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(237,144,7,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .stats-strip::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(237,144,7,0.4), transparent);
+    }
+    .stats-strip__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .stats-strip__item {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .stats-strip__item.visible { opacity: 1; transform: translateY(0); }
+    .stats-strip__num {
+      font-family: var(--font-head);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stats-strip__label {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.4;
+    }
+    .stats-strip__sep {
+      width: 1px;
+      background: var(--glass-border);
+      align-self: stretch;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CTA SECTION
+    ═══════════════════════════════════════════════════════ */
+    .proj-cta {
+      background: var(--teget-mid);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(237,144,7,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .proj-cta__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .proj-cta__label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .proj-cta__title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .proj-cta__sub {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .proj-cta__actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-head); font-weight: 600; font-size: 15px;
+      color: var(--teget); background: var(--orange); padding: 14px 28px;
+      border-radius: var(--radius-sm); border: none; cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .btn-primary svg { width: 16px; height: 16px; stroke: var(--teget); fill: none; stroke-width: 2; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-head); font-weight: 600; font-size: 15px;
+      color: var(--white); background: transparent; padding: 13px 28px;
+      border-radius: var(--radius-sm); border: 1.5px solid var(--glass-border); cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: var(--glass-hover); }
+    .btn-ghost svg { width: 16px; height: 16px; stroke: var(--white); fill: none; stroke-width: 2; }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer { background: var(--teget, #0F1A24); }
+    /* Pre-footer CTA bar */
+    .footer-cta-bar {
+      background: linear-gradient(135deg, rgba(237,144,7,0.12) 0%, rgba(237,144,7,0.06) 100%);
+      border-top: 1px solid rgba(237,144,7,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 0;
+    }
+    .footer-cta-bar__inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+    }
+    .footer-cta-bar__title { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .footer-cta-bar__sub { font-size: 0.9rem; color: var(--text-body); }
+    .footer-cta-bar__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .footer-cta-bar__btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-head); font-weight: 600; font-size: 14px;
+      padding: 12px 24px; border-radius: var(--radius-sm); cursor: pointer;
+      transition: all 0.15s ease; border: none;
+    }
+    .footer-cta-bar__btn--primary { background: var(--orange); color: var(--teget); }
+    .footer-cta-bar__btn--primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .footer-cta-bar__btn--secondary { background: transparent; color: var(--white); border: 1.5px solid var(--glass-border); }
+    .footer-cta-bar__btn--secondary:hover { border-color: rgba(255,255,255,0.3); background: var(--glass-hover); }
+    /* Footer body */
+    .footer__body { padding: 64px 0 0; }
+    .footer__inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer__logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer__logo-mark { width: 36px; height: 36px; background: var(--orange); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .footer__logo-mark svg { width: 18px; height: 18px; fill: var(--teget); }
+    .footer__logo-text { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: var(--white); letter-spacing: -0.3px; }
+    .footer__logo-text span { color: var(--orange); }
+    .footer__tagline { font-size: 0.875rem; color: var(--text-body); line-height: 1.6; margin-bottom: 24px; max-width: 280px; }
+    .footer__contact-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .footer__contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-body); }
+    .footer__contact-item svg { width: 15px; height: 15px; stroke: var(--orange); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+    .footer__contact-item a { color: var(--text-body); transition: color 0.15s; }
+    .footer__contact-item a:hover { color: var(--orange); }
+    .footer__messengers { display: flex; gap: 10px; }
+    .footer__messenger-btn {
+      display: flex; align-items: center; gap: 6px; padding: 8px 14px;
+      border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600;
+      transition: all 0.15s ease; border: none; cursor: pointer;
+    }
+    .footer__messenger-btn--viber { background: rgba(124,77,255,0.15); color: #7C4DFF; border: 1px solid rgba(124,77,255,0.25); }
+    .footer__messenger-btn--viber:hover { background: rgba(124,77,255,0.25); }
+    .footer__messenger-btn--whatsapp { background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.25); }
+    .footer__messenger-btn--whatsapp:hover { background: rgba(37,211,102,0.22); }
+    .footer__messenger-btn svg { width: 15px; height: 15px; }
+    .footer__col-title { font-family: var(--font-head); font-size: 0.78rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    .footer__nav { display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-link { font-size: 0.875rem; color: var(--text-body); transition: color 0.15s ease; }
+    .footer__nav-link:hover { color: var(--orange); }
+    .footer__hours { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--sep); }
+    .footer__hours strong { color: var(--text-body); display: block; margin-bottom: 4px; }
+    .footer__zone-cities { font-size: 0.875rem; color: var(--text-body); line-height: 1.8; margin-bottom: 20px; }
+    .footer__rating { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding: 10px 14px; background: var(--glass-bg); border-radius: var(--radius-sm); border: 1px solid var(--glass-border); }
+    .footer__rating-stars { color: var(--orange); font-size: 13px; }
+    .footer__rating-text { font-size: 0.78rem; color: var(--text-body); }
+    .footer__rating-text strong { color: var(--white); }
+    .footer__social { display: flex; gap: 10px; }
+    .footer__social-link { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; }
+    .footer__social-link:hover { background: var(--orange); border-color: var(--orange); }
+    .footer__social-link svg { width: 16px; height: 16px; stroke: var(--text-body); fill: none; stroke-width: 1.5; transition: stroke 0.15s; }
+    .footer__social-link:hover svg { stroke: var(--teget); }
+    /* Footer bottom */
+    .footer__bottom {
+      margin-top: 48px; padding: 24px 0;
+      border-top: 1px solid var(--sep);
+    }
+    .footer__bottom-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .footer__legal { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+    .footer__legal-name { color: var(--text-body); font-weight: 500; }
+    .footer__bottom-links { display: flex; gap: 20px; }
+    .footer__bottom-link { font-size: 0.78rem; color: var(--text-muted); transition: color 0.15s; }
+    .footer__bottom-link:hover { color: var(--orange); }
+
+    /* Float contact */
+    .float-contact { position: fixed; bottom: 24px; right: 24px; z-index: 900; display: flex; flex-direction: column; gap: 10px; }
+    .float-btn {
+      width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3); transition: transform 0.2s ease, box-shadow 0.2s ease; border: none; cursor: pointer;
+    }
+    .float-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+    .float-btn--viber { background: #7C4DFF; }
+    .float-btn--whatsapp { background: #25D366; }
+    .float-btn svg { width: 24px; height: 24px; fill: #fff; }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav { display: none; }
+      .header-phone span { display: none; }
+      .header-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .header { padding: 0 20px; }
+      .header-right { gap: 12px; }
+      .proj-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-strip__inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .stats-strip__sep { display: none; }
+      .footer__inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: calc(var(--header-height) + 48px) 0 60px; }
+      .page-hero__inner { padding: 0 24px; }
+      .page-hero__title { font-size: 36px; }
+      .page-hero__sub { font-size: 16px; margin-bottom: 36px; }
+      .page-hero__stats { gap: 32px; }
+      .page-hero__stat-num { font-size: 28px; }
+      .projects-page__inner { padding: 0 24px; }
+      .proj-filters { gap: 6px; }
+      .proj-filter { font-size: 12px; padding: 7px 14px; }
+      .proj-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stats-strip__inner { padding: 0 24px; }
+      .stats-strip__num { font-size: 36px; }
+      .proj-cta__inner { padding: 0 24px; }
+      .footer-cta-bar__inner { padding: 0 24px; flex-direction: column; align-items: flex-start; }
+      .footer__inner { padding: 0 24px; grid-template-columns: 1fr; gap: 32px; }
+      .footer__bottom-inner { padding: 0 24px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      :root { --header-height: 68px; --header-compact: 60px; }
+      .header { padding: 0 16px; }
+      .logo-img { height: 40px; }
+      .mobile-menu { padding: 88px 20px 32px; }
+      .mobile-nav-link { font-size: 16px; padding: 16px 0; }
+      .page-hero__inner { padding: 0 20px; }
+      .page-hero__title { font-size: 30px; letter-spacing: -0.8px; }
+      .page-hero__stats { gap: 24px; }
+      .page-hero__stat-num { font-size: 26px; }
+      .projects-page { padding: 56px 0 72px; }
+      .projects-page__inner { padding: 0 20px; }
+      .proj-grid { grid-template-columns: 1fr; gap: 16px; }
+      .proj-card__img { height: 180px; }
+      .stats-strip { padding: 56px 0; }
+      .stats-strip__inner { grid-template-columns: 1fr 1fr; gap: 24px; padding: 0 20px; }
+      .stats-strip__num { font-size: 32px; }
+      .proj-cta { padding: 64px 0; }
+      .proj-cta__actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .footer__messengers { flex-direction: column; }
+      .float-contact { bottom: 16px; right: 16px; }
+      .float-btn { width: 46px; height: 46px; }
+    }
+    @media (max-width: 360px) {
+      .proj-filters { gap: 4px; }
+      .proj-filter { font-size: 11px; padding: 6px 12px; }
+      .page-hero__stats { flex-direction: column; gap: 16px; }
+    }
+
+    /* AOS-like animation */
+    [data-aos] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    [data-aos].aos-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a href="header_hero.html" class="logo" aria-label="Pro Art Electric, početna">
+      <img src="logo.png" alt="Pro Art Electric" class="logo-img" width="140" height="48">
+    </a>
+    <nav class="nav" role="navigation" aria-label="Glavna navigacija">
+      <!-- Elektroinstalacije -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Elektroinstalacije
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Stambeni objekti</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Stanovi i kuće</span><span class="mega-menu-desc">Kompletne instalacije, rekonstrukcije</span></div>
+              </a>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Razvodni ormani</span><span class="mega-menu-desc">Projektovanje i montaža</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Poslovni objekti</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Poslovni prostori</span><span class="mega-menu-desc">Kancelarije, lokali, magacini</span></div>
+              </a>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Atestna dokumentacija</span><span class="mega-menu-desc">Tehnički pregled i atest</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pametna kuća -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Pametna kuća
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Sistemi</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">KNX automatizacija</span><span class="mega-menu-desc">Međunarodni standard</span></div>
+              </a>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Tuya / Google Home</span><span class="mega-menu-desc">Pametni uređaji i automatizacija</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Funkcije</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Pametna rasveta</span><span class="mega-menu-desc">Dimeri, scene, automatizacija</span></div>
+              </a>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Upravljanje klima</span><span class="mega-menu-desc">Pametni termostati i HVAC</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sigurnost -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Sigurnost
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Video nadzor</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Hikvision kamere</span><span class="mega-menu-desc">IP kamere, NVR sistemi</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Alarmni sistemi</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Jablotron alarm</span><span class="mega-menu-desc">Detekcija provale i požara</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Rasveta -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Rasveta
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">LED rešenja</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Ambijentalna rasveta</span><span class="mega-menu-desc">LED trake, spot, panel</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Spoljašnja rasveta</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Fasadna i dvorišna</span><span class="mega-menu-desc">Energetski efikasna rešenja</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Održavanje -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Održavanje
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu" role="menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Servis</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Hitne intervencije</span><span class="mega-menu-desc">Dostupni 24h za kvarove</span></div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <p class="mega-menu-category">Ugovori</p>
+              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+                <div class="mega-menu-content"><span class="mega-menu-title">Redovno održavanje</span><span class="mega-menu-desc">Godišnji ugovori za firme</span></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="projekti.html" class="nav-link active">Projekti</a>
+      <a href="o-nama.html" class="nav-link">O nama</a>
+      <a href="kontakt.html" class="nav-link">Kontakt</a>
+    </nav>
+    <div class="header-right">
+      <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span>064 643 6538</span>
+      </a>
+      <a href="kontakt.html" class="header-cta">Zakažite obilazak</a>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ MOBILE MENU ═══════════════ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Mobilni meni">
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Elektroinstalacije<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">Stanovi i kuće</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Poslovni prostori</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><span class="mobile-submenu-text">Atestna dokumentacija</span></a>
+    </div>
+  </div>
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Pametna kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">KNX automatizacija</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></div><span class="mobile-submenu-text">Tuya / Google Home</span></a>
+    </div>
+  </div>
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Sigurnost<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Video nadzor</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
+    </div>
+  </div>
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Rasveta<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></svg></div><span class="mobile-submenu-text">Ambijentalna rasveta</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><span class="mobile-submenu-text">Fasadna i dvorišna</span></a>
+    </div>
+  </div>
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Održavanje<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Hitne intervencije 24h</span></a>
+      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg></div><span class="mobile-submenu-text">Redovno održavanje</span></a>
+    </div>
+  </div>
+  <div class="mobile-nav-item"><a href="projekti.html" class="mobile-nav-link" style="color:var(--orange)">Projekti</a></div>
+  <div class="mobile-nav-item"><a href="o-nama.html" class="mobile-nav-link">O nama</a></div>
+  <div class="mobile-nav-item"><a href="kontakt.html" class="mobile-nav-link">Kontakt</a></div>
+  <div class="mobile-menu-footer">
+    <a href="tel:+381646436538" class="mobile-phone">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      064 643 6538
+    </a>
+    <a href="kontakt.html" class="mobile-cta">Zakažite obilazak</a>
+  </div>
+</div>
+
+<!-- ═══════════════ PAGE HERO ═══════════════ -->
+<section class="page-hero" aria-label="Projekti — Pro Art Electric">
+  <div class="page-hero__inner">
+    <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="header_hero.html">Početna</a>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Projekti</span>
+    </nav>
+    <p class="page-hero__label"><span class="page-hero__label-dot"></span>Realizovani projekti</p>
+    <h1 class="page-hero__title">Svaki projekat,<br><span>priča za sebe.</span></h1>
+    <p class="page-hero__sub">Od stambenih rekonstrukcija do poslovnih objekata — svaki projekat izvodimo po istom principu: precizno, uredno i sa pisanom garancijom.</p>
+    <div class="page-hero__stats">
+      <div class="page-hero__stat">
+        <div class="page-hero__stat-num">50+</div>
+        <div class="page-hero__stat-label">Završenih projekata</div>
+      </div>
+      <div class="page-hero__stat">
+        <div class="page-hero__stat-num">4.9</div>
+        <div class="page-hero__stat-label">Prosečna ocena</div>
+      </div>
+      <div class="page-hero__stat">
+        <div class="page-hero__stat-num">100%</div>
+        <div class="page-hero__stat-label">Zadovoljnih klijenata</div>
+      </div>
+      <div class="page-hero__stat">
+        <div class="page-hero__stat-num">2g</div>
+        <div class="page-hero__stat-label">Pisana garancija</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROJECTS GRID ═══════════════ -->
+<section class="projects-page" aria-label="Lista projekata">
+  <div class="projects-page__inner">
+
+    <!-- Filter tabs -->
+    <div class="proj-filters" role="tablist" aria-label="Filtriraj projekte po kategoriji">
+      <button class="proj-filter active" role="tab" aria-selected="true" data-filter="all">Svi projekti</button>
+      <button class="proj-filter" role="tab" aria-selected="false" data-filter="smart">Pametna kuća</button>
+      <button class="proj-filter" role="tab" aria-selected="false" data-filter="elektro">Elektroinstalacije</button>
+      <button class="proj-filter" role="tab" aria-selected="false" data-filter="cctv">Video nadzor</button>
+      <button class="proj-filter" role="tab" aria-selected="false" data-filter="rasveta">Rasveta</button>
+      <button class="proj-filter" role="tab" aria-selected="false" data-filter="odrzavanje">Održavanje</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="proj-grid" id="projGrid">
+
+      <!-- 1: Smart Home -->
+      <a href="kontakt.html" class="proj-card" data-category="smart" aria-label="Projekat: Vila Petrovaradin Smart Home">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #1a2a4a 0%, #0d1a35 50%, #1a2040 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--smart">Pametna kuća</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Vila Petrovaradin — Smart Home komplet</h2>
+          <p class="proj-card__desc">KNX automatizacija, pametna rasveta, upravljanje klima uređajima, alarmni sistem i video nadzor integrisani u jednu aplikaciju.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Petrovaradin
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              280 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">KNX</span>
+              <span class="proj-card__tag">Google Home</span>
+              <span class="proj-card__tag">Alarm</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2: Elektroinstalacije -->
+      <a href="kontakt.html" class="proj-card" data-category="elektro" aria-label="Projekat: Poslovni objekat Liman">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #1e2a1a 0%, #0d1a0d 50%, #1a2520 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--elektro">Elektroinstalacije</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Poslovni objekat Liman — Kompletna instalacija</h2>
+          <p class="proj-card__desc">Projektovanje i izvođenje elektroinstalacija za poslovni prostor. Razvodni ormani, EV punjači, LED rasveta, UPS sistemi.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad, Liman
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              450 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">Poslovni</span>
+              <span class="proj-card__tag">EV punjač</span>
+              <span class="proj-card__tag">LED</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 3: Video nadzor -->
+      <a href="kontakt.html" class="proj-card" data-category="cctv" aria-label="Projekat: Stambena zgrada Detelinara">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #2a1a1a 0%, #1e0d0d 50%, #251a1a 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--cctv">Video nadzor</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Stambena zgrada Detelinara — Video nadzor i alarm</h2>
+          <p class="proj-card__desc">Hikvision IP kamera sistem za 12 stanova, NVR sa 30-dnevnim arhivom, Jablotron alarmni sistem za zajednički prostor.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad, Detelinara
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              12 stanova
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">Hikvision</span>
+              <span class="proj-card__tag">Jablotron</span>
+              <span class="proj-card__tag">NVR</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4: Rasveta -->
+      <a href="kontakt.html" class="proj-card" data-category="rasveta" aria-label="Projekat: Restoran Centar ambijentalna rasveta">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #2a2a0d 0%, #1a1a05 50%, #252510 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--rasveta">Rasveta</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Restoran Centar — Ambijentalna LED rasveta</h2>
+          <p class="proj-card__desc">Projektovanje i montaža ambijentalne LED rasvete za restoran. Dimeri, scene, LED trake i spot rasveta sa automatizacijom.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad, Centar
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2026
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              180 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">LED trake</span>
+              <span class="proj-card__tag">Dimeri</span>
+              <span class="proj-card__tag">Scene</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5: Elektroinstalacije stan -->
+      <a href="kontakt.html" class="proj-card" data-category="elektro" aria-label="Projekat: Rekonstrukcija stana Grbavica">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #1a1a2a 0%, #0d0d1e 50%, #1a1a28 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--elektro">Elektroinstalacije</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Završeno</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Rekonstrukcija stana Grbavica — Kompletna instalacija</h2>
+          <p class="proj-card__desc">Potpuna rekonstrukcija elektroinstalacija u stanu. Novi razvodni orman, podžbukna instalacija, LED rasveta i atestna dokumentacija.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad, Grbavica
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              78 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">Stambeni</span>
+              <span class="proj-card__tag">Rekonstrukcija</span>
+              <span class="proj-card__tag">Atest</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 6: Održavanje -->
+      <a href="kontakt.html" class="proj-card" data-category="odrzavanje" aria-label="Projekat: Ugovor o održavanju Tehnopolis">
+        <div class="proj-card__img">
+          <div class="proj-card__img-bg" style="background: linear-gradient(135deg, #1a2530 0%, #0f1a24 50%, #1a2030 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <span class="proj-card__badge proj-card__badge--odrzavanje">Održavanje</span>
+          <span class="proj-card__status"><span class="proj-card__status-dot"></span>Aktivan ugovor</span>
+        </div>
+        <div class="proj-card__body">
+          <h2 class="proj-card__title">Tehnopolis — Godišnji ugovor o održavanju</h2>
+          <p class="proj-card__desc">Redovno preventivno održavanje elektroinstalacija, hitne intervencije i mesečni tehnički pregledi za poslovni park.</p>
+          <div class="proj-card__meta">
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Novi Sad
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2025–2026
+            </span>
+            <span class="proj-card__meta-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              1200 m²
+            </span>
+          </div>
+          <div class="proj-card__footer">
+            <div class="proj-card__tags">
+              <span class="proj-card__tag">Poslovni</span>
+              <span class="proj-card__tag">Preventivni</span>
+              <span class="proj-card__tag">24h servis</span>
+            </div>
+            <span class="proj-card__cta">Detalji <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- No results message -->
+      <div class="proj-no-results" id="noResults" aria-live="polite">
+        Nema projekata u ovoj kategoriji.
+      </div>
+
+    </div><!-- /proj-grid -->
+  </div>
+</section>
+
+<!-- ═══════════════ STATS STRIP ═══════════════ -->
+<section class="stats-strip" aria-label="Statistike">
+  <div class="stats-strip__inner">
+    <div class="stats-strip__item">
+      <div class="stats-strip__num">50+</div>
+      <div class="stats-strip__label">Završenih projekata<br>od osnivanja</div>
+    </div>
+    <div class="stats-strip__item">
+      <div class="stats-strip__num">5</div>
+      <div class="stats-strip__label">Kategorija usluga<br>pod jednim krovom</div>
+    </div>
+    <div class="stats-strip__item">
+      <div class="stats-strip__num">4.9★</div>
+      <div class="stats-strip__label">Prosečna ocena<br>na Google recenzijama</div>
+    </div>
+    <div class="stats-strip__item">
+      <div class="stats-strip__num">24h</div>
+      <div class="stats-strip__label">Dostupnost za<br>hitne intervencije</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA SECTION ═══════════════ -->
+<section class="proj-cta" aria-label="Poziv na akciju">
+  <div class="proj-cta__inner">
+    <p class="proj-cta__label">Sledeći projekat</p>
+    <h2 class="proj-cta__title">Imate projekat na umu?</h2>
+    <p class="proj-cta__sub">Zakažite besplatan obilazak. Dolazimo, snimamo stanje i dajemo vam precizan predračun bez obaveze. Odgovaramo u roku od 2 sata.</p>
+    <div class="proj-cta__actions">
+      <a href="kontakt.html" class="btn-primary">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Zakažite obilazak
+      </a>
+      <a href="tel:+381646436538" class="btn-ghost">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        064 643 6538
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer" role="contentinfo">
+  <!-- Pre-footer CTA bar -->
+  <div class="footer-cta-bar">
+    <div class="footer-cta-bar__inner">
+      <div class="footer-cta-bar__text" data-footer-animate>
+        <h2 class="footer-cta-bar__title">Spremi za sledeći korak?</h2>
+        <p class="footer-cta-bar__sub">Zakažite besplatan obilazak ili pošaljite upit, odgovaramo u roku od 24h.</p>
+      </div>
+      <div class="footer-cta-bar__actions" data-footer-animate>
+        <a href="tel:+381646436538" class="footer-cta-bar__btn footer-cta-bar__btn--primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Pozovite odmah
+        </a>
+        <a href="kontakt.html" class="footer-cta-bar__btn footer-cta-bar__btn--secondary">
+          Zakažite obilazak
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Main footer body -->
+  <div class="footer__body">
+    <div class="footer__inner">
+      <!-- Col 1: Brand -->
+      <div>
+        <a href="header_hero.html" class="footer__logo" aria-label="Pro Art Electric - početna strana">
+          <div class="footer__logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="footer__logo-text">Pro Art <span>Electric</span></div>
+        </a>
+        <p class="footer__tagline">Elektroinstalacije, pametna kuća i sigurnosni sistemi u Novom Sadu i Vojvodini.</p>
+        <div class="footer__contact-list">
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Vojvode Bojovića 10/3, 21000 Novi Sad</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:+381646436538">064 643 6538</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@proartelectric.rs">info@proartelectric.rs</a>
+          </div>
+        </div>
+        <div class="footer__messengers">
+          <a href="viber://chat?number=+381646436538" class="footer__messenger-btn footer__messenger-btn--viber" aria-label="Kontaktirajte nas na Viberu">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.4 0C5.5 0 1 4.2 1 9.4c0 2.8 1.3 5.4 3.5 7.2v3.9l3.7-2c1 .3 2.1.4 3.2.4 5.9 0 10.4-4.2 10.4-9.4C21.8 4.2 17.3 0 11.4 0zm1 14.3c-.4 0-.8-.1-1.2-.2l-2.6 1.4 1-2.5c-1.5-1-2.5-2.6-2.5-4.4 0-3 2.4-5.4 5.4-5.4s5.4 2.4 5.4 5.4-2.5 5.7-5.5 5.7z"/></svg>
+            Viber
+          </a>
+          <a href="https://wa.me/381646436538" target="_blank" rel="noopener" class="footer__messenger-btn footer__messenger-btn--whatsapp" aria-label="Kontaktirajte nas na WhatsApp-u">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <!-- Col 2: Usluge -->
+      <div>
+        <h3 class="footer__col-title">Usluge</h3>
+        <nav class="footer__nav" aria-label="Usluge">
+          <a href="kontakt.html" class="footer__nav-link">Elektroinstalacije</a>
+          <a href="kontakt.html" class="footer__nav-link">Pametna kuća</a>
+          <a href="kontakt.html" class="footer__nav-link">Video nadzor</a>
+          <a href="kontakt.html" class="footer__nav-link">Alarmni sistemi</a>
+          <a href="kontakt.html" class="footer__nav-link">LED rasveta</a>
+          <a href="kontakt.html" class="footer__nav-link">Održavanje</a>
+        </nav>
+      </div>
+      <!-- Col 3: Kompanija -->
+      <div>
+        <h3 class="footer__col-title">Kompanija</h3>
+        <nav class="footer__nav" aria-label="Kompanija">
+          <a href="o-nama.html" class="footer__nav-link">O nama</a>
+          <a href="projekti.html" class="footer__nav-link">Projekti</a>
+          <a href="kontakt.html" class="footer__nav-link">Kontakt</a>
+        </nav>
+        <div class="footer__hours">
+          <strong>Radno vreme</strong>
+          Pon–Pet: 08:00–17:00<br>
+          Sub: po dogovoru<br>
+          <span style="color: var(--orange); font-weight: 600;">Hitni kvarovi: 24h</span>
+        </div>
+      </div>
+      <!-- Col 4: Zona -->
+      <div>
+        <h3 class="footer__col-title">Zona pokrivanja</h3>
+        <p class="footer__zone-cities">Novi Sad · Vojvodina · Srbija<br>(po dogovoru)</p>
+        <div class="footer__rating">
+          <span class="footer__rating-stars">★★★★★</span>
+          <span class="footer__rating-text"><strong>4.9/5</strong> recenzije</span>
+        </div>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/proartelectric" target="_blank" rel="noopener" class="footer__social-link" aria-label="Pro Art Electric na Facebook-u">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/proartelectric" target="_blank" rel="noopener" class="footer__social-link" aria-label="Pro Art Electric na Instagram-u">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/proartelectric" target="_blank" rel="noopener" class="footer__social-link" aria-label="Pro Art Electric na LinkedIn-u">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer bottom bar -->
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <div class="footer__legal">
+        <span class="footer__legal-name">Branislav Vujasin PR Pro Art Electric</span> &nbsp;·&nbsp;
+        PIB: 115297032 &nbsp;·&nbsp; MB: 68254604 &nbsp;·&nbsp;
+        Vojvode Bojovića 10/3, 21000 Novi Sad
+      </div>
+      <div>
+        <p style="font-size:0.78rem; color:var(--text-muted);">&copy; 2025&ndash;2026 Pro Art Electric. Sva prava zadržana.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Float contact buttons -->
+<div class="float-contact" aria-label="Brzi kontakt">
+  <a href="viber://chat?number=+381646436538" class="float-btn float-btn--viber" aria-label="Kontaktirajte nas na Viberu">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.4 0C5.5 0 1 4.2 1 9.4c0 2.8 1.3 5.4 3.5 7.2v3.9l3.7-2c1 .3 2.1.4 3.2.4 5.9 0 10.4-4.2 10.4-9.4C21.8 4.2 17.3 0 11.4 0zm1 14.3c-.4 0-.8-.1-1.2-.2l-2.6 1.4 1-2.5c-1.5-1-2.5-2.6-2.5-4.4 0-3 2.4-5.4 5.4-5.4s5.4 2.4 5.4 5.4-2.5 5.7-5.5 5.7z"/></svg>
+  </a>
+  <a href="https://wa.me/381646436538" target="_blank" rel="noopener" class="float-btn float-btn--whatsapp" aria-label="Kontaktirajte nas na WhatsApp-u">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ─── Sticky header ────────────────────────────────────────
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // ─── Hamburger / mobile menu ──────────────────────────────
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ─── Mobile accordion ─────────────────────────────────────
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    if (link.querySelector('.mobile-chevron')) {
+      link.addEventListener('click', () => {
+        const item = link.closest('.mobile-nav-item');
+        const wasExpanded = item.classList.contains('expanded');
+        document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('expanded'));
+        if (!wasExpanded) item.classList.add('expanded');
+      });
+    }
+  });
+
+  // ─── Project filter ───────────────────────────────────────
+  const filters = document.querySelectorAll('.proj-filter');
+  const cards = document.querySelectorAll('.proj-card');
+  const noResults = document.getElementById('noResults');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filter = btn.dataset.filter;
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+        if (match) visibleCount++;
+      });
+      noResults.classList.toggle('visible', visibleCount === 0);
+    });
+  });
+
+  // ─── Intersection Observer — card animations ──────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => observer.observe(card));
+
+  // ─── Stats strip animation ────────────────────────────────
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        statsObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.stats-strip__item').forEach(el => statsObs.observe(el));
+
+  // ─── Footer animation ─────────────────────────────────────
+  const footerObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        footerObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-footer-animate]').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    footerObs.observe(el);
+  });
+
+  // ─── AOS-like animation ───────────────────────────────────
+  const aosObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('aos-visible');
+        aosObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('[data-aos]').forEach(el => aosObs.observe(el));
+});
+</script>
+
+</body>
+</html>
