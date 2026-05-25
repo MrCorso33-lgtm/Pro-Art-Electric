@@ -1339,7 +1339,7 @@
 
     <!-- Right: Phone + CTA + Hamburger -->
     <div class="header-right">
-      <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas: 060 123 4567">
+      <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas: 064 643 6538">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         <span>064 643 6538</span>
       </a>
@@ -1419,7 +1419,7 @@
   <div class="mobile-menu-footer">
     <a href="tel:+381646436538" class="mobile-phone">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-      060 123 4567
+      064 643 6538
     </a>
     <a href="kontakt.html" class="mobile-cta">Zakažite obilazak</a>
   </div>
@@ -1521,9 +1521,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Zakažite obilazak
       </a>
-      <a href="tel:0601234567" class="path-card__phone">
+      <a href="tel:+381646436538" class="path-card__phone">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        060 123 4567
+        064 643 6538
       </a>
     </article>
 
@@ -2426,61 +2426,108 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Bottom CTA bar */
   .trust__cta-bar {
     margin-top: 72px;
-    background: var(--teget);
+    background: linear-gradient(135deg, #0d1e2e 0%, var(--teget) 60%, #0a1520 100%);
     border-radius: 20px;
-    padding: 48px 56px;
-    display: flex;
+    padding: 52px 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 32px;
+    gap: 48px;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(237,144,7,0.18);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
   }
   .trust__cta-bar::before {
     content: '';
     position: absolute;
-    right: -80px; top: -80px;
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, rgba(237,144,7,0.12) 0%, transparent 65%);
+    right: -60px; top: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(237,144,7,0.13) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .trust__cta-bar::after {
+    content: '';
+    position: absolute;
+    left: -40px; bottom: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 65%);
     pointer-events: none;
   }
   .trust__cta-text {
     position: relative; z-index: 1;
   }
+  .trust__cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(237,144,7,0.12);
+    border: 1px solid rgba(237,144,7,0.28);
+    color: var(--orange);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .trust__cta-badge svg { width: 11px; height: 11px; fill: var(--orange); flex-shrink: 0; }
   .trust__cta-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-size: clamp(1.55rem, 2.4vw, 2.1rem);
     font-weight: 700;
     color: #fff;
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .trust__cta-title em {
+    font-style: normal;
+    color: var(--orange);
   }
   .trust__cta-desc {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.62);
-    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+    max-width: 500px;
   }
   .trust__cta-actions {
     display: flex;
+    flex-direction: column;
     gap: 12px;
     flex-shrink: 0;
     position: relative; z-index: 1;
+    min-width: 230px;
+  }
+  .trust__cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.92rem;
+  }
+  .trust__cta-hint {
+    text-align: center;
+    font-size: 0.73rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+    letter-spacing: 0.2px;
   }
 
   /* Responsive */
   @media (max-width: 960px) {
     .trust__stats { grid-template-columns: repeat(2, 1fr); }
     .trust__body { grid-template-columns: 1fr; gap: 48px; }
-    .trust__cta-bar { flex-direction: column; text-align: center; padding: 40px 32px; }
-    .trust__cta-actions { justify-content: center; }
+    .trust__cta-bar { grid-template-columns: 1fr; text-align: center; padding: 44px 36px; gap: 32px; }
+    .trust__cta-desc { max-width: 100%; }
+    .trust__cta-actions { min-width: unset; width: 100%; max-width: 320px; margin: 0 auto; }
   }
   @media (max-width: 560px) {
     .trust__stats { grid-template-columns: repeat(2, 1fr); gap: 1px; }
     .trust__stat { padding: 28px 20px; }
     .trust { padding: 72px 20px; }
-    .trust__cta-bar { padding: 32px 24px; }
-    .trust__cta-actions { flex-direction: column; width: 100%; }
-    .trust__cta-actions .btn { width: 100%; justify-content: center; }
+    .trust__cta-bar { padding: 36px 24px; }
+    .trust__cta-actions { max-width: 100%; }
   }
 </style>
 
@@ -2615,8 +2662,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Bottom CTA bar -->
     <div class="trust__cta-bar" data-aos>
       <div class="trust__cta-text">
-        <div class="trust__cta-title">Spremni da krenemo , kada ste vi.</div>
-        <div class="trust__cta-desc">Besplatan obilazak i procena bez obaveze. Odgovaramo u roku od 2 sata radnim danima.</div>
+        <div class="trust__cta-badge">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Besplatan obilazak
+        </div>
+        <div class="trust__cta-title">Spremni kada <em>ste vi.</em></div>
+        <div class="trust__cta-desc">Dolazimo, snimamo stanje i dajemo vam precizan predračun bez obaveze. Odgovaramo u roku od 2 sata tokom radnog vremena.</div>
       </div>
       <div class="trust__cta-actions">
         <a href="kontakt.html" class="btn btn--primary">
@@ -2625,8 +2676,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
         <a href="tel:+381646436538" class="btn btn--ghost-light">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          060 123 4567
+          064 643 6538
         </a>
+        <div class="trust__cta-hint">Pon–Pet 08:00–17:00 · Hitni kvarovi 24h</div>
       </div>
     </div>
 
