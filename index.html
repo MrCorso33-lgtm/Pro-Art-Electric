@@ -5684,6 +5684,423 @@ a.footer__contact-item:hover { color: rgba(255,255,255,0.9); }
     transition: none !important;
   }
 }
+
+
+  /* ===== ZONE CHECK MODAL ===== */
+/* ===== ZONE CHECK MODAL ===== */
+.zone-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 15, 25, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.zone-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.zone-modal {
+  background: linear-gradient(145deg, #0d1e2e 0%, #0a1520 100%);
+  border: 1px solid rgba(237,144,7,0.15);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+.zone-modal-overlay.is-open .zone-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Decorative top glow */
+.zone-modal::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 120px;
+  background: radial-gradient(ellipse, rgba(237,144,7,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.zone-modal__header {
+  padding: 28px 28px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.zone-modal__icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(237,144,7,0.2), rgba(237,144,7,0.08));
+  border: 1px solid rgba(237,144,7,0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--orange, #ed9007);
+}
+.zone-modal__close {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.zone-modal__close:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.zone-modal__body {
+  padding: 20px 28px 28px;
+}
+.zone-modal__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 14px 0 6px;
+  line-height: 1.3;
+}
+.zone-modal__subtitle {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* Search input */
+.zone-search-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+.zone-search-wrap svg.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.3);
+  pointer-events: none;
+  transition: color 0.2s;
+}
+.zone-search-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 48px 14px 44px;
+  font-size: 1rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.zone-search-input::placeholder {
+  color: rgba(255,255,255,0.28);
+}
+.zone-search-input:focus {
+  border-color: rgba(237,144,7,0.6);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 3px rgba(237,144,7,0.1);
+}
+.zone-search-input:focus + .search-icon,
+.zone-search-wrap:focus-within svg.search-icon {
+  color: var(--orange, #ed9007);
+}
+.zone-search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.2s;
+}
+.zone-search-clear:hover { background: rgba(255,255,255,0.18); }
+.zone-search-clear.visible { display: flex; }
+
+/* Autocomplete dropdown */
+.zone-autocomplete {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #0d1e2e;
+  border: 1px solid rgba(237,144,7,0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+.zone-autocomplete.visible { display: block; }
+.zone-autocomplete-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.zone-autocomplete-item:last-child { border-bottom: none; }
+.zone-autocomplete-item:hover, .zone-autocomplete-item.active {
+  background: rgba(237,144,7,0.1);
+  color: #fff;
+}
+.zone-autocomplete-item .zone-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.zone-dot--1 { background: #ed9007; }
+.zone-dot--2 { background: #f0c040; }
+.zone-dot--3 { background: rgba(255,255,255,0.35); }
+
+/* Zone pills (quick select) */
+.zone-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.zone-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.zone-pill:hover {
+  background: rgba(237,144,7,0.12);
+  border-color: rgba(237,144,7,0.3);
+  color: var(--orange, #ed9007);
+}
+
+/* Check button */
+.zone-check-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ed9007, #f0a820);
+  color: #0a1520;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.zone-check-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(237,144,7,0.35);
+}
+.zone-check-btn:active { transform: translateY(0); }
+.zone-check-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Result card */
+.zone-result {
+  display: none;
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 16px;
+  animation: zoneResultIn 0.4s cubic-bezier(0.34,1.3,0.64,1) forwards;
+}
+.zone-result.visible { display: block; }
+
+@keyframes zoneResultIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.zone-result--1 {
+  background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.05));
+  border: 1px solid rgba(34,197,94,0.25);
+}
+.zone-result--2 {
+  background: linear-gradient(135deg, rgba(237,144,7,0.12), rgba(237,144,7,0.05));
+  border: 1px solid rgba(237,144,7,0.25);
+}
+.zone-result--3 {
+  background: linear-gradient(135deg, rgba(148,163,184,0.1), rgba(148,163,184,0.04));
+  border: 1px solid rgba(148,163,184,0.2);
+}
+.zone-result--unknown {
+  background: linear-gradient(135deg, rgba(100,116,139,0.1), rgba(100,116,139,0.04));
+  border: 1px solid rgba(100,116,139,0.2);
+}
+
+.zone-result__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.zone-result__badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+.zone-result--1 .zone-result__badge { background: rgba(34,197,94,0.15); }
+.zone-result--2 .zone-result__badge { background: rgba(237,144,7,0.15); }
+.zone-result--3 .zone-result__badge, .zone-result--unknown .zone-result__badge { background: rgba(148,163,184,0.1); }
+
+.zone-result__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.zone-result--1 .zone-result__label { color: #4ade80; }
+.zone-result--2 .zone-result__label { color: #ed9007; }
+.zone-result--3 .zone-result__label, .zone-result--unknown .zone-result__label { color: rgba(255,255,255,0.4); }
+
+.zone-result__city {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+.zone-result__desc {
+  font-size: 0.87rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.zone-result__meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.zone-result__tag {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+.zone-result--1 .zone-result__tag { background: rgba(34,197,94,0.15); color: #4ade80; }
+.zone-result--2 .zone-result__tag { background: rgba(237,144,7,0.15); color: #f0c040; }
+.zone-result--3 .zone-result__tag, .zone-result--unknown .zone-result__tag { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+
+.zone-result__cta {
+  display: flex;
+  gap: 8px;
+}
+.zone-result__cta a {
+  flex: 1;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.zone-result__cta .btn-primary-sm {
+  background: var(--orange, #ed9007);
+  color: #0a1520;
+}
+.zone-result__cta .btn-primary-sm:hover {
+  background: #f0a820;
+  transform: translateY(-1px);
+}
+.zone-result__cta .btn-ghost-sm {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.zone-result__cta .btn-ghost-sm:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* Divider */
+.zone-modal__divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 0 28px;
+}
+
+/* Footer hint */
+.zone-modal__footer {
+  padding: 14px 28px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.25);
+}
+.zone-modal__footer svg { flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 560px) {
+  .zone-modal {
+    border-radius: 16px;
+    max-width: 100%;
+  }
+  .zone-modal__header { padding: 20px 20px 0; }
+  .zone-modal__body { padding: 16px 20px 20px; }
+  .zone-modal__divider { margin: 0 20px; }
+  .zone-modal__footer { padding: 12px 20px 16px; }
+  .zone-result__cta { flex-direction: column; }
+  .zone-modal__title { font-size: 1.15rem; }
+}
 </style>
 
 <script>
@@ -5703,5 +6120,389 @@ a.footer__contact-item:hover { color: rgba(255,255,255,0.9); }
 </script>
 
 
+
+
+<!-- Zone Check Modal -->
+<div class="zone-modal-overlay" id="zoneModal" role="dialog" aria-modal="true" aria-labelledby="zoneModalTitle">
+  <div class="zone-modal">
+    <div class="zone-modal__header">
+      <div class="zone-modal__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <button class="zone-modal__close" id="zoneModalClose" aria-label="Zatvori">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="zone-modal__body">
+      <h2 class="zone-modal__title" id="zoneModalTitle">Proverite dostupnost<br>za Vašu lokaciju</h2>
+      <p class="zone-modal__subtitle">Unesite grad ili opštinu — odmah ćemo vam reći da li dolazimo i kada.</p>
+
+      <div class="zone-search-wrap">
+        <input
+          type="text"
+          class="zone-search-input"
+          id="zoneSearchInput"
+          placeholder="npr. Novi Sad, Zrenjanin, Beograd..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <button class="zone-search-clear" id="zoneSearchClear" aria-label="Obriši unos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <div class="zone-autocomplete" id="zoneAutocomplete"></div>
+      </div>
+
+      <div class="zone-pills">
+        <span class="zone-pill" data-city="Novi Sad">📍 Novi Sad</span>
+        <span class="zone-pill" data-city="Futog">Futog</span>
+        <span class="zone-pill" data-city="Petrovaradin">Petrovaradin</span>
+        <span class="zone-pill" data-city="Subotica">Subotica</span>
+        <span class="zone-pill" data-city="Zrenjanin">Zrenjanin</span>
+        <span class="zone-pill" data-city="Beograd">Beograd</span>
+      </div>
+
+      <button class="zone-check-btn" id="zoneCheckBtn" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Proverite dostupnost
+      </button>
+
+      <div class="zone-result" id="zoneResult"></div>
+    </div>
+
+    <div class="zone-modal__divider"></div>
+    <div class="zone-modal__footer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      Proveravamo lokaciju na osnovu naše zone pokrivanja. Bez GPS-a, bez praćenja.
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ===== ZONE DATA =====
+  const ZONES = {
+    1: {
+      cities: [
+        'novi sad','liman','satelit','detelinara','sremska kamenica','petrovaradin',
+        'futog','kac','becej','vrbas','temerin','backi jarak','stepanovicevo',
+        'rumenka','kisac','veternik','cenej','budisava','koviljski rit','kovil',
+        'titel','gardinovci','lok','vilovo','mosoric','curug','zabalj','sirig',
+        'parage','bukovac','ledinci','stari ledinci','popovica','sremska mitrovica',
+        'indjija','stara pazova','nova pazova','backa palanka','backi petrovac',
+        'srbobran','zmajevo','turija','mladenovo','pivnice','despotovo','gajdobra',
+        'obrovac','silbas','tovariševo','nova gajdobra'
+      ],
+      label: 'Primarno područje',
+      emoji: '⚡',
+      badge: 'BRZI ODZIV',
+      desc: 'Odlično! Pokrivamo ovu lokaciju kao primarno područje. Dolazimo u roku od 24h za hitne intervencije, a obilasci se zakazuju 3–5 dana unapred.',
+      tags: ['Hitne intervencije 24h', 'Besplatan obilazak', 'Brzi odziv'],
+      cls: 'zone-result--1',
+      ctaPrimary: { text: 'Zakažite obilazak', href: 'kontakt.html' },
+      ctaGhost: { text: 'Pozovite odmah', href: 'tel:+381646436538' }
+    },
+    2: {
+      cities: [
+        'subotica','senta','ada','kanjiza','zrenjanin','pancevo','sombor','kikinda',
+        'ruma','sid','backa topola','mali idjos','bajmok','palic','horgos',
+        'novi knezevac','mokrin','zitiste','nova crnja','melenci','mihajlovo',
+        'lazarevo','ečka','ecka','lukicevo','elemir','aradac','taras','jankov most',
+        'belo blato','cestereg','torak','uzdin','sakule','banatski karlovac',
+        'alibunar','vladimirovci','nikolinci','jabuka','omoljica','banatsko novo selo',
+        'glogonj','starčevo','starcevo','kacevo','dolovo','ivanovo','deliblato',
+        'kovin','mramorak','dubovac','skorenovac','malo crnice','bela crkva',
+        'vrsac','gudurica','grebenac','zagajica','orešac','oresac','mesic',
+        'surduk','belegis','krcedin','novi slankamen','stari slankamen','hrtkovci',
+        'nikinci','platičevo','platicevo','pecinci','asanja','kupinovo','ogar',
+        'progara','boljevci','surčin','surcin','jakovo','dobanovci','ugrinovci',
+        'batajnica','zemun','borca','ovca','padinska skela','krnjaca','vinča','vinca',
+        'grocka','begaljica','brestovik','vrčin','vrcin','leštane','lestane',
+        'kaluđerica','kaludjerica','ripanj','pinosava','zuce','rakovica','lazarevac',
+        'barajevo','sopot','mladenovac','obrenovac','ub','lajkovac','mionica',
+        'valjevo','sabac','sremska mitrovica','šabac','sabac','bogatic','vladimirci',
+        'koceljeva','osecina','ljubovija','bajina basta','uzice','cacak','gornji milanovac',
+        'kragujevac','jagodina','paracin','cuprija','svilajnac','despotovac',
+        'zajecar','bor','negotin','kladovo','majdanpek','kucevo','petrovac na mlavi',
+        'pozarevac','smederevo','smederevska palanka','velika plana','markovac',
+        'aranđelovac','arandjelovac','topola','krusevac','aleksandrovac','vrnjacka banja',
+        'trstenik','brus','blace','prokuplje','leskovac','vranje','bujanovac',
+        'presevo','medvedja','surdulica','vlasotince','crna trava','bosilegrad',
+        'nis','niš','aleksinac','svrljig','gadzin han','gadžin han','merosina',
+        'doljevac','razanj','sokobanja','knjazevac','pirot','babusnica','bela palanka',
+        'dimitrovgrad','novi pazar','tutin','raska','vrh','kopaonik','kursumlija',
+        'lebane','bojnik','medvedja','jablanica','pcinj','pcinja'
+      ],
+      label: 'Vojvodina i okolina',
+      emoji: '🗺️',
+      badge: 'PROJEKTNI RADOVI',
+      desc: 'Pokrivamo ovu lokaciju za projektne radove i specijalizovane sisteme (pametna kuća, video nadzor, alarmni sistemi). Dolazimo po dogovoru.',
+      tags: ['Projektni radovi', 'Pametna kuća', 'Po dogovoru'],
+      cls: 'zone-result--2',
+      ctaPrimary: { text: 'Pošaljite upit', href: 'kontakt.html' },
+      ctaGhost: { text: 'Pozovite nas', href: 'tel:+381646436538' }
+    }
+  };
+
+  // Normalize text for comparison
+  function norm(s) {
+    return s.toLowerCase()
+      .replace(/š/g,'s').replace(/đ/g,'dj').replace(/ž/g,'z')
+      .replace(/č/g,'c').replace(/ć/g,'c')
+      .replace(/Š/g,'s').replace(/Đ/g,'dj').replace(/Ž/g,'z')
+      .replace(/Č/g,'c').replace(/Ć/g,'c')
+      .trim();
+  }
+
+  function findZone(city) {
+    const n = norm(city);
+    if (!n) return null;
+    for (const c of ZONES[1].cities) { if (norm(c) === n || norm(c).includes(n) || n.includes(norm(c))) return { zone: 1, matched: c }; }
+    for (const c of ZONES[2].cities) { if (norm(c) === n || norm(c).includes(n) || n.includes(norm(c))) return { zone: 2, matched: c }; }
+    return { zone: 0, matched: city };
+  }
+
+  function getAllCities() {
+    const all = [];
+    for (const c of ZONES[1].cities) all.push({ name: c, zone: 1 });
+    for (const c of ZONES[2].cities) all.push({ name: c, zone: 2 });
+    return all;
+  }
+
+  function capitalize(s) {
+    return s.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
+
+  // ===== DOM REFS =====
+  const overlay   = document.getElementById('zoneModal');
+  const closeBtn  = document.getElementById('zoneModalClose');
+  const input     = document.getElementById('zoneSearchInput');
+  const clearBtn  = document.getElementById('zoneSearchClear');
+  const autocomplete = document.getElementById('zoneAutocomplete');
+  const checkBtn  = document.getElementById('zoneCheckBtn');
+  const result    = document.getElementById('zoneResult');
+  const pills     = document.querySelectorAll('.zone-pill');
+  const openTrigger = document.querySelector('.zone__cta');
+
+  if (!overlay) return;
+
+  // ===== OPEN / CLOSE =====
+  function openModal() {
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 350);
+  }
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(resetModal, 300);
+  }
+  function resetModal() {
+    input.value = '';
+    clearBtn.classList.remove('visible');
+    autocomplete.classList.remove('visible');
+    autocomplete.innerHTML = '';
+    result.classList.remove('visible');
+    result.innerHTML = '';
+    result.className = 'zone-result';
+    checkBtn.disabled = true;
+  }
+
+  if (openTrigger) {
+    openTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+
+  // ===== AUTOCOMPLETE =====
+  let acIndex = -1;
+
+  input.addEventListener('input', function() {
+    const val = this.value.trim();
+    clearBtn.classList.toggle('visible', val.length > 0);
+    checkBtn.disabled = val.length < 2;
+    result.classList.remove('visible');
+
+    if (val.length < 2) {
+      autocomplete.classList.remove('visible');
+      return;
+    }
+    const nv = norm(val);
+    const matches = getAllCities()
+      .filter(c => norm(c.name).includes(nv))
+      .slice(0, 7);
+
+    if (matches.length === 0) {
+      autocomplete.classList.remove('visible');
+      return;
+    }
+    acIndex = -1;
+    autocomplete.innerHTML = matches.map((c, i) =>
+      `<div class="zone-autocomplete-item" data-city="${c.name}" data-idx="${i}">
+        <span class="zone-dot zone-dot--${c.zone}"></span>
+        ${capitalize(c.name)}
+      </div>`
+    ).join('');
+    autocomplete.classList.add('visible');
+
+    autocomplete.querySelectorAll('.zone-autocomplete-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const city = capitalize(this.dataset.city);
+        input.value = city;
+        autocomplete.classList.remove('visible');
+        clearBtn.classList.add('visible');
+        checkBtn.disabled = false;
+        showResult(city);
+      });
+    });
+  });
+
+  input.addEventListener('keydown', function(e) {
+    const items = autocomplete.querySelectorAll('.zone-autocomplete-item');
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      acIndex = Math.min(acIndex + 1, items.length - 1);
+      items.forEach((it, i) => it.classList.toggle('active', i === acIndex));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      acIndex = Math.max(acIndex - 1, -1);
+      items.forEach((it, i) => it.classList.toggle('active', i === acIndex));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (acIndex >= 0 && items[acIndex]) {
+        items[acIndex].click();
+      } else if (input.value.trim().length >= 2) {
+        checkBtn.click();
+      }
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.zone-search-wrap')) {
+      autocomplete.classList.remove('visible');
+    }
+  });
+
+  clearBtn.addEventListener('click', function() {
+    input.value = '';
+    clearBtn.classList.remove('visible');
+    autocomplete.classList.remove('visible');
+    checkBtn.disabled = true;
+    result.classList.remove('visible');
+    input.focus();
+  });
+
+  // ===== PILLS =====
+  pills.forEach(pill => {
+    pill.addEventListener('click', function() {
+      const city = this.dataset.city;
+      input.value = city;
+      clearBtn.classList.add('visible');
+      checkBtn.disabled = false;
+      autocomplete.classList.remove('visible');
+      showResult(city);
+    });
+  });
+
+  // ===== CHECK BUTTON =====
+  checkBtn.addEventListener('click', function() {
+    const city = input.value.trim();
+    if (city.length < 2) return;
+    autocomplete.classList.remove('visible');
+    showResult(city);
+  });
+
+  // ===== SHOW RESULT =====
+  function showResult(city) {
+    const found = findZone(city);
+    result.className = 'zone-result';
+    result.innerHTML = '';
+
+    if (!found) return;
+
+    let html = '';
+    if (found.zone === 1) {
+      const z = ZONES[1];
+      html = `
+        <div class="zone-result__top">
+          <div class="zone-result__badge">${z.emoji}</div>
+          <div>
+            <div class="zone-result__label">${z.badge}</div>
+            <div class="zone-result__city">${capitalize(city)}</div>
+          </div>
+        </div>
+        <p class="zone-result__desc">${z.desc}</p>
+        <div class="zone-result__meta">
+          ${z.tags.map(t => `<span class="zone-result__tag">${t}</span>`).join('')}
+        </div>
+        <div class="zone-result__cta">
+          <a href="${z.ctaPrimary.href}" class="btn-primary-sm">${z.ctaPrimary.text}</a>
+          <a href="${z.ctaGhost.href}" class="btn-ghost-sm">${z.ctaGhost.text}</a>
+        </div>`;
+      result.classList.add('zone-result--1');
+    } else if (found.zone === 2) {
+      const z = ZONES[2];
+      html = `
+        <div class="zone-result__top">
+          <div class="zone-result__badge">${z.emoji}</div>
+          <div>
+            <div class="zone-result__label">${z.badge}</div>
+            <div class="zone-result__city">${capitalize(city)}</div>
+          </div>
+        </div>
+        <p class="zone-result__desc">${z.desc}</p>
+        <div class="zone-result__meta">
+          ${z.tags.map(t => `<span class="zone-result__tag">${t}</span>`).join('')}
+        </div>
+        <div class="zone-result__cta">
+          <a href="${z.ctaPrimary.href}" class="btn-primary-sm">${z.ctaPrimary.text}</a>
+          <a href="${z.ctaGhost.href}" class="btn-ghost-sm">${z.ctaGhost.text}</a>
+        </div>`;
+      result.classList.add('zone-result--2');
+    } else {
+      html = `
+        <div class="zone-result__top">
+          <div class="zone-result__badge">🔍</div>
+          <div>
+            <div class="zone-result__label">NIJE U LISTI</div>
+            <div class="zone-result__city">${capitalize(city)}</div>
+          </div>
+        </div>
+        <p class="zone-result__desc">Nismo pronašli ovu lokaciju u našoj bazi. Za veće projekte dolazimo i van naše zone — pošaljite upit i javićemo vam se u roku od 24h.</p>
+        <div class="zone-result__cta">
+          <a href="kontakt.html" class="btn-primary-sm">Pošaljite upit</a>
+          <a href="tel:+381646436538" class="btn-ghost-sm">Pozovite nas</a>
+        </div>`;
+      result.classList.add('zone-result--unknown');
+    }
+
+    result.innerHTML = html;
+    result.classList.add('visible');
+  }
+})();
+</script>
 </body>
 </html>
