@@ -4117,8 +4117,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </svg>
             </div>
             <div class="zone__item-text">
-              <strong>Novi Sad i okolina</strong>
-              <span>Liman, Satelit, Detelinara, Sremska Kamenica, Petrovaradin, Futog, Kać, Bečej, Vrbas, Temerin</span>
+              <strong>Novi Sad i Južno-bački okrug</strong>
+              <span>Petrovaradin, Sremska Kamenica, Futog, Veternik, Temerin, Bečej, Vrbas, Bačka Palanka, Srbobran, Titel, Bački Petrovac, Beočin, Sremski Karlovci i sva prigradska naselja</span>
             </div>
             <span class="zone__item-badge zone__item-badge--green">Brzi odziv</span>
           </li>
@@ -4130,8 +4130,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </svg>
             </div>
             <div class="zone__item-text">
-              <strong>Vojvodina</strong>
-              <span>Subotica, Zrenjanin, Pančevo, Sombor, Kikinda, Ruma, Sremska Mitrovica i ostali gradovi</span>
+              <strong>Sremski okrug</strong>
+              <span>Sremska Mitrovica, Ruma, Inđija, Stara Pazova, Pećinci, Irig, Šid i sva naselja Sremskog okruga</span>
             </div>
             <span class="zone__item-badge">Projektni radovi</span>
           </li>
@@ -4143,8 +4143,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </svg>
             </div>
             <div class="zone__item-text">
-              <strong>Ostala Srbija</strong>
-              <span>Beograd, Niš, Kragujevac i ostali gradovi, za veće projekte pametnih kuća i poslovnih objekata</span>
+              <strong>Beograd</strong>
+              <span>Beograd i okolina, za veće projekte pametnih kuća, video nadzora i poslovnih objekata</span>
             </div>
             <span class="zone__item-badge">Po dogovoru</span>
           </li>
@@ -5105,7 +5105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Pro Art <span>Electric</span>
           </div>
         </a>
-        <p class="footer__tagline">Elektroinstalacije, pametna kuća i sigurnosni sistemi, Novi Sad i Vojvodina.</p>
+        <p class="footer__tagline">Elektroinstalacije, pametna kuća i sigurnosni sistemi — Novi Sad, Južno-bački okrug, Sremski okrug i Beograd.</p>
 
         <!-- Contact info -->
         <address class="footer__contact">
@@ -5127,7 +5127,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
-            Novi Sad, Vojvodina, Srbija
+            Novi Sad, Vojvodina
           </div>
         </address>
 
@@ -5197,7 +5197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Col 4: Trust + Social -->
       <div class="footer__col">
         <h3 class="footer__col-title">Zona pokrivanja</h3>
-        <p class="footer__zone-text">Novi Sad &middot; Vojvodina &middot; Srbija (po dogovoru)</p>
+        <p class="footer__zone-text">Novi Sad &middot; Južno-bački okrug &middot; Sremski okrug &middot; Beograd</p>
 
         <!-- Review summary -->
         <div class="footer__review-summary">
@@ -6198,14 +6198,107 @@ a.footer__contact-item:hover { color: rgba(255,255,255,0.9); }
   const ZONES = {
     1: {
       cities: [
-        'novi sad','liman','satelit','detelinara','sremska kamenica','petrovaradin',
-        'futog','kac','becej','vrbas','temerin','backi jarak','stepanovicevo',
-        'rumenka','kisac','veternik','cenej','budisava','koviljski rit','kovil',
-        'titel','gardinovci','lok','vilovo','mosoric','curug','zabalj','sirig',
-        'parage','bukovac','ledinci','stari ledinci','popovica','sremska mitrovica',
-        'indjija','stara pazova','nova pazova','backa palanka','backi petrovac',
-        'srbobran','zmajevo','turija','mladenovo','pivnice','despotovo','gajdobra',
-        'obrovac','silbas','tovariševo','nova gajdobra'
+                // Zona 1 - Južno-bački okrug + Beograd
+        'novi sad',
+        'begeč',
+        'budisava',
+        'veternik',
+        'kać',
+        'kisač',
+        'tankosićevo',
+        'kovilj',
+        'rumenka',
+        'stepanovićevo',
+        'futog',
+        'čenej',
+        'petrovaradin',
+        'bukovac',
+        'ledinci',
+        'sremska kamenica',
+        'stari ledinci',
+        'bač',
+        'bačko novo selo',
+        'bođani',
+        'vajska',
+        'plavna',
+        'selenča',
+        'mali bač',
+        'tomićevo',
+        'bačka palanka',
+        'vizić',
+        'gajdobra',
+        'despotovo',
+        'karađorđevo',
+        'mladenovo',
+        'neštin',
+        'nova gajdobra',
+        'obrovac',
+        'parage',
+        'pivnice',
+        'silbaš',
+        'tovariševo',
+        'čelarevo',
+        'bački petrovac',
+        'gložan',
+        'kulpin',
+        'maglić',
+        'beočin',
+        'banoštor',
+        'grabovo',
+        'lug',
+        'rakovac',
+        'sviloš',
+        'susek',
+        'čerević',
+        'bečej',
+        'bačko gradište',
+        'bačko petrovo selo',
+        'mileševo',
+        'radičević',
+        'vrbas',
+        'bačko dobro polje',
+        'zmajevo',
+        'kosančić',
+        'kucura',
+        'ravno selo',
+        'savino selo',
+        'žabalj',
+        'gospođinci',
+        'đurđevo',
+        'čurug',
+        'srbobran',
+        'nadalj',
+        'turija',
+        'sremski karlovci',
+        'temerin',
+        'bački jarak',
+        'sirig',
+        'kamendin',
+        'titel',
+        'vilovo',
+        'gardinovci',
+        'lok',
+        'mošorin',
+        'šajkaš',
+        'beograd',
+        'zemun',
+        'novi beograd',
+        'surčin',
+        'batajnica',
+        'borča',
+        'ovča',
+        'padinska skela',
+        'krnjača',
+        'vinča',
+        'grocka',
+        'rakovica',
+        'čukarica',
+        'voždovac',
+        'zvezdara',
+        'palilula',
+        'savski venac',
+        'stari grad',
+        'vračar'
       ],
       label: 'Primarno područje',
       emoji: '⚡',
@@ -6218,36 +6311,119 @@ a.footer__contact-item:hover { color: rgba(255,255,255,0.9); }
     },
     2: {
       cities: [
-        'subotica','senta','ada','kanjiza','zrenjanin','pancevo','sombor','kikinda',
-        'ruma','sid','backa topola','mali idjos','bajmok','palic','horgos',
-        'novi knezevac','mokrin','zitiste','nova crnja','melenci','mihajlovo',
-        'lazarevo','ečka','ecka','lukicevo','elemir','aradac','taras','jankov most',
-        'belo blato','cestereg','torak','uzdin','sakule','banatski karlovac',
-        'alibunar','vladimirovci','nikolinci','jabuka','omoljica','banatsko novo selo',
-        'glogonj','starčevo','starcevo','kacevo','dolovo','ivanovo','deliblato',
-        'kovin','mramorak','dubovac','skorenovac','malo crnice','bela crkva',
-        'vrsac','gudurica','grebenac','zagajica','orešac','oresac','mesic',
-        'surduk','belegis','krcedin','novi slankamen','stari slankamen','hrtkovci',
-        'nikinci','platičevo','platicevo','pecinci','asanja','kupinovo','ogar',
-        'progara','boljevci','surčin','surcin','jakovo','dobanovci','ugrinovci',
-        'batajnica','zemun','borca','ovca','padinska skela','krnjaca','vinča','vinca',
-        'grocka','begaljica','brestovik','vrčin','vrcin','leštane','lestane',
-        'kaluđerica','kaludjerica','ripanj','pinosava','zuce','rakovica','lazarevac',
-        'barajevo','sopot','mladenovac','obrenovac','ub','lajkovac','mionica',
-        'valjevo','sabac','sremska mitrovica','šabac','sabac','bogatic','vladimirci',
-        'koceljeva','osecina','ljubovija','bajina basta','uzice','cacak','gornji milanovac',
-        'kragujevac','jagodina','paracin','cuprija','svilajnac','despotovac',
-        'zajecar','bor','negotin','kladovo','majdanpek','kucevo','petrovac na mlavi',
-        'pozarevac','smederevo','smederevska palanka','velika plana','markovac',
-        'aranđelovac','arandjelovac','topola','krusevac','aleksandrovac','vrnjacka banja',
-        'trstenik','brus','blace','prokuplje','leskovac','vranje','bujanovac',
-        'presevo','medvedja','surdulica','vlasotince','crna trava','bosilegrad',
-        'nis','niš','aleksinac','svrljig','gadzin han','gadžin han','merosina',
-        'doljevac','razanj','sokobanja','knjazevac','pirot','babusnica','bela palanka',
-        'dimitrovgrad','novi pazar','tutin','raska','vrh','kopaonik','kursumlija',
-        'lebane','bojnik','medvedja','jablanica','pcinj','pcinja'
+                // Zona 2 - Sremski okrug
+        'sremska mitrovica',
+        'bešenovački prnjavor',
+        'bešenovo',
+        'bosut',
+        'veliki radinci',
+        'grgurevci',
+        'divoš',
+        'zasavica',
+        'jarak',
+        'kuzmin',
+        'laćarak',
+        'ležimir',
+        'manđelos',
+        'martinci',
+        'mačvanska mitrovica',
+        'noćaj',
+        'ravnje',
+        'radenković',
+        'salaš noćajski',
+        'sremska rača',
+        'stara bingula',
+        'čalma',
+        'šašinci',
+        'šišatovac',
+        'šuljam',
+        'inđija',
+        'beška',
+        'jarkovci',
+        'krčedin',
+        'ljukovo',
+        'maradik',
+        'novi karlovci',
+        'novi slankamen',
+        'slankamenački vinogradi',
+        'stari slankamen',
+        'čortanovci',
+        'irig',
+        'velika remeta',
+        'vrdnik',
+        'grgetek',
+        'dobrodol',
+        'jazak',
+        'jazak prnjavor',
+        'krušedol prnjavor',
+        'krušedol selo',
+        'mala remeta',
+        'neradin',
+        'rivica',
+        'šatrinci',
+        'pećinci',
+        'ašanja',
+        'brestač',
+        'deč',
+        'donji tovarnik',
+        'karlovčić',
+        'kupinovo',
+        'obrež',
+        'ogar',
+        'popinci',
+        'prhovo',
+        'sibač',
+        'sremski mihaljevci',
+        'subotište',
+        'šimanovci',
+        'ruma',
+        'buđanovci',
+        'vitojevci',
+        'voganj',
+        'marđelos',
+        'grabovci',
+        'dobrinci',
+        'donji petrovci',
+        'žarkovac',
+        'klenak',
+        'kraljevci',
+        'mali radinci',
+        'nikinci',
+        'pavlovci',
+        'platičevo',
+        'putinci',
+        'stejanovci',
+        'hrtkovci',
+        'stara pazova',
+        'belegiš',
+        'vojka',
+        'golubinci',
+        'krnješevci',
+        'nova pazova',
+        'novi banovci',
+        'stari banovci',
+        'surduk',
+        'šid',
+        'adaševci',
+        'batrovci',
+        'bačinci',
+        'berkasovo',
+        'bikić do',
+        'bingula',
+        'vašica',
+        'višnjićevo',
+        'gibarac',
+        'erdevik',
+        'ilinci',
+        'jamena',
+        'kukujevci',
+        'ljuba',
+        'molovin',
+        'morović',
+        'privina glava',
+        'sot'
       ],
-      label: 'Vojvodina i okolina',
+      label: 'Sremski okrug',
       emoji: '🗺️',
       badge: 'PROJEKTNI RADOVI',
       desc: 'Pokrivamo ovu lokaciju za projektne radove i specijalizovane sisteme (pametna kuća, video nadzor, alarmni sistemi). Dolazimo po dogovoru.',
