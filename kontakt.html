@@ -1480,6 +1480,117 @@
 
 
 <script>
+// ─── Multi-step Form Wizard ──────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const TOTAL = 3;
+  let currentStep = 1;
+
+  const steps      = [null, document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3')];
+  const progDots   = [null, document.getElementById('pd1'), document.getElementById('pd2'), document.getElementById('pd3')];
+  const progSteps  = [null, document.getElementById('ps1'), document.getElementById('ps2'), document.getElementById('ps3')];
+  const progLines  = [document.getElementById('pl1'), document.getElementById('pl2')];
+  const btnNext    = document.getElementById('btn-next');
+  const btnBack    = document.getElementById('btn-back');
+  const formNav    = document.getElementById('form-nav');
+  const formSuccess = document.getElementById('form-success');
+
+  function showStep(n) {
+    steps.forEach((s, i) => { if (i > 0) s.classList.toggle('active', i === n); });
+    progDots.forEach((d, i) => {
+      if (i === 0) return;
+      d.classList.toggle('active', i === n);
+      d.classList.toggle('done', i < n);
+    });
+    progSteps.forEach((ps, i) => {
+      if (i === 0) return;
+      ps.classList.toggle('active', i === n);
+      ps.classList.toggle('done', i < n);
+    });
+    if (progLines[0]) progLines[0].classList.toggle('done', n > 1);
+    if (progLines[1]) progLines[1].classList.toggle('done', n > 2);
+    btnBack.style.visibility = n > 1 ? 'visible' : 'hidden';
+    if (n === TOTAL) {
+      btnNext.textContent = '';
+      btnNext.innerHTML = 'Pošalji upit <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+      btnNext.setAttribute('aria-label', 'Pošalji upit');
+    } else {
+      btnNext.innerHTML = 'Sledeći korak <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+      btnNext.setAttribute('aria-label', 'Sledeći korak');
+    }
+    currentStep = n;
+  }
+
+  function clearErr(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }
+  function showErr(id) {
+    const el = document.getElementById(id);
+    if (el) { el.style.display = 'block'; el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  }
+
+  function validateStep(n) {
+    let valid = true;
+    if (n === 1) {
+      // Tip usluge
+      const usluga = document.querySelector('input[name="usluga"]:checked');
+      if (!usluga) { showErr('e-usluga'); valid = false; } else clearErr('e-usluga');
+      // Tip objekta
+      const objekat = document.querySelector('input[name="objekat"]:checked');
+      if (!objekat) { showErr('e-objekat'); valid = false; } else clearErr('e-objekat');
+      // Grad
+      const grad = document.getElementById('grad');
+      if (!grad || grad.value.trim().length < 2) { showErr('e-grad'); valid = false; } else clearErr('e-grad');
+      // Faza
+      const faza = document.getElementById('faza');
+      if (!faza || !faza.value) { showErr('e-faza'); valid = false; } else clearErr('e-faza');
+    } else if (n === 2) {
+      // Opis
+      const opis = document.getElementById('opis');
+      if (!opis || opis.value.trim().length < 20) { showErr('e-opis'); valid = false; } else clearErr('e-opis');
+    } else if (n === 3) {
+      // Ime
+      const ime = document.getElementById('ime');
+      if (!ime || ime.value.trim().length < 2) { showErr('e-ime'); valid = false; } else clearErr('e-ime');
+      // Telefon
+      const tel = document.getElementById('telefon');
+      if (!tel || tel.value.trim().length < 8) { showErr('e-telefon'); valid = false; } else clearErr('e-telefon');
+      // Email (optional but validate format if filled)
+      const email = document.getElementById('email');
+      if (email && email.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
+        showErr('e-email'); valid = false;
+      } else clearErr('e-email');
+      // Saglasnost
+      const sag = document.getElementById('saglasnost');
+      if (!sag || !sag.checked) { showErr('e-saglasnost'); valid = false; } else clearErr('e-saglasnost');
+    }
+    return valid;
+  }
+
+  btnNext.addEventListener('click', () => {
+    if (!validateStep(currentStep)) return;
+    if (currentStep < TOTAL) {
+      showStep(currentStep + 1);
+      window.scrollTo({ top: document.getElementById('forma').offsetTop - 100, behavior: 'smooth' });
+    } else {
+      // Submit
+      formNav.style.display = 'none';
+      document.querySelectorAll('.form-step.active').forEach(s => s.classList.remove('active'));
+      formSuccess.style.display = 'block';
+    }
+  });
+
+  btnBack.addEventListener('click', () => {
+    if (currentStep > 1) {
+      showStep(currentStep - 1);
+      window.scrollTo({ top: document.getElementById('forma').offsetTop - 100, behavior: 'smooth' });
+    }
+  });
+
+  // Initialize
+  showStep(1);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Sticky header
   const header = document.querySelector('.header');
