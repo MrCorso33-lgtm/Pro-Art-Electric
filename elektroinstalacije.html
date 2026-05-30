@@ -838,6 +838,106 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
+  
+    /* ═══════════════════════════════════════════════════════
+       TOP BAR — desktop/laptop only
+    ═══════════════════════════════════════════════════════ */
+    .top-bar {
+      display: none; /* hidden by default, shown on desktop */
+      background: rgba(10, 18, 26, 0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      height: 36px;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1001;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .top-bar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .top-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+    }
+    .top-bar-item svg {
+      width: 12px; height: 12px;
+      stroke: rgba(237,144,7,0.7);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .top-bar-sep {
+      width: 1px; height: 14px;
+      background: rgba(255,255,255,0.1);
+    }
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .top-bar-link {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.45);
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: color 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .top-bar-link:hover {
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.05);
+    }
+    .top-bar-link--phone {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: rgba(237,144,7,0.85);
+      font-weight: 500;
+    }
+    .top-bar-link--phone:hover { color: #ED9007; background: rgba(237,144,7,0.08); }
+    .top-bar-link--phone svg {
+      width: 11px; height: 11px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    @media (min-width: 1024px) {
+      .top-bar { display: block; }
+      /* Push header down by top-bar height */
+      .header { top: 36px !important; }
+    }
+
+  
+    @media (min-width: 1024px) {
+      /* Offset for top-bar (36px) on desktop */
+      .page-hero,
+      .kontakt-hero,
+      .hero-section,
+      .about-hero,
+      .proj-hero,
+      .elektro-hero {
+        padding-top: calc(var(--header-height, 80px) + 36px + 72px) !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -845,6 +945,37 @@
 <!-- ═══════════════════════════════════════════════════════════
      HEADER
 ════════════════════════════════════════════════════════════ -->
+<div class="top-bar" role="complementary" aria-label="Gornja traka">
+  <div class="top-bar-inner">
+    <div class="top-bar-left">
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Pon–Pet: 08:00–17:00
+      </span>
+      <div class="top-bar-sep"></div>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Novi Sad &amp; okolina
+      </span>
+      <div class="top-bar-sep"></div>
+      <span class="top-bar-item">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Hitni kvarovi: 0–24h
+      </span>
+    </div>
+    <div class="top-bar-right">
+      <a href="projekti.html" class="top-bar-link">Projekti</a>
+      <a href="o-nama.html" class="top-bar-link">O nama</a>
+      <a href="kontakt.html" class="top-bar-link">Kontakt</a>
+      <div class="top-bar-sep" style="margin: 0 4px;"></div>
+      <a href="tel:+381646436538" class="top-bar-link top-bar-link--phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        064 643 6538
+      </a>
+    </div>
+  </div>
+</div>
+
 <header class="header" role="banner">
   <div class="header-inner">
     <a href="index.html" class="logo" aria-label="Pro Art Electric — početna">
