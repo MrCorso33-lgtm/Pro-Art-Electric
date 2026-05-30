@@ -188,17 +188,22 @@
         }
         .mega-menu-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
-    /* ── Mega Menu Wide (80% viewport) ── */
+    
+    /* ── Mega Menu Wide — Viewport Center Fix ── */
     .mega-menu--wide {
-      left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      width: 80vw;
-      max-width: 1200px;
-      min-width: 700px;
+      position: fixed !important;
+      left: 50% !important;
+      top: auto !important;
+      transform: translateX(-50%) translateY(8px) !important;
+      width: 80vw !important;
+      max-width: 1200px !important;
+      min-width: 700px !important;
     }
-    .nav-item:hover .mega-menu--wide {
-      transform: translateX(-50%) translateY(0);
+    .nav-item:hover .mega-menu--wide,
+    .nav-item:focus-within .mega-menu--wide {
+      transform: translateX(-50%) translateY(0) !important;
     }
+
     .mega-menu-grid--4col {
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
@@ -2239,6 +2244,23 @@ a.footer__contact-item:hover { color: rgba(255,255,255,0.9); }
   }, { threshold: 0.1 });
   footerItems.forEach(function(el) { footerObs.observe(el); });
 })();
+
+  // ── Mega Menu Wide: fix top position for viewport-centered menus ──
+  (function() {
+    function positionWideMenus() {
+      document.querySelectorAll('.mega-menu--wide').forEach(function(menu) {
+        var navItem = menu.closest('.nav-item');
+        if (!navItem) return;
+        var rect = navItem.getBoundingClientRect();
+        menu.style.top = (rect.bottom + 4) + 'px';
+      });
+    }
+    // Run on load and on scroll (header compacts on scroll)
+    positionWideMenus();
+    window.addEventListener('scroll', positionWideMenus, { passive: true });
+    window.addEventListener('resize', positionWideMenus, { passive: true });
+  })();
+
 </script>
 
 </body>
