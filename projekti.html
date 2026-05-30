@@ -122,6 +122,84 @@
     .mega-menu-content { display: flex; flex-direction: column; gap: 2px; }
     .mega-menu-title { font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--white); }
     .mega-menu-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Mega Menu Wide (80% viewport) ── */
+    .mega-menu--wide {
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      width: 80vw;
+      max-width: 1200px;
+      min-width: 700px;
+    }
+    .nav-item:hover .mega-menu--wide {
+      transform: translateX(-50%) translateY(0);
+    }
+    .mega-menu-grid--4col {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .mega-menu-grid--3col {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .mega-menu-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    /* ── Mega Menu Promo Card ── */
+    .mega-menu-promo {
+      background: linear-gradient(135deg, rgba(237,144,7,0.12) 0%, rgba(237,144,7,0.05) 100%);
+      border: 1px solid rgba(237,144,7,0.2);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mega-menu-promo__icon {
+      width: 36px; height: 36px;
+      background: var(--orange-dim);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mega-menu-promo__icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--orange); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .mega-menu-promo__title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--white);
+    }
+    .mega-menu-promo__desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .mega-menu-promo__cta {
+      display: inline-block;
+      margin-top: 4px;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--orange);
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+    .mega-menu-promo__cta:hover { opacity: 0.75; }
+    /* ── Urgent nav link ── */
+    .nav-link--urgent {
+      color: var(--orange) !important;
+      gap: 6px;
+    }
+    .nav-link--urgent svg { stroke: var(--orange); }
+    .mobile-nav-link--urgent {
+      color: var(--orange) !important;
+    }
+
     /* ── Header Right ── */
     .header-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
     .header-phone { display: flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--text-body); transition: color 0.15s ease; }
@@ -728,150 +806,542 @@
       <img src="logo.png" alt="Pro Art Electric" class="logo-img" width="140" height="48">
     </a>
     <nav class="nav" role="navigation" aria-label="Glavna navigacija">
-      <!-- Elektroinstalacije -->
+
+      <!-- 1. Elektroinstalacije -->
       <div class="nav-item">
         <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
           Elektroinstalacije
-          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
         </span>
-        <div class="mega-menu" role="menu">
-          <div class="mega-menu-grid">
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--4col">
             <div class="mega-menu-section">
-              <p class="mega-menu-category">Stambeni objekti</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Stanovi i kuće</span><span class="mega-menu-desc">Kompletne instalacije, rekonstrukcije</span></div>
+              <div class="mega-menu-category">Instalacije</div>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Izrada novih elektroinstalacija</span>
+                  <span class="mega-menu-desc">Kompletna elektroinstalacija za stambene i poslovne objekte — od projekta do atestne dokumentacije.</span>
+                </div>
               </a>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Razvodni ormani</span><span class="mega-menu-desc">Projektovanje i montaža</span></div>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Zamena starih instalacija</span>
+                  <span class="mega-menu-desc">Zamena dotrajalih instalacija u stanovima, kućama i poslovnim prostorima bez rušenja.</span>
+                </div>
+              </a>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Razvodne table, ormari i osigurači</span>
+                  <span class="mega-menu-desc">Ugradnja i zamena razvodnih ormara, osigurača i zaštitnih elemenata po važećim standardima.</span>
+                </div>
               </a>
             </div>
             <div class="mega-menu-section">
-              <p class="mega-menu-category">Poslovni objekti</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Poslovni prostori</span><span class="mega-menu-desc">Kancelarije, lokali, magacini</span></div>
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Utičnice i prekidači</span>
+                  <span class="mega-menu-desc">Ugradnja i zamena utičnica, prekidača i parapetnih kanala u svim tipovima prostora.</span>
+                </div>
               </a>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Atestna dokumentacija</span><span class="mega-menu-desc">Tehnički pregled i atest</span></div>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Dijagnostika i popravka elektro kvarova</span>
+                  <span class="mega-menu-desc">Pronalaženje i otklanjanje kratkih spojeva, pregorenih osigurača i kvarova na instalacijama.</span>
+                </div>
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Pametna kuća -->
-      <div class="nav-item">
-        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
-          Pametna kuća
-          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
-        </span>
-        <div class="mega-menu" role="menu">
-          <div class="mega-menu-grid">
-            <div class="mega-menu-section">
-              <p class="mega-menu-category">Sistemi</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">KNX automatizacija</span><span class="mega-menu-desc">Međunarodni standard</span></div>
-              </a>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Tuya / Google Home</span><span class="mega-menu-desc">Pametni uređaji i automatizacija</span></div>
-              </a>
-            </div>
-            <div class="mega-menu-section">
-              <p class="mega-menu-category">Funkcije</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Pametna rasveta</span><span class="mega-menu-desc">Dimeri, scene, automatizacija</span></div>
-              </a>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Upravljanje klima</span><span class="mega-menu-desc">Pametni termostati i HVAC</span></div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Sigurnost -->
-      <div class="nav-item">
-        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
-          Sigurnost
-          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
-        </span>
-        <div class="mega-menu" role="menu">
-          <div class="mega-menu-grid">
-            <div class="mega-menu-section">
-              <p class="mega-menu-category">Video nadzor</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Hikvision kamere</span><span class="mega-menu-desc">IP kamere, NVR sistemi</span></div>
-              </a>
-            </div>
-            <div class="mega-menu-section">
-              <p class="mega-menu-category">Alarmni sistemi</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
                 <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Jablotron alarm</span><span class="mega-menu-desc">Detekcija provale i požara</span></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Merenje instalacija i ispitivanje uzemljenja</span>
+                  <span class="mega-menu-desc">Atestno merenje otpora izolacije, uzemljenja i zaštitnih provodnika sa izdavanjem dokumentacije.</span>
+                </div>
               </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Zaštita i napajanje</div>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M1 6l11-4 11 4v6c0 5.5-4.7 10.7-11 12C5.7 22.7 1 17.5 1 12V6z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Prenaponska zaštita i gromobrani</span>
+                  <span class="mega-menu-desc">Ugradnja prenaponske zaštite i gromobranske instalacije za objekte svih veličina.</span>
+                </div>
+              </a>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Rezervno napajanje, UPS sistemi i agregati</span>
+                  <span class="mega-menu-desc">Projektovanje i ugradnja UPS uređaja i agregata za neprekidno napajanje kritičnih sistema.</span>
+                </div>
+              </a>
+              <a href="elektroinstalacije.html" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Elektroinstalacije za lokale i hale</span>
+                  <span class="mega-menu-desc">Trofazni priključci, industrijska razvoda i specijalizovane instalacije za poslovne i industrijske objekte.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Promo</div>
+              <div class="mega-menu-promo">
+                <div class="mega-menu-promo__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div class="mega-menu-promo__title">Besplatan predračun</div>
+                <div class="mega-menu-promo__desc">Izlazimo na teren, procenimo obim radova i damo predračun bez ikakve obaveze.</div>
+                <a href="kontakt.html" class="mega-menu-promo__cta">Zakažite obilazak →</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Rasveta -->
+
+      <!-- 2. Rasveta -->
       <div class="nav-item">
         <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
           Rasveta
-          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
         </span>
-        <div class="mega-menu" role="menu">
-          <div class="mega-menu-grid">
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--4col">
             <div class="mega-menu-section">
-              <p class="mega-menu-category">LED rešenja</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Ambijentalna rasveta</span><span class="mega-menu-desc">LED trake, spot, panel</span></div>
+              <div class="mega-menu-category">Tipovi rasvete</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Unutrašnja rasveta</span>
+                  <span class="mega-menu-desc">Ambijentalna, dekorativna i funkcionalna rasveta za stanove, kuće i poslovne prostore.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Spoljašnja rasveta</span>
+                  <span class="mega-menu-desc">Fasadna, dvorišna i rasveta staza — vodootporna ugradnja sa automatskim upravljanjem.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">LED rasveta</span>
+                  <span class="mega-menu-desc">Ugradnja LED traka, panela i sistema — ušteda energije do 70% uz duži vek trajanja.</span>
+                </div>
               </a>
             </div>
             <div class="mega-menu-section">
-              <p class="mega-menu-category">Spoljašnja rasveta</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
+              <div class="mega-menu-category">Montaža</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Ugradnja rasvete</span>
+                  <span class="mega-menu-desc">Montaža svih tipova svetiljki — ugradbene, nadgradne, viseće, spoljašnje.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Montaža lustera</span>
+                  <span class="mega-menu-desc">Sigurna montaža lustera i visilica svih dimenzija uz proveru nosivosti tavanice.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
                 <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Fasadna i dvorišna</span><span class="mega-menu-desc">Energetski efikasna rešenja</span></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Montaža LED sistema</span>
+                  <span class="mega-menu-desc">Ugradnja LED traka, RGB sistema i pametnih rasveta sa dimerom i aplikacijom.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Projektovanje i servis</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Projektovanje rasvete</span>
+                  <span class="mega-menu-desc">Izrada plana rasvete i proračun osvetljenja prema nameni prostora i važećim normama.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Proračun osvetljenja</span>
+                  <span class="mega-menu-desc">Tehnički proračun nivoa osvetljenosti za radne, stambene i javne prostore.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Servis i održavanje rasvete</span>
+                  <span class="mega-menu-desc">Zamena sijalica, popravka kvarova i redovni servis rasvete u poslovnim objektima.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Senzori pokreta i prisustva</span>
+                  <span class="mega-menu-desc">Ugradnja senzora za automatsko paljenje/gašenje rasvete — ušteda energije i komfor.</span>
+                </div>
               </a>
             </div>
           </div>
         </div>
       </div>
-      <!-- Održavanje -->
+
+      <!-- 3. Video nadzor i alarmni sistemi -->
       <div class="nav-item">
         <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
-          Održavanje
-          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+          Video nadzor
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
         </span>
-        <div class="mega-menu" role="menu">
-          <div class="mega-menu-grid">
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--4col">
             <div class="mega-menu-section">
-              <p class="mega-menu-category">Servis</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Hitne intervencije</span><span class="mega-menu-desc">Dostupni 24h za kvarove</span></div>
+              <div class="mega-menu-category">Video nadzor</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Ugradnja video nadzora</span>
+                  <span class="mega-menu-desc">Kompletna instalacija CCTV sistema za stanove, kuće, lokale i poslovne objekte.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">IP kamere</span>
+                  <span class="mega-menu-desc">Ugradnja IP kamera visoke rezolucije sa noćnim snimanjem i daljinskim pristupom.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M1 6l4.5 3L1 12V6z"/><rect x="5" y="4" width="14" height="16" rx="2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Wi-Fi kamere</span>
+                  <span class="mega-menu-desc">Bežične kamere za brzu instalaciju — idealne za stanove i manje poslovne prostore.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">DVR i NVR sistemi</span>
+                  <span class="mega-menu-desc">Ugradnja snimača za kontinuirano arhiviranje snimaka sa udaljenim pregledom.</span>
+                </div>
               </a>
             </div>
             <div class="mega-menu-section">
-              <p class="mega-menu-category">Ugovori</p>
-              <a href="kontakt.html" class="mega-menu-item" role="menuitem">
-                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
-                <div class="mega-menu-content"><span class="mega-menu-title">Redovno održavanje</span><span class="mega-menu-desc">Godišnji ugovori za firme</span></div>
+              <div class="mega-menu-category">Alarmni sistemi</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Alarmni sistemi</span>
+                  <span class="mega-menu-desc">Projektovanje i ugradnja protivprovalnih alarma sa senzorima, sirenom i GSM javljanjem.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Interfoni i video interfoni</span>
+                  <span class="mega-menu-desc">Ugradnja audio i video interfona za stanove, kuće i stambene zgrade.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Kontrola pristupa</span>
+                  <span class="mega-menu-desc">RFID kartice, elektronske brave i biometrijski sistemi za kontrolu ulaska.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Servis</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Servis video nadzora</span>
+                  <span class="mega-menu-desc">Podešavanje, popravka i nadogradnja postojećih CCTV i IP sistema.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">RFID sistemi i elektronske brave</span>
+                  <span class="mega-menu-desc">Ugradnja i programiranje RFID čitača i elektronskih brava za poslovne i stambene objekte.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Promo</div>
+              <div class="mega-menu-promo">
+                <div class="mega-menu-promo__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-promo__title">Besplatan pregled</div>
+                <div class="mega-menu-promo__desc">Dolazimo na teren, procenimo šta vam treba i damo ponudu bez obaveze.</div>
+                <a href="kontakt.html" class="mega-menu-promo__cta">Pošaljite upit →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Pametna kuća -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Pametna kuća
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--4col">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Automatizacija</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Automatizacija doma</span>
+                  <span class="mega-menu-desc">Centralno upravljanje rasvjetom, grijanjem, roletama i uređajima iz jedne aplikacije.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Pametna rasveta</span>
+                  <span class="mega-menu-desc">Pametne sijalice, dimeri i scene — upravljanje glasom, aplikacijom ili automatski.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Pametni prekidači</span>
+                  <span class="mega-menu-desc">Zamena klasičnih prekidača pametnim — bez promene instalacije, sa Wi-Fi upravljanjem.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Uređaji</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Pametni termostati</span>
+                  <span class="mega-menu-desc">Ugradnja pametnih termostata za uštedu energije i upravljanje grejanjem na daljinu.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Automatizacija roletni</span>
+                  <span class="mega-menu-desc">Motorizovane roletne i tende sa vremenskim programiranjem i senzorima vetra.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Pametne utičnice</span>
+                  <span class="mega-menu-desc">Pametne utičnice za daljinsko upravljanje uređajima i praćenje potrošnje energije.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Sistemi i senzori</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Detekcija dima i curenja vode</span>
+                  <span class="mega-menu-desc">Pametni senzori dima i vode sa SMS/aplikacijskim upozorenjem u realnom vremenu.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Pametne brave</span>
+                  <span class="mega-menu-desc">Elektronske brave sa PIN kodom, karticom ili aplikacijom — bez ključa.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Tuya, KNX, Zigbee i Wi-Fi sistemi</span>
+                  <span class="mega-menu-desc">Integracija različitih protokola pametne kuće u jedinstven, kompatibilan ekosistem.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Integracije</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Google Home i Alexa integracija</span>
+                  <span class="mega-menu-desc">Povezivanje pametnih uređaja sa Google Home i Amazon Alexa glasovnim asistentima.</span>
+                </div>
               </a>
             </div>
           </div>
         </div>
       </div>
-      <a href="projekti.html" class="nav-link active">Projekti</a>
-      <a href="o-nama.html" class="nav-link">O nama</a>
-      <a href="kontakt.html" class="nav-link">Kontakt</a>
+
+      <!-- 5. Adaptacija stanova i kuća -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Adaptacija
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--3col">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Elektro radovi pri adaptaciji</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Elektro radovi pri adaptaciji kuće ili stana</span>
+                  <span class="mega-menu-desc">Planiranje i ugradnja elektroinstalacija u toku rekonstrukcije — koordinacija sa građevinskim radovima.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Zamena starih elektroinstalacija</span>
+                  <span class="mega-menu-desc">Kompletna zamena dotrajalih instalacija u stanovima i kućama uz minimalno rušenje.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Nadogradnja postojećih elektroinstalacija</span>
+                  <span class="mega-menu-desc">Dodavanje novih strujnih kola, utičnica i prekidača bez rušenja celokupne instalacije.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Ugradnja</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Ugradnja novih elektroinstalacija</span>
+                  <span class="mega-menu-desc">Izrada kompletne nove instalacije u renoviranom prostoru prema savremenim standardima.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Promo</div>
+              <div class="mega-menu-promo">
+                <div class="mega-menu-promo__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+                <div class="mega-menu-promo__title">Radimo uz graditelje</div>
+                <div class="mega-menu-promo__desc">Koordiniramo elektro radove sa svim ostalim majstorima na gradilištu.</div>
+                <a href="kontakt.html" class="mega-menu-promo__cta">Zakažite konsultaciju →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Za investitore -->
+      <div class="nav-item">
+        <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+          Za investitore
+          <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5L5 6.5L8 3.5"/></svg>
+        </span>
+        <div class="mega-menu mega-menu--wide" role="menu">
+          <div class="mega-menu-grid mega-menu-grid--4col">
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Novi objekti</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Elektroinstalacije za nove objekte</span>
+                  <span class="mega-menu-desc">Kompletna elektroinstalacija stambenih zgrada, vila i poslovnih objekata od temelja do atesta.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Instalacije za lokale i hale</span>
+                  <span class="mega-menu-desc">Trofazni priključci, industrijska razvoda i specijalizovane instalacije za poslovne i industrijske objekte.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Rasveta za poslovne prostore</span>
+                  <span class="mega-menu-desc">Projektovanje i ugradnja rasvete za kancelarije, prodavnice, hale i javne prostore.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Sistemi</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Video nadzor za objekte</span>
+                  <span class="mega-menu-desc">CCTV sistemi za stambene zgrade, poslovne komplekse i industrijske objekte.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Alarmni sistemi</span>
+                  <span class="mega-menu-desc">Protivprovalni alarmi, senzori i GSM javljači za zaštitu objekata u izgradnji i gotovih.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Interfoni</span>
+                  <span class="mega-menu-desc">Video interfoni za stambene zgrade, poslovne ulaze i industrijske objekte.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Infrastruktura</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Kontrola pristupa</span>
+                  <span class="mega-menu-desc">Sistemi kontrole ulaska za stambene zgrade i poslovne objekte — kartice, PIN, biometrija.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Mrežne instalacije</span>
+                  <span class="mega-menu-desc">LAN, optičke i Wi-Fi infrastrukture za stambene i poslovne objekte.</span>
+                </div>
+              </a>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Ugovorno održavanje</span>
+                  <span class="mega-menu-desc">Godišnji ugovori za redovni servis i preventivno održavanje svih elektro sistema.</span>
+                </div>
+              </a>
+            </div>
+            <div class="mega-menu-section">
+              <div class="mega-menu-category">Specijalizovano</div>
+              <a href="#" class="mega-menu-item" role="menuitem">
+                <div class="mega-menu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                <div class="mega-menu-content">
+                  <span class="mega-menu-title">Servis i hitne intervencije</span>
+                  <span class="mega-menu-desc">Brza reakcija na kvarove u stambenim zgradama i poslovnim objektima — 24h za Novi Sad.</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Hitne intervencije (no dropdown) -->
+      <div class="nav-item">
+        <a href="#" class="nav-link nav-link--urgent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Hitne intervencije
+        </a>
+      </div>
+
+      <!-- Direktni linkovi -->
+      <div class="nav-item"><a href="projekti.html" class="nav-link">Projekti</a></div>
+      <div class="nav-item"><a href="o-nama.html" class="nav-link">O nama</a></div>
+      <div class="nav-item"><a href="kontakt.html" class="nav-link">Kontakt</a></div>
     </nav>
     <div class="header-right">
       <a href="tel:+381646436538" class="header-phone" aria-label="Pozovite nas">
@@ -888,56 +1358,114 @@
   </div>
 </header>
 
-<!-- ═══════════════ MOBILE MENU ═══════════════ -->
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Mobilni meni">
+<!-- ═══════════════════════════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════════════════════════ -->
+<div class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobilni meni">
+  <!-- 1. Elektroinstalacije -->
   <div class="mobile-nav-item">
     <div class="mobile-nav-link">Elektroinstalacije<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
     <div class="mobile-submenu">
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">Stanovi i kuće</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Poslovni prostori</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><span class="mobile-submenu-text">Atestna dokumentacija</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div><span class="mobile-submenu-text">Izrada novih elektroinstalacija</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><span class="mobile-submenu-text">Zamena starih instalacija</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><span class="mobile-submenu-text">Razvodne table, ormari i osigurači</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><span class="mobile-submenu-text">Utičnice i prekidači</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><span class="mobile-submenu-text">Dijagnostika i popravka elektro kvarova</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Merenje instalacija i ispitivanje uzemljenja</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M1 6l11-4 11 4v6c0 5.5-4.7 10.7-11 12C5.7 22.7 1 17.5 1 12V6z"/></svg></div><span class="mobile-submenu-text">Prenaponska zaštita i gromobrani</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><span class="mobile-submenu-text">Rezervno napajanje, UPS sistemi i agregati</span></a>
+      <a href="elektroinstalacije.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/></svg></div><span class="mobile-submenu-text">Elektroinstalacije za lokale i hale</span></a>
     </div>
   </div>
-  <div class="mobile-nav-item">
-    <div class="mobile-nav-link">Pametna kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
-    <div class="mobile-submenu">
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">KNX automatizacija</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></div><span class="mobile-submenu-text">Tuya / Google Home</span></a>
-    </div>
-  </div>
-  <div class="mobile-nav-item">
-    <div class="mobile-nav-link">Sigurnost<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
-    <div class="mobile-submenu">
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Video nadzor</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
-    </div>
-  </div>
+  <!-- 2. Rasveta -->
   <div class="mobile-nav-item">
     <div class="mobile-nav-link">Rasveta<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
     <div class="mobile-submenu">
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></svg></div><span class="mobile-submenu-text">Ambijentalna rasveta</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><span class="mobile-submenu-text">Fasadna i dvorišna</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><span class="mobile-submenu-text">Unutrašnja rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><span class="mobile-submenu-text">Spoljašnja rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><span class="mobile-submenu-text">LED rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Ugradnja rasvete</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><span class="mobile-submenu-text">Montaža lustera</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><span class="mobile-submenu-text">Projektovanje rasvete</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span class="mobile-submenu-text">Proračun osvetljenja</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Servis i održavanje rasvete</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Senzori pokreta i prisustva</span></a>
     </div>
   </div>
+  <!-- 3. Video nadzor i alarmni sistemi -->
   <div class="mobile-nav-item">
-    <div class="mobile-nav-link">Održavanje<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-nav-link">Video nadzor i alarmni sistemi<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
     <div class="mobile-submenu">
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Hitne intervencije 24h</span></a>
-      <a href="kontakt.html" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg></div><span class="mobile-submenu-text">Redovno održavanje</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Ugradnja video nadzora</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">IP kamere</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M1 6l4.5 3L1 12V6z"/><rect x="5" y="4" width="14" height="16" rx="2"/></svg></div><span class="mobile-submenu-text">Wi-Fi kamere</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><span class="mobile-submenu-text">DVR i NVR sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Interfoni i video interfoni</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Kontrola pristupa</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Servis video nadzora</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><span class="mobile-submenu-text">RFID sistemi i elektronske brave</span></a>
     </div>
   </div>
-  <div class="mobile-nav-item"><a href="projekti.html" class="mobile-nav-link" style="color:var(--orange)">Projekti</a></div>
-  <div class="mobile-nav-item"><a href="o-nama.html" class="mobile-nav-link">O nama</a></div>
-  <div class="mobile-nav-item"><a href="kontakt.html" class="mobile-nav-link">Kontakt</a></div>
+  <!-- 4. Pametna kuća -->
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Pametna kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">Automatizacija doma</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><span class="mobile-submenu-text">Pametna rasveta</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><span class="mobile-submenu-text">Pametni prekidači</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/></svg></div><span class="mobile-submenu-text">Pametni termostati</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Automatizacija roletni</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Pametne utičnice</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Detekcija dima i curenja vode</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Pametne brave</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><span class="mobile-submenu-text">Tuya, KNX, Zigbee i Wi-Fi sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><span class="mobile-submenu-text">Google Home i Alexa integracija</span></a>
+    </div>
+  </div>
+  <!-- 5. Adaptacija -->
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Adaptacija stanova i kuća<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">Elektro radovi pri adaptaciji kuće ili stana</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div><span class="mobile-submenu-text">Zamena starih elektroinstalacija</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><span class="mobile-submenu-text">Nadogradnja postojećih elektroinstalacija</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><span class="mobile-submenu-text">Ugradnja novih elektroinstalacija</span></a>
+    </div>
+  </div>
+  <!-- 6. Za investitore -->
+  <div class="mobile-nav-item">
+    <div class="mobile-nav-link">Za investitore<svg class="mobile-chevron" viewBox="0 0 10 10"><path d="M2 3.5L5 6.5L8 3.5"/></svg></div>
+    <div class="mobile-submenu">
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mobile-submenu-text">Elektroinstalacije za nove objekte</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div><span class="mobile-submenu-text">Instalacije za lokale i hale</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><span class="mobile-submenu-text">Rasveta za poslovne prostore</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="mobile-submenu-text">Video nadzor za objekte</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="mobile-submenu-text">Alarmni sistemi</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Interfoni</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span class="mobile-submenu-text">Kontrola pristupa</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><span class="mobile-submenu-text">Mrežne instalacije</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span class="mobile-submenu-text">Ugovorno održavanje</span></a>
+      <a href="#" class="mobile-submenu-item"><div class="mobile-submenu-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span class="mobile-submenu-text">Servis i hitne intervencije</span></a>
+    </div>
+  </div>
+  <!-- 7. Hitne intervencije -->
+  <div class="mobile-nav-item"><a href="#" class="mobile-nav-link mobile-nav-link--urgent" style="justify-content:flex-start;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Hitne intervencije
+  </a></div>
+  <!-- Direktni linkovi -->
+  <div class="mobile-nav-item"><a href="projekti.html" class="mobile-nav-link" style="justify-content:flex-start;">Projekti</a></div>
+  <div class="mobile-nav-item"><a href="o-nama.html" class="mobile-nav-link" style="justify-content:flex-start;">O nama</a></div>
+  <div class="mobile-nav-item"><a href="kontakt.html" class="mobile-nav-link" style="justify-content:flex-start;">Kontakt</a></div>
   <div class="mobile-menu-footer">
     <a href="tel:+381646436538" class="mobile-phone">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.77a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
       064 643 6538
     </a>
     <a href="kontakt.html" class="mobile-cta">Zakažite obilazak</a>
   </div>
 </div>
-
 <!-- ═══════════════ PAGE HERO ═══════════════ -->
 <section class="page-hero" aria-label="Projekti — Pro Art Electric">
   <div class="page-hero__inner">
@@ -1322,11 +1850,12 @@
         <h3 class="footer__col-title">Usluge</h3>
         <nav class="footer__nav" aria-label="Usluge">
           <a href="elektroinstalacije.html" class="footer__nav-link">Elektroinstalacije</a>
-          <a href="kontakt.html" class="footer__nav-link">Pametna kuća</a>
-          <a href="kontakt.html" class="footer__nav-link">Video nadzor</a>
-          <a href="kontakt.html" class="footer__nav-link">Alarmni sistemi</a>
-          <a href="kontakt.html" class="footer__nav-link">LED rasveta</a>
-          <a href="kontakt.html" class="footer__nav-link">Održavanje</a>
+          <a href="#" class="footer__nav-link">Rasveta</a>
+          <a href="#" class="footer__nav-link">Video nadzor i alarmni sistemi</a>
+          <a href="#" class="footer__nav-link">Pametna kuća</a>
+          <a href="#" class="footer__nav-link">Adaptacija stanova i kuća</a>
+          <a href="#" class="footer__nav-link">Za investitore</a>
+          <a href="#" class="footer__nav-link">Hitne intervencije</a>
         </nav>
       </div>
       <!-- Col 3: Kompanija -->
