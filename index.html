@@ -2234,7 +2234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 3,
-      category: 'Video nadzor & Alarm',
+      category: 'Video nadzor i alarmni sistemi',
       name: 'Stambena zgrada - Detelinara',
       area: '12 stanova',
       location: 'Novi Sad',
@@ -2504,6 +2504,18 @@ document.addEventListener('DOMContentLoaded', () => {
   .svc-card:hover::before { opacity: 1; }
 
   /* Featured card (first) */
+  .svc-card--urgent {
+    border-color: rgba(237,144,7,0.35) !important;
+  }
+  .svc-card--urgent .svc-card__title {
+    color: var(--orange) !important;
+  }
+  .svc-card--urgent .svc-card__icon {
+    background: rgba(237,144,7,0.15) !important;
+  }
+  .svc-card--urgent .svc-card__icon svg {
+    stroke: var(--orange) !important;
+  }
   .svc-card--featured {
     background: linear-gradient(145deg, #1a2e1a 0%, #111e2a 100%);
     background: linear-gradient(145deg, rgba(237,144,7,0.14) 0%, rgba(237,144,7,0.04) 100%), #111e2a;
@@ -2651,7 +2663,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Responsive */
   @media (max-width: 1100px) {
-    .services__grid { grid-template-columns: repeat(3, 1fr); }
+    .services__grid { grid-template-columns: repeat(4, 1fr); }
   }
   @media (max-width: 720px) {
     .services__grid { grid-template-columns: repeat(2, 1fr); }
@@ -2705,7 +2717,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="services__grid">
 
       <!-- 1. Elektroinstalacije -->
-      <a href="kontakt.html" class="svc-card svc-card--featured" data-aos>
+      <a href="elektroinstalacije.html" class="svc-card svc-card--featured" data-aos>
         <div class="svc-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
@@ -2713,9 +2725,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="svc-card__desc">Kompletne elektroinstalacije za stambene i poslovne objekte, od projekta do primopredaje.</p>
         <ul class="svc-card__items" role="list">
           <li class="svc-card__item">Razvodni ormani i tabla</li>
-          <li class="svc-card__item">Unutrašnje instalacije</li>
-          <li class="svc-card__item">Spoljne instalacije</li>
-          <li class="svc-card__item">Punjaci za EV vozila</li>
+          <li class="svc-card__item">Unutrašnje i spoljne instalacije</li>
+          <li class="svc-card__item">Punjači za EV vozila</li>
+          <li class="svc-card__item">Atestna dokumentacija</li>
         </ul>
         <span class="svc-card__link">
           Saznajte više
@@ -2723,16 +2735,54 @@ document.addEventListener('DOMContentLoaded', () => {
         </span>
       </a>
 
-      <!-- 2. Pametna kuća -->
-      <a href="kontakt.html" class="svc-card" data-aos>
+      <!-- 2. Rasveta -->
+      <a href="#" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="svc-card__title">Rasveta</div>
+        <p class="svc-card__desc">Ambijentalna, dekorativna i pametna rasveta za unutrašnje i spoljne prostore.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">LED sistemi i dimeri</li>
+          <li class="svc-card__item">RGB i ambijentalna rasveta</li>
+          <li class="svc-card__item">Fasadna i dvorišna rasveta</li>
+          <li class="svc-card__item">Plan i proračun rasvete</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 3. Video nadzor i alarmni sistemi -->
+      <a href="#" class="svc-card" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="svc-card__title">Video nadzor i alarmni sistemi</div>
+        <p class="svc-card__desc">IP kamere, alarmni sistemi, kontrola pristupa i video interfoni za svaki tip objekta.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">IP i Wi-Fi kamere</li>
+          <li class="svc-card__item">Protivprovalni alarmi</li>
+          <li class="svc-card__item">RFID i elektronske brave</li>
+          <li class="svc-card__item">Video interfoni</li>
+        </ul>
+        <span class="svc-card__link">
+          Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 4. Pametna kuća – Smart home -->
+      <a href="#" class="svc-card" data-aos>
         <div class="svc-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <div class="svc-card__title">Pametna kuća</div>
-        <p class="svc-card__desc">Automatizacija doma , rasveta, roletne, grejanje, klima i sigurnost u jednom sistemu.</p>
+        <div class="svc-card__title">Pametna kuća – Smart home</div>
+        <p class="svc-card__desc">Automatizacija doma — rasveta, roletne, grejanje, klima i sigurnost u jednom sistemu.</p>
         <ul class="svc-card__items" role="list">
           <li class="svc-card__item">KNX, Tuya, Zigbee sistemi</li>
-          <li class="svc-card__item">Google Home & Alexa</li>
+          <li class="svc-card__item">Google Home i Alexa</li>
           <li class="svc-card__item">Scene i automatizacije</li>
           <li class="svc-card__item">Daljinsko upravljanje</li>
         </ul>
@@ -2742,18 +2792,18 @@ document.addEventListener('DOMContentLoaded', () => {
         </span>
       </a>
 
-      <!-- 3. Video nadzor & Sigurnost -->
-      <a href="kontakt.html" class="svc-card" data-aos>
+      <!-- 5. Adaptacija stanova i kuća -->
+      <a href="#" class="svc-card" data-aos>
         <div class="svc-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-7 8 7v10"/><path d="M9 20v-5h6v5"/></svg>
         </div>
-        <div class="svc-card__title">Video nadzor & Alarm</div>
-        <p class="svc-card__desc">IP kamere, alarmni sistemi, kontrola pristupa i video interfoni za svaki tip objekta.</p>
+        <div class="svc-card__title">Adaptacija stanova i kuća</div>
+        <p class="svc-card__desc">Kompletni elektro radovi pri renoviranju — zamena starih instalacija, nadogradnja i nove trase.</p>
         <ul class="svc-card__items" role="list">
-          <li class="svc-card__item">IP & Wi-Fi kamere</li>
-          <li class="svc-card__item">Protivprovalni alarmi</li>
-          <li class="svc-card__item">RFID & elektronske brave</li>
-          <li class="svc-card__item">Video interfoni</li>
+          <li class="svc-card__item">Zamena starih instalacija</li>
+          <li class="svc-card__item">Nadogradnja elektroinstalacija</li>
+          <li class="svc-card__item">Ugradnja novih tačaka</li>
+          <li class="svc-card__item">Koordinacija sa majstorima</li>
         </ul>
         <span class="svc-card__link">
           Saznajte više
@@ -2761,40 +2811,40 @@ document.addEventListener('DOMContentLoaded', () => {
         </span>
       </a>
 
-      <!-- 4. Rasveta -->
-      <a href="kontakt.html" class="svc-card" data-aos>
+      <!-- 6. Za investitore -->
+      <a href="#" class="svc-card" data-aos>
         <div class="svc-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         </div>
-        <div class="svc-card__title">Rasveta</div>
-        <p class="svc-card__desc">Ambijentalna, dekorativna i pametna rasveta za unutrašnje i spoljne prostore.</p>
+        <div class="svc-card__title">Za investitore</div>
+        <p class="svc-card__desc">Elektroinstalacije za stambene zgrade, poslovne objekte i komplekse — od projekta do primopredaje.</p>
         <ul class="svc-card__items" role="list">
-          <li class="svc-card__item">LED sistemi & dimeri</li>
-          <li class="svc-card__item">RGB & ambijentalna</li>
-          <li class="svc-card__item">Fasadna & dvorišna</li>
-          <li class="svc-card__item">Plan i proračun rasvete</li>
-        </ul>
-        <span class="svc-card__link">
-          Saznajte više
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </a>
-
-      <!-- 5. Održavanje & Servis -->
-      <a href="kontakt.html" class="svc-card" data-aos>
-        <div class="svc-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-        </div>
-        <div class="svc-card__title">Održavanje & Servis</div>
-        <p class="svc-card__desc">Redovno održavanje, hitne intervencije i dijagnostika kvarova , brzo i pouzdano.</p>
-        <ul class="svc-card__items" role="list">
-          <li class="svc-card__item">Hitne intervencije</li>
-          <li class="svc-card__item">Dijagnostika kvarova</li>
+          <li class="svc-card__item">Stambene zgrade</li>
+          <li class="svc-card__item">Poslovni i industrijski objekti</li>
+          <li class="svc-card__item">Video nadzor i alarmni sistemi</li>
           <li class="svc-card__item">Ugovorno održavanje</li>
-          <li class="svc-card__item">Servis video nadzora</li>
         </ul>
         <span class="svc-card__link">
           Saznajte više
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- 7. Hitne intervencije -->
+      <a href="#" class="svc-card svc-card--urgent" data-aos>
+        <div class="svc-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="svc-card__title">Hitne intervencije</div>
+        <p class="svc-card__desc">Brzo reagovanje na elektro kvarove — dijagnostika, popravka i servis 0–24h u Novom Sadu i okolini.</p>
+        <ul class="svc-card__items" role="list">
+          <li class="svc-card__item">Kvarovi i kratki spojevi</li>
+          <li class="svc-card__item">Dijagnostika instalacija</li>
+          <li class="svc-card__item">Zamena osigurača i tabla</li>
+          <li class="svc-card__item">Dostupni 0–24h</li>
+        </ul>
+        <span class="svc-card__link">
+          Zakažite odmah
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
       </a>
@@ -4267,7 +4317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.4 7.4H20l-6.2 4.5 2.4 7.4L10 16l-6.2 4.3 2.4-7.4L0 8.4h7.6z"/></svg>
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.4 7.4H20l-6.2 4.5 2.4 7.4L10 16l-6.2 4.3 2.4-7.4L0 8.4h7.6z"/></svg>
           </div>
-          <span class="review-card__tag">Održavanje</span>
+          <span class="review-card__tag">Hitne intervencije</span>
         </div>
         <blockquote class="review-card__quote">
           <p>"Imali smo kvar na razvodu u stanu , struja je padala bez razloga. Ekipa je stigla isti dan, pronašla problem za sat vremena i sve popravila. Cena je bila fer, a majstor je objasnio šta je bio uzrok. To se pamti."</p>
